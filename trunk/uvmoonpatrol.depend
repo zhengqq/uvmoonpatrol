@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1204786857 c:\projects\vgng\ultraviolencemoonpatrol\main.cpp
+	<math.h>
+	<stdio.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<SDL/SDL.h>
+
+1204827098 source:c:\documents and settings\luke\desktop\vmoon\main.cpp
+	<math.h>
+	<stdio.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<SDL/SDL.h>
+	<cstdlib>
+	<ctime>
+
+1204866217 source:d:\projects\vgng\violentmoonpatrol\main.cpp
+	<math.h>
+	<stdio.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<SDL/SDL.h>
+	<cstdlib>
+	<ctime>
+

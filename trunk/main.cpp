@@ -1,7 +1,3 @@
-/*	ball3d.c
-	Adopted from the code created by Banu Cosmin aka Choko - 20 may 2000
- */
-
 #include <math.h>
 #include <stdio.h>
 #include <GL/gl.h>	// Header File For The OpenGL32 Library
@@ -14,107 +10,121 @@
 #define FALSE   0
 #define TRUE    1
 #define COLORKEY 0,255,0 // transparent color
+#define KEY_R 0
+#define KEY_G 255
+#define KEY_B 0
 // Physics iterations per second
 #define PHYSICSFPS 30
 
 int         gLastTick;
 Uint8*		keys;			// Array Used For The Keyboard Routine
 BOOL		active=TRUE;		// Window Active Flag Set To TRUE By Default
-BOOL		fullscreen=FALSE;	// Fullscreen Flag Set To Fullscreen Mode By Default
+BOOL		fullscreen=TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
+
+int gTextureCount = 12; // how many textures we have
+char * gTextureList[12] = {"data\\bus1_1.bmp","data\\bus1_2.bmp","data\\car.bmp",
+                    "data\\flyingman.bmp","data\\running1_1.bmp","data\\running1_2.bmp",
+                    "data\\wheel1_1.bmp","data\\wheel1_2.bmp","data\\wheel2_1.bmp",
+                    "data\\wheel2_2.bmp","data\\wheel3_1.bmp","data\\wheel3_2.bmp"};
 
 struct Sprite
 {
 	GLuint texture;
+	char * name;
 	int width;
 	int height;
 	int x;
 	int y;
 };
 
-Sprite		sprites[4];			// 4 Textures
+Sprite		sprites[12];
 
-SDL_Surface *LoadBMP(char *filename)
+SDL_Surface *LoadBMP2RGBA(char *filename)
 {
   Uint8 *rowhi, *rowlo;
   Uint8 *tmpbuf, tmpch;
   SDL_Surface *image;
   int i, j;
-
   image = SDL_LoadBMP(filename);
   if ( image == NULL ) {
     fprintf(stderr, "Unable to load %s: %s\n", filename, SDL_GetError());
     return(NULL);
   }
-
-  /* GL surfaces are upsidedown and RGB, not BGR :-) */
-  tmpbuf = (Uint8 *)malloc(image->pitch);
-  if ( tmpbuf == NULL ) {
-    fprintf(stderr, "Out of memory\n");
-    return(NULL);
-  }
-  rowhi = (Uint8 *)image->pixels;
-  rowlo = rowhi + (image->h * image->pitch) - image->pitch;
-  for ( i=0; i<image->h/2; ++i ) {
-    for ( j=0; j<image->w; ++j ) {
-	tmpch = rowhi[j*3];
-	rowhi[j*3] = rowhi[j*3+2];
-	rowhi[j*3+2] = tmpch;
-	tmpch = rowlo[j*3];
-	rowlo[j*3] = rowlo[j*3+2];
-	rowlo[j*3+2] = tmpch;
+  /* Copy our RGB into an ABGR buffer - C32 */
+  // Allocated all 4 pixels for our ABGR
+    unsigned char * newPixels = (unsigned char *)malloc((image->w*image->h*4));
+    unsigned char * newPixelPtr = newPixels;
+    unsigned char * pixelPtr = (unsigned char *)image->pixels;
+    for(int i = 0; i < (image->w*image->h);i++)
+    {
+        unsigned char * R = pixelPtr;
+        unsigned char * G = R + sizeof(unsigned char);
+        unsigned char * B = G + sizeof(unsigned char);
+        // Lets start dumping them into our new memory!
+        * newPixelPtr++ = *B;
+        * newPixelPtr++ = *G;
+        * newPixelPtr++ = *R;
+        if ( *B == KEY_B && *G == KEY_G && *R == KEY_R )
+        {
+            * newPixelPtr++ = 0;
+        }
+        else
+        {
+            * newPixelPtr++ = 255;
+        }
+        pixelPtr += sizeof(unsigned char)*3;
     }
-    memcpy(tmpbuf, rowhi, image->pitch);
-    memcpy(rowhi, rowlo, image->pitch);
-    memcpy(rowlo, tmpbuf, image->pitch);
-    rowhi += image->pitch;
-    rowlo -= image->pitch;
-  }
-  free(tmpbuf);
+    free(image->pixels);        // free the pixels used in the original LoadBMP
+    image->pixels = newPixels;  // set our current image pixels to our new pixels
+    image->pitch = (image->pitch/3)*4; // adjust our pitch for 4 pixels instead of 3
+    // Now flip our surface for OpenGL specifics!
+    tmpbuf = (Uint8 *)malloc(image->pitch);
+    if ( tmpbuf == NULL ) {
+        fprintf(stderr, "Out of memory\n");
+        return(NULL);
+    }
+    rowhi = (Uint8 *)image->pixels; // highest portion of the image
+    rowlo = rowhi + (image->h * image->pitch) - image->pitch; // lowest portion
+    for ( i=0; i<image->h/2; ++i ) {
+        memcpy(tmpbuf, rowhi, image->pitch);
+        memcpy(rowhi, rowlo, image->pitch);
+        memcpy(rowlo, tmpbuf, image->pitch);
+        rowhi += image->pitch;
+        rowlo -= image->pitch;
+    }
   return(image);
 }
 
 int LoadGLTextures() 		// Load Bitmaps And Convert To Textures
 {
-    int Status=FALSE;		// Status Indicator
-    int loop;
-    SDL_Surface *TextureImage[4];	// Create Storage Space For The Textures
-    memset(TextureImage,0,sizeof(void *)*4);	// Set The Pointer To NULL
-    if ((TextureImage[0]=LoadBMP("data\\car.bmp")) &&  // Load The Floor Texture
-        (TextureImage[1]=LoadBMP("data\\wheel1_1.bmp")) &&	  // Load the Light Texture
-        (TextureImage[2]=LoadBMP("data\\wheel2_1.bmp")) &&
-        (TextureImage[3]=LoadBMP("data\\wheel3_1.bmp")))  // Load the Wall Texture
+    int noError=TRUE;		// Status Indicator
+    SDL_Surface *TextureImage[gTextureCount];	// Create Storage Space For The Textures
+    memset(TextureImage,0,sizeof(void *)*gTextureCount);	// Set The Pointer To NULL
+    for(int i = 0; i < gTextureCount; i++)
     {
-        Status=TRUE;
-        for (loop=0; loop<4; loop++) {		// Loop Through 3 Textures
-            glGenTextures(1, &sprites[loop].texture);		// Create The Texture
-            glBindTexture(GL_TEXTURE_2D, sprites[loop].texture);
-            gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGB, TextureImage[loop]->w, TextureImage[loop]->h, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[loop]->pixels);
-            //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, TextureImage[loop]->w, TextureImage[loop]->h,
-            //    0, GL_RGBA, GL_UNSIGNED_BYTE, TextureImage[loop]->pixels);
-            glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
-            glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-            sprites[loop].width = TextureImage[loop]->w;
-            sprites[loop].height = TextureImage[loop]->h;
-            sprites[loop].x = sprites[loop].y = 0; // ### DEBUG! ###
-            /* ZOMG! */
-            unsigned char * pixelR = (unsigned char *)TextureImage[loop]->pixels;
-            unsigned char * pixelG = pixelR + sizeof(unsigned char);
-            unsigned char * pixelB = pixelG + sizeof(unsigned char);
-            for(int i=0; i < TextureImage[loop]->w*TextureImage[loop]->h; i++)
-            {
-                printf("%06x\n", (*pixelR<<16|*pixelG<<8|*pixelB));
-                pixelR += sizeof(unsigned char)*3;
-                pixelG += sizeof(unsigned char)*3;
-                pixelB += sizeof(unsigned char)*3;
-            }
+        TextureImage[i]=LoadBMP2RGBA(gTextureList[i]);
+        if (TextureImage[i]==NULL)
+        {
+            printf("Error, could not load textures!\n");
+            noError=FALSE;
+            break;
         }
-        for (loop=0; loop<4; loop++) {		// Loop Through 3 Textures
-            if (TextureImage[loop]) {		// If Texture Exists
-                SDL_FreeSurface(TextureImage[loop]);
-            }
+        glGenTextures(1, &sprites[i].texture);		// Create The Texture
+        glBindTexture(GL_TEXTURE_2D, sprites[i].texture);
+        gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, TextureImage[i]->w, TextureImage[i]->h, GL_RGBA, GL_UNSIGNED_BYTE, TextureImage[i]->pixels);
+        //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, TextureImage[loop]->w, TextureImage[loop]->h,
+        //    0, GL_RGBA, GL_UNSIGNED_BYTE, TextureImage[loop]->pixels);
+        glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+        glTexParameterf(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
+        sprites[i].width = TextureImage[i]->w;
+        sprites[i].height = TextureImage[i]->h;
+        sprites[i].x = sprites[i].y = 0; // ### DEBUG! ###
+        sprites[i].name = gTextureList[i];
+        if (TextureImage[i]) {		// If Texture Exists
+            SDL_FreeSurface(TextureImage[i]);
         }
     }
-    return Status;
+    return noError;
 }
 
 int InitGL(GLvoid)			// All Setup For OpenGL Goes Here
@@ -178,7 +188,7 @@ int DrawGLScene(GLvoid)				// Draw Everything
             glPushMatrix();
             glLoadIdentity();
             glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-            for(int i = 0; i < 4; i++)
+            for(int i = 0; i < gTextureCount; i++)
                 DrawSprite(sprites[i], sprites[i].x, sprites[i].y, false);
 
             glPopMatrix();
@@ -244,6 +254,7 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, BOOL fullscree
   //printf("Got a stencil buffer %d bits deep\n", size);
 
   SDL_WM_SetCaption(title, "opengl");
+    SDL_ShowCursor(FALSE); // hide our cursor
 
   //ReSizeGLScene(width, height);		// Set Up Our Perspective GL Screen
 
@@ -257,27 +268,15 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, BOOL fullscree
 
 void UpdatePhysics()
 {
-    for(int i = 0; i < 4; i++)
-    {
-        sprites[i].x += ((rand()%25)-12);
-        sprites[i].y += ((rand()%25)-12);
-        if ( sprites[i].x > (240-sprites[i].width) )
-        {
-            sprites[i].x = 240-sprites[i].width;
-        }
-        else if ( sprites[i].x < 0 )
-        {
-            sprites[i].x = 0;
-        }
-        if ( sprites[i].y > (248-sprites[i].height) )
-        {
-            sprites[i].y = 248-sprites[i].height;
-        }
-        else if ( sprites[i].y < 0 )
-        {
-            sprites[i].y = 0;
-        }
-    }
+    // We have all the sprite names, but we are going to cheat here
+    sprites[2].x = 50;
+    sprites[2].y = 100;
+    sprites[6].x = 45;
+    sprites[6].y = 100;
+    sprites[8].x = 60;
+    sprites[8].y = 100;
+    sprites[10].x = 75;
+    sprites[10].y = 100;
 }
 
 int main(int argc, char *argv[])

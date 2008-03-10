@@ -13,7 +13,6 @@
 				<Option working_dir="."/>
 				<Option object_output=".objs"/>
 				<Option deps_output=".deps"/>
-				<Option external_deps=""/>
 				<Option type="1"/>
 				<Option compiler="0"/>
 				<Option projectResourceIncludeDirsRelation="1"/>
@@ -23,6 +22,12 @@
 			<Add library="mingw32"/>
 			<Add library="SDLmain"/>
 			<Add library="SDL"/>
+			<Add library="opengl32"/>
+			<Add library="glu32"/>
 		</Linker>
+		<Unit filename="main.cpp">
+			<Option compilerVar="CPP"/>
+			<Option target="default"/>
+		</Unit>
 	</Project>
 </CodeBlocks_project_file>

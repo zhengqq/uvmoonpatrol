@@ -1,33 +1,40 @@
-<?xml version="1.0"?>
-<!DOCTYPE CodeBlocks_project_file>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_project_file>
-	<FileVersion major="1" minor="1"/>
+	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="SDL Application"/>
-		<Option makefile="Makefile"/>
-		<Option makefile_is_custom="0"/>
-		<Option compiler="0"/>
+		<Option title="SDL Application" />
+		<Option pch_mode="0" />
+		<Option compiler="gcc" />
 		<Build>
 			<Target title="default">
-				<Option output="SDLapp.exe"/>
-				<Option working_dir="."/>
-				<Option object_output=".objs"/>
-				<Option deps_output=".deps"/>
-				<Option type="1"/>
-				<Option compiler="0"/>
-				<Option projectResourceIncludeDirsRelation="1"/>
+				<Option output="SDLapp.exe" prefix_auto="0" extension_auto="0" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Option projectResourceIncludeDirsRelation="1" />
 			</Target>
 		</Build>
+		<VirtualTargets>
+			<Add alias="All" targets="default;" />
+		</VirtualTargets>
 		<Linker>
-			<Add library="mingw32"/>
-			<Add library="SDLmain"/>
-			<Add library="SDL"/>
-			<Add library="opengl32"/>
-			<Add library="glu32"/>
+			<Add library="mingw32" />
+			<Add library="SDLmain" />
+			<Add library="SDL" />
+			<Add library="opengl32" />
 		</Linker>
-		<Unit filename="main.cpp">
-			<Option compilerVar="CPP"/>
-			<Option target="default"/>
-		</Unit>
+		<Unit filename="base.h" />
+		<Unit filename="car.cpp" />
+		<Unit filename="car.h" />
+		<Unit filename="gfx.cpp" />
+		<Unit filename="gfx.h" />
+		<Unit filename="level.cpp" />
+		<Unit filename="level.h" />
+		<Unit filename="main.cpp" />
+		<Unit filename="moonman.cpp" />
+		<Unit filename="moonman.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

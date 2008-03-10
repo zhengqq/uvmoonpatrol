@@ -1,7 +1,34 @@
-<?xml version="1.0"?>
-<!DOCTYPE CodeBlocks_layout_file>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<File name="main.cpp" open="1" top="1">
-		<Cursor position="8894" topLine="229"/>
+	<ActiveTarget name="All" />
+	<File name="base.h" open="1" top="0" tabpos="2">
+		<Cursor position="266" topLine="0" />
+	</File>
+	<File name="car.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="1397" topLine="15" />
+	</File>
+	<File name="car.h" open="1" top="0" tabpos="5">
+		<Cursor position="427" topLine="0" />
+	</File>
+	<File name="gfx.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="2895" topLine="51" />
+	</File>
+	<File name="gfx.h" open="1" top="0" tabpos="3">
+		<Cursor position="323" topLine="0" />
+	</File>
+	<File name="level.cpp" open="1" top="0" tabpos="8">
+		<Cursor position="653" topLine="0" />
+	</File>
+	<File name="level.h" open="1" top="0" tabpos="7">
+		<Cursor position="83" topLine="0" />
+	</File>
+	<File name="main.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="5160" topLine="188" />
+	</File>
+	<File name="moonman.cpp" open="1" top="1" tabpos="10">
+		<Cursor position="418" topLine="0" />
+	</File>
+	<File name="moonman.h" open="1" top="0" tabpos="9">
+		<Cursor position="249" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

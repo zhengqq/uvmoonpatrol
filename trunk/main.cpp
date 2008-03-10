@@ -21,7 +21,7 @@ BOOL        gKeyLeft,gKeyRight,gKeyUp,gKeyDown;
 
 Car*        mainCar;
 Level*      mainLevel;
-MoonMan*    mainMan;
+MoonMan*    mainMan[5];
 
 int InitGL(GLvoid)			// All Setup For OpenGL Goes Here
 {
@@ -54,7 +54,8 @@ void Render()				// Draw Everything
 
     mainLevel->draw();
     mainCar->draw();
-    mainMan->draw();
+    for(int i =0; i < 5; i++)
+        mainMan[i]->draw();
 
     glPopMatrix();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
@@ -126,7 +127,8 @@ void Logic()
 
     mainCar->update();
     mainLevel->update();
-    mainMan->update();
+    for(int i =0; i < 5; i++)
+        mainMan[i]->update();
 }
 
 void Timer()
@@ -201,7 +203,8 @@ int main(int argc, char *argv[])
     // Call our car here!
     mainCar = new Car();
     mainLevel = new Level();
-    mainMan = new MoonMan();
+    for(int i =0; i < 5; i++)
+        mainMan[i] = new MoonMan();
 
     if (!InitGL())			// Initialize Our Newly Created GL Window
     {
@@ -221,7 +224,8 @@ int main(int argc, char *argv[])
 
     delete mainCar;
     delete mainLevel;
-    delete mainMan;
+    for(int i =0; i < 5; i++)
+        delete mainMan[i];
 
     return 0;				// Exit The Program
 }

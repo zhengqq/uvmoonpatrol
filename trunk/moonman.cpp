@@ -12,7 +12,7 @@ MoonMan::MoonMan(){
     {
         printf("Could not load moon man running1_1.bmp\n");
     }
-    manX = 55;
+    manX = rand()%200 + 35;
     manY = 190;
     speed = 2;
 }

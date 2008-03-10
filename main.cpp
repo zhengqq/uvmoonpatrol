@@ -8,14 +8,18 @@
 #include "base.h"
 #include "gfx.h"
 #include "car.h"
+#include "level.h"
 
 int         gLastFrame;
 int         gLastTick;
+int         startTime;
 BOOL		active=TRUE;		// Window Active Flag Set To TRUE By Default
-BOOL		fullscreen=FALSE;	// Fullscreen Flag Set To Fullscreen Mode By Default
+BOOL    	done=FALSE;			// Bool Variable To Exit Loop
+BOOL		fullscreen=TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 BOOL        gKeyLeft,gKeyRight,gKeyUp,gKeyDown;
 
 Car*        mainCar;
+Level*      mainLevel;
 
 int InitGL(GLvoid)			// All Setup For OpenGL Goes Here
 {
@@ -25,8 +29,8 @@ int InitGL(GLvoid)			// All Setup For OpenGL Goes Here
 	glDisable(GL_CULL_FACE);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	//glOrtho(0,240, 0,248, 1.0f, -1.0f);
-	gluOrtho2D(0,240,0,248);
+	glOrtho(0,SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0.0f, 1.0f); // 0,w,h,0 makes it top left,  0,w,0,h makes it bottom left
+	//gluOrtho2D(0,240,0,248);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
     glEnable(GL_TEXTURE_2D);
@@ -36,27 +40,8 @@ int InitGL(GLvoid)			// All Setup For OpenGL Goes Here
 	return TRUE;						// Initialization Went OK
 }
 
-int DrawGLScene(GLvoid)				// Draw Everything
+void Render()				// Draw Everything
 {
-    int tick = SDL_GetTicks();
-    if (tick <= gLastFrame && (((1000/PHYSICSFPS)-(tick-gLastTick)>0)))
-    {
-        SDL_Delay((1000 / PHYSICSFPS) - (tick-gLastTick));
-        return TRUE;
-    }
-    gLastTick = tick;
-    while (gLastFrame < tick)
-    {
-        if (gKeyLeft) mainCar->moveLeft();
-        if (gKeyRight) mainCar->moveRight();
-        if (gKeyUp) gKeyUp=gKeyUp;
-        if (gKeyDown) gKeyDown=gKeyDown;
-
-        // Physics updates go here!
-
-        gLastFrame += 1000 / PHYSICSFPS;
-    }
-
     // Clear Screen, Depth Buffer & Stencil Buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -65,13 +50,87 @@ int DrawGLScene(GLvoid)				// Draw Everything
     glLoadIdentity();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
+    mainLevel->draw();
     mainCar->draw();
 
     glPopMatrix();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     glFlush();
 
-    return TRUE;					// Everything Went OK
+    SDL_GL_SwapBuffers();
+}
+
+void Logic()
+{
+    SDL_Event event;
+    while ( SDL_PollEvent(&event) ) {
+        switch (event.type) {
+        case SDL_QUIT:
+            done=TRUE;			// If So done=TRUE
+            break;
+        default:
+            break;
+        }
+
+        if (event.type == SDL_KEYDOWN)
+        {
+            switch(event.key.keysym.sym){
+                case SDLK_LEFT:
+                    gKeyLeft=TRUE;
+                break;
+                case SDLK_RIGHT:
+                    gKeyRight=TRUE;
+                break;
+                case SDLK_UP:
+                    gKeyUp=TRUE;
+                break;
+                case SDLK_DOWN:
+                    gKeyDown=TRUE;
+                break;
+                case SDLK_ESCAPE:
+                    done=TRUE;
+                break;
+                default:
+
+                break;
+            }
+        }
+        if (event.type == SDL_KEYUP)
+        {
+            switch(event.key.keysym.sym){
+                case SDLK_LEFT:
+                    gKeyLeft=FALSE;
+                break;
+                case SDLK_RIGHT:
+                    gKeyRight=FALSE;
+                break;
+                case SDLK_UP:
+                    gKeyUp=FALSE;
+                break;
+                case SDLK_DOWN:
+                    gKeyDown=FALSE;
+                break;
+                default:
+                break;
+            }
+        }
+    }
+
+    if (gKeyLeft) mainCar->moveLeft();
+    if (gKeyRight) mainCar->moveRight();
+    if (gKeyUp) gKeyUp=gKeyUp;
+    if (gKeyDown) gKeyDown=gKeyDown;
+
+    mainCar->update();
+    mainLevel->update();
+}
+
+void Timer()
+{
+    if((SDL_GetTicks() - startTime) < 1000.0/PHYSICSFPS)
+        SDL_Delay(int(1000.0/PHYSICSFPS - (SDL_GetTicks() - startTime)));
+
+    startTime = SDL_GetTicks();
 }
 
 GLvoid KillGLWindow(GLvoid)			// Properly Kill The Window
@@ -91,17 +150,15 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, BOOL fullscree
   int size;
 
   fullscreen=fullscreenflag;	// Set The Global Fullscreen Flag
-  flags = SDL_OPENGL | SDL_HWSURFACE;
+  flags = SDL_OPENGL;
   if ( fullscreenflag ) {
     flags |= SDL_FULLSCREEN;
   }
-  SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 5 );
-  SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 5 );
-  SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 5 );
+  SDL_GL_SetAttribute( SDL_GL_RED_SIZE, 8 );
+  SDL_GL_SetAttribute( SDL_GL_GREEN_SIZE, 8 );
+  SDL_GL_SetAttribute( SDL_GL_BLUE_SIZE, 8 );
   SDL_GL_SetAttribute( SDL_GL_DEPTH_SIZE, bits);
   SDL_GL_SetAttribute( SDL_GL_DOUBLEBUFFER, 1);
-
-    flags |= SDL_OPENGL;
 
   //SDL_GL_SetAttribute( SDL_GL_STENCIL_SIZE, 1 );
   if ( SDL_SetVideoMode(width, height, bits, flags) == NULL ) {
@@ -120,7 +177,6 @@ BOOL CreateGLWindow(char* title, int width, int height, int bits, BOOL fullscree
 int main(int argc, char *argv[])
 {
     srand((unsigned)time(0));
-    BOOL	done=FALSE;			// Bool Variable To Exit Loop
     gLastTick = SDL_GetTicks();
 
     gKeyLeft=gKeyRight=gKeyUp=gKeyDown=FALSE;
@@ -140,6 +196,7 @@ int main(int argc, char *argv[])
 
     // Call our car here!
     mainCar = new Car();
+    mainLevel = new Level();
 
     if (!InitGL())			// Initialize Our Newly Created GL Window
     {
@@ -147,67 +204,10 @@ int main(int argc, char *argv[])
         return -1;			// Return Error
     }
 
-    while(!done) {			// Loop That Runs While done=FALSE
-
-            // Draw The Scene.  Watch For ESC Key And Quit Messages From DrawGLScene()
-            if ((active && !DrawGLScene()))// Active? Was There A Quit Received?
-                done=TRUE;			// ESC or DrawGLScene Signalled A Quit
-            else				// Not Time To Quit, Update Screen
-                SDL_GL_SwapBuffers();		// Swap Buffers (Double Buffering)
-
-            SDL_Event event;
-            while ( SDL_PollEvent(&event) ) {
-                switch (event.type) {
-                case SDL_QUIT:
-                    done=TRUE;			// If So done=TRUE
-                    break;
-                default:
-                    break;
-                }
-
-                if (event.type == SDL_KEYDOWN)
-                {
-                    switch(event.key.keysym.sym){
-                        case SDLK_LEFT:
-                            gKeyLeft=TRUE;
-                        break;
-                        case SDLK_RIGHT:
-                            gKeyRight=TRUE;
-                        break;
-                        case SDLK_UP:
-                            gKeyUp=TRUE;
-                        break;
-                        case SDLK_DOWN:
-                            gKeyDown=TRUE;
-                        break;
-                        case SDLK_ESCAPE:
-                            done=TRUE;
-                        break;
-                        default:
-
-                        break;
-                    }
-                }
-                if (event.type == SDL_KEYUP)
-                {
-                    switch(event.key.keysym.sym){
-                        case SDLK_LEFT:
-                            gKeyLeft=FALSE;
-                        break;
-                        case SDLK_RIGHT:
-                            gKeyRight=FALSE;
-                        break;
-                        case SDLK_UP:
-                            gKeyUp=FALSE;
-                        break;
-                        case SDLK_DOWN:
-                            gKeyDown=FALSE;
-                        break;
-                        default:
-                        break;
-                    }
-                }
-            }
+    while(!done) {
+        Logic();
+        Render();
+        Timer();
     }
 
     // Shutdown
@@ -215,6 +215,7 @@ int main(int argc, char *argv[])
     SDL_Quit();
 
     delete mainCar;
+    delete mainLevel;
 
     return 0;				// Exit The Program
 }

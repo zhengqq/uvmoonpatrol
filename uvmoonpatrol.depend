@@ -8,7 +8,7 @@
 	<cstdlib>
 	<ctime>
 
-1205184933 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\main.cpp
+1205186403 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\main.cpp
 	<math.h>
 	<stdio.h>
 	<GL/gl.h>
@@ -20,6 +20,7 @@
 	"gfx.h"
 	"car.h"
 	"level.h"
+	"moonman.h"
 
 1205177989 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\base.h
 
@@ -44,6 +45,13 @@
 	"level.h"
 
 1205184623 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\level.h
+	"base.h"
+	"gfx.h"
+
+1205186817 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\moonman.cpp
+	"moonman.h"
+
+1205186588 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\moonman.h
 	"base.h"
 	"gfx.h"
 

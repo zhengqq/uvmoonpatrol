@@ -9,17 +9,19 @@
 #include "gfx.h"
 #include "car.h"
 #include "level.h"
+#include "moonman.h"
 
 int         gLastFrame;
 int         gLastTick;
 int         startTime;
 BOOL		active=TRUE;		// Window Active Flag Set To TRUE By Default
 BOOL    	done=FALSE;			// Bool Variable To Exit Loop
-BOOL		fullscreen=TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
+BOOL		fullscreen=FALSE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 BOOL        gKeyLeft,gKeyRight,gKeyUp,gKeyDown;
 
 Car*        mainCar;
 Level*      mainLevel;
+MoonMan*    mainMan;
 
 int InitGL(GLvoid)			// All Setup For OpenGL Goes Here
 {
@@ -52,6 +54,7 @@ void Render()				// Draw Everything
 
     mainLevel->draw();
     mainCar->draw();
+    mainMan->draw();
 
     glPopMatrix();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
@@ -123,6 +126,7 @@ void Logic()
 
     mainCar->update();
     mainLevel->update();
+    mainMan->update();
 }
 
 void Timer()
@@ -197,6 +201,7 @@ int main(int argc, char *argv[])
     // Call our car here!
     mainCar = new Car();
     mainLevel = new Level();
+    mainMan = new MoonMan();
 
     if (!InitGL())			// Initialize Our Newly Created GL Window
     {
@@ -216,6 +221,7 @@ int main(int argc, char *argv[])
 
     delete mainCar;
     delete mainLevel;
+    delete mainMan;
 
     return 0;				// Exit The Program
 }

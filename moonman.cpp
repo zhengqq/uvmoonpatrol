@@ -1,6 +1,13 @@
 #include "moonman.h"
 
+enum {
+    RUNNING = 0,
+    WALKING,
+    DEAD
+};
+
 MoonMan::MoonMan(){
+    manState = RUNNING;
     currentFrame = 0;
     facingLeft = FALSE;
     spriteA = TRUE;
@@ -23,28 +30,35 @@ MoonMan::~MoonMan(){
 }
 
 void MoonMan::update(){
-    currentFrame ++;
-    if ( currentFrame > 2 ){
-        spriteA = !spriteA;
-        currentFrame = 0;
+    if ( manState == RUNNING )
+    {
+        currentFrame ++;
+        if ( currentFrame > 2 ){
+            spriteA = !spriteA;
+            currentFrame = 0;
+        }
+        if ( facingLeft ){
+            if ( manX - speed < 0 ){
+                manX = 0;
+                facingLeft = FALSE;
+            }
+            else{
+                manX -= speed;
+            }
+        }
+        else {
+            if ( (manX + speed + manSpriteA.width) > SCREEN_WIDTH ){
+                manX = SCREEN_WIDTH - manSpriteA.width;
+                facingLeft = TRUE;
+            }
+            else{
+                manX += speed;
+            }
+        }
     }
-    if ( facingLeft ){
-        if ( manX - speed < 0 ){
-            manX = 0;
-            facingLeft = FALSE;
-        }
-        else{
-            manX -= speed;
-        }
-    }
-    else {
-        if ( (manX + speed + manSpriteA.width) > SCREEN_WIDTH ){
-            manX = SCREEN_WIDTH - manSpriteA.width;
-            facingLeft = TRUE;
-        }
-        else{
-            manX += speed;
-        }
+    else if ( manState == DEAD)
+    {
+        // We're dead, change sprite to dead sprite
     }
 }
 
@@ -55,4 +69,8 @@ void MoonMan::draw(){
     else{
         DrawSprite(manSpriteB, manX, manY, facingLeft);
     }
+}
+
+void MoonMan::kill() {
+    manState = DEAD;
 }

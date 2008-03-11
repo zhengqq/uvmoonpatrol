@@ -22,7 +22,10 @@
 			<Add library="SDL" />
 			<Add library="opengl32" />
 		</Linker>
+		<Unit filename="base.cpp" />
 		<Unit filename="base.h" />
+		<Unit filename="bloodfountain.cpp" />
+		<Unit filename="bloodfountain.h" />
 		<Unit filename="car.cpp" />
 		<Unit filename="car.h" />
 		<Unit filename="gfx.cpp" />
@@ -32,6 +35,8 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="moonman.cpp" />
 		<Unit filename="moonman.h" />
+		<Unit filename="particle.cpp" />
+		<Unit filename="particle.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

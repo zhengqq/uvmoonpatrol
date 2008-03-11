@@ -10,18 +10,20 @@
 #include "car.h"
 #include "level.h"
 #include "moonman.h"
+#include "bloodfountain.h"
 
 int         gLastFrame;
 int         gLastTick;
 int         startTime;
 BOOL		active=TRUE;		// Window Active Flag Set To TRUE By Default
 BOOL    	done=FALSE;			// Bool Variable To Exit Loop
-BOOL		fullscreen=FALSE;	// Fullscreen Flag Set To Fullscreen Mode By Default
+BOOL		fullscreen=TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 BOOL        gKeyLeft,gKeyRight,gKeyUp,gKeyDown;
 
 Car*        mainCar;
 Level*      mainLevel;
 MoonMan*    mainMan[5];
+BloodFountain* testFountain;
 
 int InitGL(GLvoid)			// All Setup For OpenGL Goes Here
 {
@@ -54,9 +56,12 @@ void Render()				// Draw Everything
 
     mainLevel->draw();
     mainCar->draw();
-    for(int i =0; i < 5; i++)
-        mainMan[i]->draw();
-
+    for(int i =0; i < 5; i++){
+        if (mainMan[i] != 0) {
+            mainMan[i]->draw();
+        }
+    }
+    testFountain->draw();
     glPopMatrix();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     glFlush();
@@ -125,10 +130,28 @@ void Logic()
     if (gKeyUp) gKeyUp=gKeyUp;
     if (gKeyDown) gKeyDown=gKeyDown;
 
+    for(int i = 0; i < 5; i++)
+    {
+        if ( mainMan[i] != 0 )
+        {
+            if (rectCollision(mainCar->getX(),mainCar->getY(),mainCar->width(),mainCar->height(), \
+                                mainMan[i]->getX(),mainMan[i]->getY(),mainMan[i]->width(),mainMan[i]->height())){
+                int explosionX = mainMan[i]->getX();
+                int explosionY = mainMan[i]->getY();
+                mainMan[i]->kill();
+            }
+        }
+    }
+
+    testFountain->update();
     mainCar->update();
     mainLevel->update();
     for(int i =0; i < 5; i++)
-        mainMan[i]->update();
+    {
+        if ( mainMan[i] != 0 ){
+            mainMan[i]->update();
+        }
+    }
 }
 
 void Timer()
@@ -205,6 +228,7 @@ int main(int argc, char *argv[])
     mainLevel = new Level();
     for(int i =0; i < 5; i++)
         mainMan[i] = new MoonMan();
+    testFountain = new BloodFountain(65,190,90,10);
 
     if (!InitGL())			// Initialize Our Newly Created GL Window
     {
@@ -224,8 +248,11 @@ int main(int argc, char *argv[])
 
     delete mainCar;
     delete mainLevel;
-    for(int i =0; i < 5; i++)
-        delete mainMan[i];
-
+    for(int i =0; i < 5; i++){
+        if ( mainMan[i] != 0 ){
+            delete mainMan[i];
+        }
+    }
+    delete testFountain;
     return 0;				// Exit The Program
 }

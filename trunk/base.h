@@ -13,4 +13,6 @@
 #define SCREEN_WIDTH 240
 #define SCREEN_HEIGHT 248
 
+BOOL rectCollision(int,int,int,int,int,int,int,int);
+
 #endif // __BASE_H__

@@ -16,6 +16,10 @@ public:
     bool moveRight();
     void stopMove();
     void jump();
+    int getX(){return carX;}
+    int getY(){return carY;}
+    int width(){return carSprite.width;}
+    int height(){return carSprite.height;}
 private:
     unsigned int currentFrame; // what frame are we at? (used for making wheels spin)
     BOOL wheelA;

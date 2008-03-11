@@ -10,7 +10,13 @@ public:
     ~MoonMan();
     void update();
     void draw();
+    int getX(){return manX;}
+    int getY(){return manY;}
+    int width(){return manSpriteA.width;}
+    int height(){return manSpriteA.height;}
+    void kill();
 private:
+    unsigned int manState;
     unsigned int currentFrame;
     int manX,manY,speed;
     BOOL facingLeft;

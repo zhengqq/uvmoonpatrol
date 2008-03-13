@@ -3,7 +3,9 @@
 Car::Car()
 {
     // Get some private variables declared
-    carX = screenX = carY = currentFrame = 0;
+    screenX = currentFrame = 0;
+    carX = 20;
+    carY = 175;
     airBorne = movingLeft = movingRight = FALSE;
     speed = 5;
     wheelA = TRUE;
@@ -50,6 +52,7 @@ void Car::update()
         currentFrame = 0;
     }
     carY = 175;
+    screenX += int(carX/50)+1; // ?
 } // give this the level terrain?
 
 void Car::draw()
@@ -73,21 +76,21 @@ void Car::fire()
 
 bool Car::moveLeft()
 {
-    if ( (carX-speed) > 0 ){
+    if ( (carX-speed) > 15 ){
         carX-= speed;
     }
     else{
-        carX = 0;
+        carX = 15;
     }
 }
 
 bool Car::moveRight()
 {
-    if ( ((carX+speed)+carSprite.width) < SCREEN_WIDTH ){
+    if ( ((carX+speed)+carSprite.width) < 150 ){
         carX+= speed;
     }
     else{
-        carX = (SCREEN_WIDTH-carSprite.width);
+        carX = (150-carSprite.width);
     }
 }
 

@@ -32,8 +32,9 @@ Particle::~Particle()
     glDeleteTextures( 1, &pSprite.texture );
 }
 
-void Particle::update()
+void Particle::update(int newScroll)
 {
+    scrollX = newScroll;
     if ( pType == FOUNTAIN)
     {
         if ( pState == MOVING )
@@ -84,5 +85,5 @@ void Particle::update()
 
 void Particle::draw()
 {
-     DrawSprite(pSprite, int(pX), int(pY), FALSE);
+     DrawSprite(pSprite, int(pX)-scrollX, int(pY), FALSE);
 }

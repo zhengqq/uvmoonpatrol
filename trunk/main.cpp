@@ -22,7 +22,7 @@ BOOL        gKeyLeft,gKeyRight,gKeyUp,gKeyDown;
 
 Car*        mainCar;
 Level*      mainLevel;
-MoonMan*    mainMan[5];
+MoonMan*    mainMan[100];
 BloodFountain* testFountain;
 BloodFountain* testCloud;
 BloodFountain* testPop;
@@ -58,7 +58,7 @@ void Render()				// Draw Everything
 
     mainLevel->draw();
     mainCar->draw();
-    for(int i =0; i < 5; i++){
+    for(int i =0; i < 100; i++){
         if (mainMan[i] != 0) {
             mainMan[i]->draw();
         }
@@ -134,7 +134,7 @@ void Logic()
     if (gKeyUp) gKeyUp=gKeyUp;
     if (gKeyDown) gKeyDown=gKeyDown;
 
-    for(int i = 0; i < 5; i++)
+    for(int i = 0; i < 100; i++)
     {
         if ( mainMan[i] != 0 )
         {
@@ -146,16 +146,16 @@ void Logic()
             }
         }
     }
-
-    testFountain->update();
-    testCloud->update();
-    testPop->update();
+    int scrollX = mainCar->getScreenX();
+    testFountain->update(scrollX);
+    testCloud->update(scrollX);
+    testPop->update(scrollX);
     mainCar->update();
-    mainLevel->update();
-    for(int i =0; i < 5; i++)
+    mainLevel->update(scrollX);
+    for(int i =0; i < 100; i++)
     {
         if ( mainMan[i] != 0 ){
-            mainMan[i]->update();
+            mainMan[i]->update(scrollX);
         }
     }
 }
@@ -232,13 +232,13 @@ int main(int argc, char *argv[])
     // Call our car here!
     mainCar = new Car();
     mainLevel = new Level();
-    for(int i =0; i < 5; i++)
+    for(int i =0; i < 100; i++)
         mainMan[i] = new MoonMan();
-    testFountain = new BloodFountain(65,190,90,10,200,0.9);
+    testFountain = new BloodFountain(65,190,90,10,55,0.9);
     testFountain->setSpurting();
-    testCloud = new BloodFountain(145,190,0,1,50,0);
+    testCloud = new BloodFountain(145,190,0,1,35,0);
     testCloud->setCloud();
-    testPop = new BloodFountain(200,190,0,1,50,0);
+    testPop = new BloodFountain(200,190,0,1,15,0);
     testPop->setPop();
 
     if (!InitGL())			// Initialize Our Newly Created GL Window
@@ -259,7 +259,7 @@ int main(int argc, char *argv[])
 
     delete mainCar;
     delete mainLevel;
-    for(int i =0; i < 5; i++){
+    for(int i =0; i < 100; i++){
         if ( mainMan[i] != 0 ){
             delete mainMan[i];
         }

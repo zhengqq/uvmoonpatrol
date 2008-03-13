@@ -16,14 +16,15 @@ public:
     bool moveRight();
     void stopMove();
     void jump();
-    int getX(){return carX;}
+    int getScreenX(){return screenX;}
+    int getX(){return carX+screenX;}
     int getY(){return carY;}
     int width(){return carSprite.width;}
     int height(){return carSprite.height;}
 private:
     unsigned int currentFrame; // what frame are we at? (used for making wheels spin)
     BOOL wheelA;
-    unsigned int speed;
+    int speed;
     int carX, screenX, carY; // where are we in the world?
     unsigned int fireCount; // how long since the last time we fired?
     BOOL airBorne,movingLeft,movingRight; // are we airborne?

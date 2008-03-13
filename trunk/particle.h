@@ -16,12 +16,13 @@ public:
     Particle();
     Particle(int, int, int, double, double, int, char *, unsigned int); // x,y,angle,length,gravity,life,sprite name,type
     ~Particle();
-    void update(); // update our particles x & y values
+    void update(int); // update our particles x & y values
     void draw(); // draw the particle
     unsigned int getLife() { return life; }
 private:
     unsigned int pState;
     unsigned int pType;
+    int scrollX;
     int life,maxLife; // tells it how long to stay on the ground
     double pX,pY;   // particle's x & y
     double vX,vY;

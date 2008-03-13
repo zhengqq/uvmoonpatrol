@@ -46,6 +46,11 @@ void BloodFountain::setCloud()
     type = CLOUD;
 }
 
+void BloodFountain::setPop()
+{
+    type = POP;
+}
+
 void BloodFountain::update()
 {
     for(int i = 0; i < 256; i++)
@@ -70,6 +75,12 @@ void BloodFountain::update()
     else if ( type == CLOUD )
     {
         for(int i = 0; i < rand()%2+2; i++){
+            addDroplet();
+        }
+    }
+    else if ( type == POP )
+    {
+        for(int i = 0; i < 8; i++){
             addDroplet();
         }
     }
@@ -99,6 +110,10 @@ void BloodFountain::addDroplet()
             else if ( type == CLOUD )
             {
                 pList[i] = new Particle(bloodX+(rand()%20-10), bloodY+(rand()%20-10), 5-rand()%10, 1.0, gravity, 15, bloodList[rand()%4],CLOUD);
+            }
+            else if ( type == POP )
+            {
+                pList[i] = new Particle(bloodX, bloodY, rand()%360, 0.5+(rand()%10/10), gravity, 25, bloodList[rand()%4],POP);
             }
             break;
         }

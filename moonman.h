@@ -8,7 +8,7 @@ class MoonMan {
 public:
     MoonMan();
     ~MoonMan();
-    void update();
+    void update(int);
     void draw();
     int getX(){return manX;}
     int getY(){return manY;}
@@ -19,6 +19,7 @@ private:
     unsigned int manState;
     unsigned int currentFrame;
     int manX,manY,speed;
+    int scrollX;
     BOOL facingLeft;
     BOOL spriteA; // which sprite are we on?
     Sprite manSpriteA;

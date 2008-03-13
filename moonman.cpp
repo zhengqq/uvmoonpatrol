@@ -19,7 +19,7 @@ MoonMan::MoonMan(){
     {
         printf("Could not load moon man running1_1.bmp\n");
     }
-    manX = rand()%200 + 35;
+    manX = rand()%3000 + 300;
     manY = 190;
     speed = 2;
 }
@@ -29,7 +29,8 @@ MoonMan::~MoonMan(){
     glDeleteTextures( 1, &manSpriteB.texture );
 }
 
-void MoonMan::update(){
+void MoonMan::update(int newScroll){
+    scrollX = newScroll;
     if ( manState == RUNNING )
     {
         currentFrame ++;
@@ -38,8 +39,7 @@ void MoonMan::update(){
             currentFrame = 0;
         }
         if ( facingLeft ){
-            if ( manX - speed < 0 ){
-                manX = 0;
+            if ( rand()%50 == 3 ){
                 facingLeft = FALSE;
             }
             else{
@@ -47,8 +47,7 @@ void MoonMan::update(){
             }
         }
         else {
-            if ( (manX + speed + manSpriteA.width) > SCREEN_WIDTH ){
-                manX = SCREEN_WIDTH - manSpriteA.width;
+            if ( rand()%50 == 13 ){
                 facingLeft = TRUE;
             }
             else{
@@ -64,10 +63,10 @@ void MoonMan::update(){
 
 void MoonMan::draw(){
     if ( spriteA == TRUE ){
-        DrawSprite(manSpriteA, manX, manY, facingLeft);
+        DrawSprite(manSpriteA, manX-scrollX, manY, facingLeft);
     }
     else{
-        DrawSprite(manSpriteB, manX, manY, facingLeft);
+        DrawSprite(manSpriteB, manX-scrollX, manY, facingLeft);
     }
 }
 

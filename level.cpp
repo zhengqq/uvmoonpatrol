@@ -1,5 +1,9 @@
 #include "level.h"
 
+int debugLevel[] = {0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,
+                    0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,
+                    0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3};
+
 Level::Level()
 {
     if(!generateSprite("data\\tile1.bmp",&tiles[0])){
@@ -24,13 +28,14 @@ Level::~Level()
     }
 }
 
-void Level::update()
+void Level::update(int scrollX)
 {
+    levelX = scrollX;
 }
 
 void Level::draw()
 {
-    for(int i = 0; i < 8; i++){
-        DrawSprite(tiles[i%4], i*32, 190, FALSE);
+    for(int i = 0; i < 164; i++){
+        DrawSprite(tiles[debugLevel[i]], i*32 - levelX, 190, FALSE);
     }
 }

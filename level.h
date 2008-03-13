@@ -9,10 +9,11 @@ class Level
 public:
     Level();
     ~Level();
-    void update();
+    void update(int);
     void draw();
 private:
     Sprite tiles[4]; // 4 so far
+    int levelX;
 };
 
 #endif // __LEVEL_H__

@@ -9,7 +9,7 @@ public:
     BloodFountain();
     BloodFountain(int,int,double,double,int,double);
     ~BloodFountain();
-    void update();
+    void update(int);
     void draw();
     void setSpurting(); // default spurting fountain
     void setCloud();    // set our fountain to a cloud
@@ -17,6 +17,7 @@ public:
 private:
     void addDroplet();
     Particle * pList[256]; // particle list for our blood sprites
+    int scrollX;
     int bloodX, bloodY; // Where is the fountain spewing from?
     int lifeSpan;       // how long do we want the fountain to last?
     int decay;          // How much decay on the life span do we want? (1.0 ?)

@@ -10,17 +10,18 @@ BloodFountain::BloodFountain()
     angle = length = gravity = 0.0;
 }
 
-BloodFountain::BloodFountain(int x, int y, double a, double l)
+BloodFountain::BloodFountain(int x, int y, double a, double l, int life, double g)
 {
     for(int i = 0; i < 256; i++)
         pList[i] = 0;
     bloodX = x;
     bloodY = y;
-    lifeSpan = 200;
+    lifeSpan = life;
     decay = 1;
     angle = a;
     length = l;
-    gravity = 0.9; // downward pull
+    gravity = g; // downward pull
+    type = FOUNTAIN; // default
 }
 
 BloodFountain::~BloodFountain()
@@ -33,6 +34,16 @@ BloodFountain::~BloodFountain()
             pList[i] = 0;
         }
     }
+}
+
+void BloodFountain::setSpurting()
+{
+    type = FOUNTAIN;
+}
+
+void BloodFountain::setCloud()
+{
+    type = CLOUD;
 }
 
 void BloodFountain::update()
@@ -52,7 +63,16 @@ void BloodFountain::update()
             }
         }
     }
-    addDroplet();
+    if ( type == FOUNTAIN )
+    {
+        addDroplet();
+    }
+    else if ( type == CLOUD )
+    {
+        for(int i = 0; i < rand()%2+2; i++){
+            addDroplet();
+        }
+    }
 }
 
 void BloodFountain::draw()
@@ -72,7 +92,14 @@ void BloodFountain::addDroplet()
     {
         if ( pList[i] == 0 )
         {
-            pList[i] = new Particle(bloodX, bloodY, 80+rand()%20, 10+rand()%5, gravity, bloodList[rand()%4]);
+            if ( type == FOUNTAIN )
+            {
+                pList[i] = new Particle(bloodX, bloodY, 80+rand()%20, 10+rand()%5, gravity, 90, bloodList[rand()%4],FOUNTAIN);
+            }
+            else if ( type == CLOUD )
+            {
+                pList[i] = new Particle(bloodX+(rand()%20-10), bloodY+(rand()%20-10), 5-rand()%10, 1.0, gravity, 15, bloodList[rand()%4],CLOUD);
+            }
             break;
         }
     }

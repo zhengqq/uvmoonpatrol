@@ -4,18 +4,24 @@
 #include "base.h"
 #include "gfx.h"
 
+typedef enum {
+    FOUNTAIN=0,
+    CLOUD
+};
+
 class Particle
 {
 public:
     Particle();
-    Particle(int, int, int, double, double, char *); // x,y,angle,length,gravity,sprite name
+    Particle(int, int, int, double, double, int, char *, unsigned int); // x,y,angle,length,gravity,life,sprite name,type
     ~Particle();
     void update(); // update our particles x & y values
     void draw(); // draw the particle
-    unsigned int getLife() { return groundLife; }
+    unsigned int getLife() { return life; }
 private:
     unsigned int pState;
-    unsigned int groundLife; // tells it how long to stay on the ground
+    unsigned int pType;
+    int life; // tells it how long to stay on the ground
     double pX,pY;   // particle's x & y
     double vX,vY;
     double gravity;

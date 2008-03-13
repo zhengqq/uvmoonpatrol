@@ -14,15 +14,16 @@ Particle::Particle()
     pState = GROUND;
 }
 
-Particle::Particle(int x, int y, int angle, double length, double g, char * filename)
+Particle::Particle(int x, int y, int angle, double length, double g, int l, char * filename, unsigned int type)
 {
     pState = MOVING;
+    pType = type;
     pX = double(x);
     pY = double(y);
     vX = length * cos(angle*PI/180);
     vY = length * sin(angle*PI/180);
     gravity = g;
-    groundLife = 90;
+    life = l;
     generateSprite(filename, &pSprite);
 }
 
@@ -33,22 +34,31 @@ Particle::~Particle()
 
 void Particle::update()
 {
-    if ( pState == MOVING )
+    if ( pType == FOUNTAIN)
     {
-        vY -= gravity;
-        pX += vX;
-        pY -= vY;
-        if ( pY >= 200 )
+        if ( pState == MOVING )
         {
-            pState = GROUND;
-            pY = 200;
+            vY -= gravity;
+            pX += vX;
+            pY -= vY;
+            if ( pY >= 200 )
+            {
+                pState = GROUND;
+                pY = 200;
+            }
+        }
+        else if ( pState == GROUND )
+        {
+            if ( life > 0 ){
+                life--;
+            }
         }
     }
-    else if ( pState == GROUND )
+    else if ( pType == CLOUD )
     {
-        if ( groundLife > 0 ){
-            groundLife--;
-        }
+        pX += vX;
+        pY -= vY;
+        life--;
     }
 }
 

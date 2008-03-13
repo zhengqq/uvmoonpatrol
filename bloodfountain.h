@@ -7,10 +7,12 @@ class BloodFountain
 {
 public:
     BloodFountain();
-    BloodFountain(int,int,double,double);
+    BloodFountain(int,int,double,double,int,double);
     ~BloodFountain();
     void update();
     void draw();
+    void setSpurting(); // default spurting fountain
+    void setCloud();    // set our fountain to a cloud
 private:
     void addDroplet();
     Particle * pList[256]; // particle list for our blood sprites
@@ -20,6 +22,7 @@ private:
     double angle;       // angle of our blood fountain
     double length;      // initial length of our blood fountain vector
     double gravity;     // gravity applying to our blood fountain
+    unsigned int type;
 };
 
 #endif // __BLOODFOUNTAIN_H__

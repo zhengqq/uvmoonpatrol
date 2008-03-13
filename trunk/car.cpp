@@ -5,6 +5,7 @@ Car::Car()
     // Get some private variables declared
     carX = screenX = carY = currentFrame = 0;
     airBorne = movingLeft = movingRight = FALSE;
+    speed = 5;
     wheelA = TRUE;
     if (!generateSprite("data\\car.bmp",&carSprite) ){
         printf("Error, could not load car.bmp!\n");
@@ -72,8 +73,8 @@ void Car::fire()
 
 bool Car::moveLeft()
 {
-    if ( (carX-2) > 0 ){
-        carX-= 2;
+    if ( (carX-speed) > 0 ){
+        carX-= speed;
     }
     else{
         carX = 0;
@@ -82,8 +83,8 @@ bool Car::moveLeft()
 
 bool Car::moveRight()
 {
-    if ( ((carX+2)+carSprite.width) < SCREEN_WIDTH ){
-        carX+= 2;
+    if ( ((carX+speed)+carSprite.width) < SCREEN_WIDTH ){
+        carX+= speed;
     }
     else{
         carX = (SCREEN_WIDTH-carSprite.width);

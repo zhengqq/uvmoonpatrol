@@ -8,7 +8,7 @@
 	<cstdlib>
 	<ctime>
 
-1205255691 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\main.cpp
+1205422846 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\main.cpp
 	<math.h>
 	<stdio.h>
 	<GL/gl.h>
@@ -38,7 +38,7 @@
 1205185138 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\car.cpp
 	"car.h"
 
-1205252069 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\car.h
+1205423093 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\car.h
 	"base.h"
 	"gfx.h"
 
@@ -59,17 +59,23 @@
 1205252046 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\base.cpp
 	"base.h"
 
-1205256172 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodfountain.cpp
+1205423051 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodfountain.cpp
 	"bloodfountain.h"
 
-1205255820 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodfountain.h
+1205422641 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodfountain.h
 	"particle.h"
 
-1205256097 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\particle.h
+1205422399 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\particle.h
 	"base.h"
 	"gfx.h"
 
-1205256125 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\particle.cpp
+1205422377 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\particle.cpp
 	"particle.h"
 	<math.h>
+
+1205421804 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodcloud.h
+	"particle.h"
+
+1205422153 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodcloud.cpp
+	"bloodcloud.h"
 

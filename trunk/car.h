@@ -23,6 +23,7 @@ public:
 private:
     unsigned int currentFrame; // what frame are we at? (used for making wheels spin)
     BOOL wheelA;
+    unsigned int speed;
     int carX, screenX, carY; // where are we in the world?
     unsigned int fireCount; // how long since the last time we fired?
     BOOL airBorne,movingLeft,movingRight; // are we airborne?

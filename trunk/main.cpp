@@ -17,13 +17,14 @@ int         gLastTick;
 int         startTime;
 BOOL		active=TRUE;		// Window Active Flag Set To TRUE By Default
 BOOL    	done=FALSE;			// Bool Variable To Exit Loop
-BOOL		fullscreen=TRUE;	// Fullscreen Flag Set To Fullscreen Mode By Default
+BOOL		fullscreen=FALSE;	// Fullscreen Flag Set To Fullscreen Mode By Default
 BOOL        gKeyLeft,gKeyRight,gKeyUp,gKeyDown;
 
 Car*        mainCar;
 Level*      mainLevel;
 MoonMan*    mainMan[5];
 BloodFountain* testFountain;
+BloodFountain* testCloud;
 
 int InitGL(GLvoid)			// All Setup For OpenGL Goes Here
 {
@@ -62,6 +63,7 @@ void Render()				// Draw Everything
         }
     }
     testFountain->draw();
+    testCloud->draw();
     glPopMatrix();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     glFlush();
@@ -144,6 +146,7 @@ void Logic()
     }
 
     testFountain->update();
+    testCloud->update();
     mainCar->update();
     mainLevel->update();
     for(int i =0; i < 5; i++)
@@ -228,7 +231,10 @@ int main(int argc, char *argv[])
     mainLevel = new Level();
     for(int i =0; i < 5; i++)
         mainMan[i] = new MoonMan();
-    testFountain = new BloodFountain(65,190,90,10);
+    testFountain = new BloodFountain(65,190,90,10,200,0.9);
+    testFountain->setSpurting();
+    testCloud = new BloodFountain(125,190,0,1,50,0);
+    testCloud->setCloud();
 
     if (!InitGL())			// Initialize Our Newly Created GL Window
     {
@@ -254,5 +260,6 @@ int main(int argc, char *argv[])
         }
     }
     delete testFountain;
+    delete testCloud;
     return 0;				// Exit The Program
 }

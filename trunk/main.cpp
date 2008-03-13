@@ -25,6 +25,7 @@ Level*      mainLevel;
 MoonMan*    mainMan[5];
 BloodFountain* testFountain;
 BloodFountain* testCloud;
+BloodFountain* testPop;
 
 int InitGL(GLvoid)			// All Setup For OpenGL Goes Here
 {
@@ -64,6 +65,7 @@ void Render()				// Draw Everything
     }
     testFountain->draw();
     testCloud->draw();
+    testPop->draw();
     glPopMatrix();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     glFlush();
@@ -147,6 +149,7 @@ void Logic()
 
     testFountain->update();
     testCloud->update();
+    testPop->update();
     mainCar->update();
     mainLevel->update();
     for(int i =0; i < 5; i++)
@@ -233,8 +236,10 @@ int main(int argc, char *argv[])
         mainMan[i] = new MoonMan();
     testFountain = new BloodFountain(65,190,90,10,200,0.9);
     testFountain->setSpurting();
-    testCloud = new BloodFountain(125,190,0,1,50,0);
+    testCloud = new BloodFountain(145,190,0,1,50,0);
     testCloud->setCloud();
+    testPop = new BloodFountain(200,190,0,1,50,0);
+    testPop->setPop();
 
     if (!InitGL())			// Initialize Our Newly Created GL Window
     {
@@ -261,5 +266,6 @@ int main(int argc, char *argv[])
     }
     delete testFountain;
     delete testCloud;
+    delete testPop;
     return 0;				// Exit The Program
 }

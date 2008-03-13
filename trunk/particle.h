@@ -6,7 +6,8 @@
 
 typedef enum {
     FOUNTAIN=0,
-    CLOUD
+    CLOUD,
+    POP
 };
 
 class Particle
@@ -21,7 +22,7 @@ public:
 private:
     unsigned int pState;
     unsigned int pType;
-    int life; // tells it how long to stay on the ground
+    int life,maxLife; // tells it how long to stay on the ground
     double pX,pY;   // particle's x & y
     double vX,vY;
     double gravity;

@@ -13,6 +13,7 @@ public:
     void draw();
     void setSpurting(); // default spurting fountain
     void setCloud();    // set our fountain to a cloud
+    void setPop();
 private:
     void addDroplet();
     Particle * pList[256]; // particle list for our blood sprites

@@ -63,9 +63,12 @@ void Render()				// Draw Everything
             mainMan[i]->draw();
         }
     }
-    testFountain->draw();
-    testCloud->draw();
-    testPop->draw();
+    if (testFountain != 0)
+        testFountain->draw();
+    if (testCloud != 0)
+        testCloud->draw();
+    if (testPop != 0)
+        testPop->draw();
     glPopMatrix();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     glFlush();
@@ -134,6 +137,8 @@ void Logic()
     if (gKeyUp) gKeyUp=gKeyUp;
     if (gKeyDown) gKeyDown=gKeyDown;
 
+    mainCar->update();
+
     for(int i = 0; i < 100; i++)
     {
         if ( mainMan[i] != 0 )
@@ -142,15 +147,41 @@ void Logic()
                                 mainMan[i]->getX(),mainMan[i]->getY(),mainMan[i]->width(),mainMan[i]->height())){
                 int explosionX = mainMan[i]->getX();
                 int explosionY = mainMan[i]->getY();
-                mainMan[i]->kill();
+                //mainMan[i]->kill();
+                delete mainMan[i];
+                mainMan[i] = 0;
+                if ( testPop == 0 ){
+                    testPop = new BloodFountain(explosionX,explosionY,0,1,15,0);
+                    testPop->setPop();
+                }
             }
         }
     }
     int scrollX = mainCar->getScreenX();
-    testFountain->update(scrollX);
-    testCloud->update(scrollX);
-    testPop->update(scrollX);
-    mainCar->update();
+    if ( testFountain != 0){
+        testFountain->update(scrollX);
+        if ( testFountain->getLife() <= 0 )
+        {
+            delete testFountain;
+            testFountain = 0;
+        }
+    }
+    if ( testCloud != 0){
+        testCloud->update(scrollX);
+        if ( testCloud->getLife() <= 0 )
+        {
+            delete testCloud;
+            testCloud = 0;
+        }
+    }
+    if ( testPop != 0){
+        testPop->update(scrollX);
+        if ( testPop->getLife() <= 0 )
+        {
+            delete testPop;
+            testPop = 0;
+        }
+    }
     mainLevel->update(scrollX);
     for(int i =0; i < 100; i++)
     {
@@ -223,7 +254,7 @@ int main(int argc, char *argv[])
     }
 
     // Create Our OpenGL Window
-    if (!CreateGLWindow("Ultraviolence Moon Patrol", SCREEN_WIDTH, SCREEN_HEIGHT, 32, fullscreen))
+    if (!CreateGLWindow("Ultraviolent Moon Patrol", SCREEN_WIDTH, SCREEN_HEIGHT, 32, fullscreen))
     {
         SDL_Quit();
         return 0;				// Quit If Window Was Not Created
@@ -234,12 +265,15 @@ int main(int argc, char *argv[])
     mainLevel = new Level();
     for(int i =0; i < 100; i++)
         mainMan[i] = new MoonMan();
-    testFountain = new BloodFountain(65,190,90,10,55,0.9);
+    testFountain = 0;
+    testCloud = 0;
+    testPop = 0;
+ /*   testFountain = new BloodFountain(65,190,90,10,55,0.9);
     testFountain->setSpurting();
     testCloud = new BloodFountain(145,190,0,1,35,0);
     testCloud->setCloud();
     testPop = new BloodFountain(200,190,0,1,15,0);
-    testPop->setPop();
+    testPop->setPop();*/
 
     if (!InitGL())			// Initialize Our Newly Created GL Window
     {
@@ -264,8 +298,14 @@ int main(int argc, char *argv[])
             delete mainMan[i];
         }
     }
-    delete testFountain;
-    delete testCloud;
-    delete testPop;
+    if (testFountain != 0){
+        delete testFountain;
+    }
+    if (testCloud != 0){
+        delete testCloud;
+    }
+    if (testPop != 0){
+        delete testPop;
+    }
     return 0;				// Exit The Program
 }

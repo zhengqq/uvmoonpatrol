@@ -85,5 +85,8 @@ void Particle::update(int newScroll)
 
 void Particle::draw()
 {
-     DrawSprite(pSprite, int(pX)-scrollX, int(pY), FALSE);
+    if ( ((int)pX-scrollX) > 0)
+    {
+        DrawSprite(pSprite, ((int)pX-scrollX), int(pY), FALSE);
+    }
 }

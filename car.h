@@ -17,7 +17,7 @@ public:
     void stopMove();
     void jump();
     int getScreenX(){return screenX;}
-    int getX(){return carX+screenX;}
+    int getX(){return int(carX+screenX);}
     int getY(){return carY;}
     int width(){return carSprite.width;}
     int height(){return carSprite.height;}

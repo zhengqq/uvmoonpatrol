@@ -54,21 +54,6 @@ void BloodFountain::setPop()
 void BloodFountain::update(int newScroll)
 {
     scrollX = newScroll;
-    for(int i = 0; i < 256; i++)
-    {
-        if ( pList[i] != 0 )
-        {
-            if ( pList[i]->getLife() > 0 )
-            {
-                pList[i]->update(newScroll);
-            }
-            else
-            {
-                delete pList[i];
-                pList[i] = 0;
-            }
-        }
-    }
     if ( lifeSpan > 0 )
     {
         if ( type == FOUNTAIN )
@@ -88,6 +73,21 @@ void BloodFountain::update(int newScroll)
             }
         }
         lifeSpan--;
+    }
+    for(int i = 0; i < 256; i++)
+    {
+        if ( pList[i] != 0 )
+        {
+            if ( pList[i]->getLife() > 0 )
+            {
+                pList[i]->update(newScroll);
+            }
+            else
+            {
+                delete pList[i];
+                pList[i] = 0;
+            }
+        }
     }
 }
 
@@ -110,15 +110,15 @@ void BloodFountain::addDroplet()
         {
             if ( type == FOUNTAIN )
             {
-                pList[i] = new Particle(bloodX-scrollX, bloodY, 80+rand()%20, 10+rand()%5, gravity, 90, bloodList[rand()%4],FOUNTAIN);
+                pList[i] = new Particle(bloodX, bloodY, 80+rand()%20, 10+rand()%5, gravity, 90, bloodList[rand()%4],FOUNTAIN);
             }
             else if ( type == CLOUD )
             {
-                pList[i] = new Particle(bloodX+(rand()%20-10)-scrollX, bloodY+(rand()%20-10), 5-rand()%10, 1.0, gravity, 15, bloodList[rand()%4],CLOUD);
+                pList[i] = new Particle(bloodX+(rand()%20-10), bloodY+(rand()%20-10), 5-rand()%10, 1.0, gravity, 15, bloodList[rand()%4],CLOUD);
             }
             else if ( type == POP )
             {
-                pList[i] = new Particle(bloodX-scrollX, bloodY, rand()%360, 0.5+(rand()%10/10), gravity, 25, bloodList[rand()%4],POP);
+                pList[i] = new Particle(bloodX, bloodY, rand()%360, 0.5+(rand()%10/10), gravity, 25, bloodList[rand()%4],POP);
             }
             break;
         }

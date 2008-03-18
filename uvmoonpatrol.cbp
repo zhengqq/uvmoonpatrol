@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="SDL Application" />
+		<Option title="Ultraviolent Moon Patrol" />
 		<Option pch_mode="0" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="default">
-				<Option output="SDLapp.exe" prefix_auto="0" extension_auto="0" />
+				<Option output="UVmpatrol.exe" prefix_auto="0" extension_auto="0" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Option projectResourceIncludeDirsRelation="1" />
@@ -28,6 +28,8 @@
 		<Unit filename="bloodfountain.h" />
 		<Unit filename="car.cpp" />
 		<Unit filename="car.h" />
+		<Unit filename="game.cpp" />
+		<Unit filename="game.h" />
 		<Unit filename="gfx.cpp" />
 		<Unit filename="gfx.h" />
 		<Unit filename="level.cpp" />

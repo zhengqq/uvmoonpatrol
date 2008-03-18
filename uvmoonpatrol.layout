@@ -1,49 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="All" />
-	<File name="base.cpp" open="1" top="0" tabpos="11">
+	<File name="base.cpp" open="1" top="0" tabpos="10">
 		<Cursor position="775" topLine="0" />
 	</File>
-	<File name="base.h" open="1" top="0" tabpos="2">
+	<File name="base.h" open="1" top="0" tabpos="1">
 		<Cursor position="323" topLine="0" />
 	</File>
-	<File name="bloodfountain.cpp" open="1" top="0" tabpos="15">
+	<File name="bloodfountain.cpp" open="1" top="0" tabpos="14">
 		<Cursor position="1080" topLine="44" />
 	</File>
-	<File name="bloodfountain.h" open="1" top="0" tabpos="14">
+	<File name="bloodfountain.h" open="1" top="0" tabpos="13">
 		<Cursor position="27" topLine="0" />
 	</File>
-	<File name="car.cpp" open="1" top="0" tabpos="6">
-		<Cursor position="2549" topLine="42" />
+	<File name="car.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="2549" topLine="0" />
 	</File>
-	<File name="car.h" open="1" top="0" tabpos="5">
+	<File name="car.h" open="1" top="0" tabpos="4">
 		<Cursor position="397" topLine="0" />
 	</File>
-	<File name="gfx.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="2956" topLine="9" />
+	<File name="game.cpp" open="1" top="1" tabpos="15">
+		<Cursor position="397" topLine="0" />
 	</File>
-	<File name="gfx.h" open="1" top="0" tabpos="3">
-		<Cursor position="323" topLine="0" />
+	<File name="game.h" open="1" top="0" tabpos="16">
+		<Cursor position="911" topLine="21" />
 	</File>
-	<File name="level.cpp" open="1" top="0" tabpos="8">
-		<Cursor position="759" topLine="3" />
+	<File name="gfx.cpp" open="1" top="0" tabpos="3">
+		<Cursor position="96" topLine="0" />
 	</File>
-	<File name="level.h" open="1" top="0" tabpos="7">
-		<Cursor position="237" topLine="0" />
+	<File name="gfx.h" open="1" top="0" tabpos="2">
+		<Cursor position="329" topLine="0" />
 	</File>
-	<File name="main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="4306" topLine="130" />
+	<File name="level.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="1652" topLine="0" />
 	</File>
-	<File name="moonman.cpp" open="1" top="0" tabpos="10">
-		<Cursor position="493" topLine="0" />
+	<File name="level.h" open="1" top="0" tabpos="6">
+		<Cursor position="479" topLine="0" />
 	</File>
-	<File name="moonman.h" open="1" top="0" tabpos="9">
+	<File name="main.cpp" open="0" top="0" tabpos="1">
+		<Cursor position="103" topLine="0" />
+	</File>
+	<File name="moonman.cpp" open="1" top="0" tabpos="9">
+		<Cursor position="72" topLine="0" />
+	</File>
+	<File name="moonman.h" open="1" top="0" tabpos="8">
 		<Cursor position="213" topLine="0" />
 	</File>
-	<File name="particle.cpp" open="1" top="0" tabpos="13">
-		<Cursor position="1780" topLine="18" />
+	<File name="particle.cpp" open="1" top="0" tabpos="12">
+		<Cursor position="1780" topLine="0" />
 	</File>
-	<File name="particle.h" open="1" top="0" tabpos="12">
+	<File name="particle.h" open="1" top="0" tabpos="11">
 		<Cursor position="556" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

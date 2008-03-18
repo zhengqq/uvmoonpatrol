@@ -14,6 +14,7 @@ struct Sprite
 	int height;
 };
 
+int InitGL(GLvoid);
 SDL_Surface *LoadBMP2RGBA(char *filename);
 void DrawSprite(Sprite & sprite, int x, int y, bool flip);
 BOOL generateSprite(char * filename, Sprite * sprite);

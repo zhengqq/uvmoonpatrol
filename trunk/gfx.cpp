@@ -1,6 +1,25 @@
 #include "gfx.h"
 #include "base.h"
 
+int InitGL(GLvoid)			// All Setup For OpenGL Goes Here
+{
+	glViewport(0, 0,240, 248);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_CULL_FACE);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0,SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0.0f, 1.0f); // 0,w,h,0 makes it top left,  0,w,0,h makes it bottom left
+	//gluOrtho2D(0,240,0,248);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+    glEnable(GL_TEXTURE_2D);
+	glColor4f(1.0f, 1.0f, 1.0, 1.0f);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	return TRUE;						// Initialization Went OK
+}
+
 SDL_Surface *LoadBMP2RGBA(char *filename)
 {
   Uint8 *rowhi, *rowlo;

@@ -8,30 +8,19 @@
 	<cstdlib>
 	<ctime>
 
-1205510864 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\main.cpp
-	<math.h>
+1205876433 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\main.cpp
 	<stdio.h>
-	<GL/gl.h>
-	<GL/glu.h>
-	<SDL/SDL.h>
-	<cstdlib>
-	<ctime>
-	"base.h"
-	"gfx.h"
-	"car.h"
-	"level.h"
-	"moonman.h"
-	"bloodfountain.h"
+	"game.h"
 
 1205251428 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\base.h
 
-1205170018 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\gfx.h
+1205871375 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\gfx.h
 	<SDL/SDL.h>
 	<GL/gl.h>
 	<GL/glu.h>
 	"base.h"
 
-1205183492 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\gfx.cpp
+1205871376 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\gfx.cpp
 	"gfx.h"
 	"base.h"
 
@@ -78,4 +67,22 @@
 
 1205422153 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodcloud.cpp
 	"bloodcloud.h"
+
+1205878155 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\game.cpp
+	"game.h"
+
+1205877573 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\game.h
+	<math.h>
+	<stdio.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<SDL/SDL.h>
+	<cstdlib>
+	<ctime>
+	"base.h"
+	"gfx.h"
+	"car.h"
+	"level.h"
+	"moonman.h"
+	"bloodfountain.h"
 

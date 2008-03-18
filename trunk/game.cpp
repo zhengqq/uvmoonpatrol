@@ -19,7 +19,7 @@ int Game::Init(){
     gLastTick = SDL_GetTicks();
 
     gKeyLeft=gKeyRight=gKeyUp=gKeyDown=done=FALSE;
-    fullscreen=FALSE;
+    fullscreen=TRUE;
 
     /* Initialize SDL */
     if ( SDL_Init(SDL_INIT_VIDEO) < 0 ) {
@@ -124,8 +124,8 @@ void Game::GameLogic()
 
     if (gKeyLeft) gameCar->moveLeft();
     if (gKeyRight) gameCar->moveRight();
-    if (gKeyUp) gKeyUp=gKeyUp;
-    if (gKeyDown) gKeyDown=gKeyDown;
+    //if (gKeyUp) gKeyUp=gKeyUp;
+    //if (gKeyDown) gKeyDown=gKeyDown;
 
 /*
     if (rectCollision(mainCar->getX(),mainCar->getY(),mainCar->width(),mainCar->height(), \

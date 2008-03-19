@@ -21,10 +21,7 @@ Level::Level()
     if(!generateSprite("data\\spacebg1.bmp",&spaceBG)) printf("Could not load spacebg1.bmp\n");
     if(!generateSprite("data\\farbg1.bmp",&farBG)) printf("Could not load farbg1.bmp\n");
     if(!generateSprite("data\\closebg1.bmp",&closeBG)) printf("Could not load closebg1.bmp\n");
-
-    spaceX=0;
-    farX=0;
-    closeX=0;
+    levelX=0;
 }
 
 Level::~Level()
@@ -42,25 +39,38 @@ void Level::update(int scrollX)
 
 void Level::draw()
 {
-    spaceX++;
-    if ( spaceX >= 15360) // 480 * 32
-    {
-        spaceX = 0;
-    }
+    int spaceX=levelX%15360;
+    int farX=levelX%3840;
+    int closeX=levelX%1920;
+    // DRAW PARALLAX
     DrawSprite(spaceBG,-int(spaceX/32), 0, FALSE);
-    farX++;
-    if ( farX >= 3840 ) // 480 * 8
+    if ( spaceX > 7680) //15360 - (240*32) )
     {
-        farX = 0;
+        DrawSprite(spaceBG,(15360 - spaceX)/32, 0, FALSE);
     }
     DrawSprite(farBG,-int(farX/8), 0, FALSE);
-    closeX++;
-    if ( closeX >= 1920 )
+    if ( farX > 1920) //3840 - (240*8) )
     {
-        closeX = 0;
+        DrawSprite(farBG,(3840 - farX)/8, 0, FALSE);
     }
     DrawSprite(closeBG,-int(closeX/2), 0, FALSE);
+    if ( closeX > 960) //1920 - (240*2) )
+    {
+        DrawSprite(closeBG,(1920 - closeX)/2, 0, FALSE);
+    }
+    // FINISH PARALLAX
     for(int i = 0; i < 164; i++){
         DrawSprite(tiles[debugLevel[i]], i*32 - levelX, 190, FALSE);
     }
+}
+
+BOOL Level::isGround(int x, int y){
+    // first find which "tile" we are looking at with the current x/y
+    // Then lookup through our level LUTs, and find if that point is ground
+    // or not.
+    if ( y < 196 ) return FALSE; // Auto-Fail
+    int yOffset = y - 196;
+    int tileNum = debugLevel[x/32];
+    BOOL groundRtn = tileLUT[tileNum][x%32 + yOffset*32];
+    return groundRtn;
 }

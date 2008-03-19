@@ -11,15 +11,14 @@ public:
     ~Level();
     void update(int);
     void draw();
+    BOOL isGround(int,int);
 private:
     Sprite tiles[4]; // 4 so far
     Sprite spaceBG; // space background
     Sprite farBG; // farthest background
     Sprite closeBG; // closest background
     int levelX;
-    int spaceX; // 0-480  SLOW
-    int farX;   // 0-480  moderately slow
-    int closeX; // 0-960  somewhat slow
+    BOOL tileLUT[4][2048];
 };
 
 #endif // __LEVEL_H__

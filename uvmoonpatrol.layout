@@ -19,8 +19,8 @@
 	<File name="car.h" open="1" top="0" tabpos="4">
 		<Cursor position="397" topLine="0" />
 	</File>
-	<File name="game.cpp" open="1" top="1" tabpos="15">
-		<Cursor position="397" topLine="0" />
+	<File name="game.cpp" open="1" top="0" tabpos="15">
+		<Cursor position="2655" topLine="60" />
 	</File>
 	<File name="game.h" open="1" top="0" tabpos="16">
 		<Cursor position="911" topLine="21" />
@@ -31,11 +31,11 @@
 	<File name="gfx.h" open="1" top="0" tabpos="2">
 		<Cursor position="329" topLine="0" />
 	</File>
-	<File name="level.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="1652" topLine="0" />
+	<File name="level.cpp" open="1" top="1" tabpos="7">
+		<Cursor position="2372" topLine="38" />
 	</File>
 	<File name="level.h" open="1" top="0" tabpos="6">
-		<Cursor position="479" topLine="0" />
+		<Cursor position="392" topLine="0" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="103" topLine="0" />

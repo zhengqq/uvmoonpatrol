@@ -5,7 +5,7 @@
 		<Cursor position="775" topLine="0" />
 	</File>
 	<File name="base.h" open="1" top="0" tabpos="1">
-		<Cursor position="323" topLine="0" />
+		<Cursor position="401" topLine="0" />
 	</File>
 	<File name="bloodfountain.cpp" open="1" top="0" tabpos="14">
 		<Cursor position="1080" topLine="44" />
@@ -14,25 +14,25 @@
 		<Cursor position="27" topLine="0" />
 	</File>
 	<File name="car.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="2549" topLine="0" />
+		<Cursor position="1694" topLine="96" />
 	</File>
 	<File name="car.h" open="1" top="0" tabpos="4">
-		<Cursor position="397" topLine="0" />
+		<Cursor position="732" topLine="0" />
 	</File>
 	<File name="game.cpp" open="1" top="0" tabpos="15">
-		<Cursor position="2655" topLine="60" />
+		<Cursor position="2498" topLine="124" />
 	</File>
 	<File name="game.h" open="1" top="0" tabpos="16">
 		<Cursor position="911" topLine="21" />
 	</File>
-	<File name="gfx.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="96" topLine="0" />
+	<File name="gfx.cpp" open="1" top="1" tabpos="3">
+		<Cursor position="99" topLine="0" />
 	</File>
 	<File name="gfx.h" open="1" top="0" tabpos="2">
 		<Cursor position="329" topLine="0" />
 	</File>
-	<File name="level.cpp" open="1" top="1" tabpos="7">
-		<Cursor position="2372" topLine="38" />
+	<File name="level.cpp" open="1" top="0" tabpos="7">
+		<Cursor position="2800" topLine="64" />
 	</File>
 	<File name="level.h" open="1" top="0" tabpos="6">
 		<Cursor position="392" topLine="0" />
@@ -51,5 +51,17 @@
 	</File>
 	<File name="particle.h" open="1" top="0" tabpos="11">
 		<Cursor position="556" topLine="0" />
+	</File>
+	<File name="tile1.h" open="1" top="0" tabpos="17">
+		<Cursor position="112" topLine="0" />
+	</File>
+	<File name="tile2.h" open="1" top="0" tabpos="18">
+		<Cursor position="79" topLine="0" />
+	</File>
+	<File name="tile3.h" open="1" top="0" tabpos="19">
+		<Cursor position="79" topLine="0" />
+	</File>
+	<File name="tile4.h" open="1" top="0" tabpos="20">
+		<Cursor position="79" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

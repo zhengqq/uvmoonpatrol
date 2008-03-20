@@ -122,8 +122,12 @@ void Game::GameLogic()
 {
     KeyInput();
 
-    if (gKeyLeft) gameCar->moveLeft();
-    if (gKeyRight) gameCar->moveRight();
+    if (gKeyLeft)
+        gameCar->moveLeft();
+    else if (gKeyRight)
+        gameCar->moveRight();
+    else
+        gameCar->stopMove();
     //if (gKeyUp) gKeyUp=gKeyUp;
     //if (gKeyDown) gKeyDown=gKeyDown;
 
@@ -131,7 +135,7 @@ void Game::GameLogic()
     if (rectCollision(mainCar->getX(),mainCar->getY(),mainCar->width(),mainCar->height(), \
            mainMan[i]->getX(),mainMan[i]->getY(),mainMan[i]->width(),mainMan[i]->height())){*/
 
-    gameCar->update();
+    gameCar->update(gameLevel);
     int scrollX = gameCar->getScreenX();
     gameLevel->update(scrollX);
 }

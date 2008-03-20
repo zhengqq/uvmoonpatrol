@@ -18,7 +18,6 @@ private:
     Sprite farBG; // farthest background
     Sprite closeBG; // closest background
     int levelX;
-    BOOL tileLUT[4][2048];
 };
 
 #endif // __LEVEL_H__

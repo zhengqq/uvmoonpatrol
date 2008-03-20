@@ -4,8 +4,8 @@ Car::Car()
 {
     // Get some private variables declared
     screenX = currentFrame = 0;
-    carX = 20;
-    carY = 175;
+    carX = 45;
+    carY = 100;
     airBorne = movingLeft = movingRight = FALSE;
     speed = 5;
     wheelA = TRUE;
@@ -43,7 +43,7 @@ Car::~Car()
     }
 } // Deconstructor
 
-void Car::update()
+void Car::update(Level * curLevel)
 {
     currentFrame ++;
     if ( currentFrame > 1 )
@@ -51,22 +51,75 @@ void Car::update()
         wheelA = !wheelA;
         currentFrame = 0;
     }
-    carY = 175;
-    screenX += int(carX/50)+1; // ?
-} // give this the level terrain?
+    // Set our wheel sprites x values
+    wheelX[0] = int(carX)-3;
+    wheelX[1] = int(carX)+6;
+    wheelX[2] = int(carX)+18;
+    // do some y calculations!
+    int lowestY = 0; // wheel 0 has the lowest y
+    for(int i = 0; i < 3; i++)
+    {
+        wheelY[i]=int(carY);
+        BOOL hitFloor=FALSE;
+        while( !curLevel->isGround(wheelX[i]+screenX+3,wheelY[i]+16)){
+            wheelY[i]++;
+        }
+        if ( wheelY[i] < wheelY[lowestY] )
+            lowestY = i;
+    }
+    carY = wheelY[lowestY]-16;
 
+
+    // Physics!
+    if ( movingLeft == TRUE ){
+        if ( velX > 0 ){
+            velX = 0;
+        }
+        velX -= 0.02;
+    }
+    else if ( movingRight == TRUE ){
+        if ( velX < 0 ){
+            velX = 0;
+        }
+        velX += 0.02;
+    }
+    else {// no outside force{
+        if ( int(carX) < 35 ){
+            velX += 0.03;
+        }
+        else if ( int(carX) > 37 ){
+            velX -= 0.03;
+        }
+        else{
+            velX = 0;
+        }
+    }
+    if ( velX <= -1.0 ){
+            velX = -1.0;
+    }
+    else if ( velX >= 1.0 ){
+            velX = 1.0;
+    }
+    carX += velX;
+    if ( carX < 20 )
+        carX = 20.0;
+    else if ( carX > 80 )
+        carX = 80.0;
+
+    screenX += int(carX/20)+2; // ?
+}
 void Car::draw()
 {
-    DrawSprite(carSprite, carX, carY, FALSE);
+    DrawSprite(carSprite, int(carX), int(carY), FALSE);
     if ( wheelA == TRUE ){
-        DrawSprite(wheelSpriteA[0], carX-3, carY+16, FALSE);
-        DrawSprite(wheelSpriteA[1], carX+8, carY+17, FALSE);
-        DrawSprite(wheelSpriteA[2], carX+19, carY+16, FALSE);
+        for(int i = 0; i < 3; i++){
+            DrawSprite(wheelSpriteA[i], wheelX[i], wheelY[i], FALSE);
+        }
     }
     else{
-        DrawSprite(wheelSpriteB[0], carX-3, carY+16, FALSE);
-        DrawSprite(wheelSpriteB[1], carX+8, carY+17, FALSE);
-        DrawSprite(wheelSpriteB[2], carX+19, carY+16, FALSE);
+        for(int i = 0; i < 3; i++){
+            DrawSprite(wheelSpriteB[i], wheelX[i], wheelY[i], FALSE);
+        }
     }
 }
 
@@ -76,22 +129,12 @@ void Car::fire()
 
 bool Car::moveLeft()
 {
-    if ( (carX-speed) > 15 ){
-        carX-= speed;
-    }
-    else{
-        carX = 15;
-    }
+    movingLeft = TRUE;
 }
 
 bool Car::moveRight()
 {
-    if ( ((carX+speed)+carSprite.width) < 150 ){
-        carX+= speed;
-    }
-    else{
-        carX = (150-carSprite.width);
-    }
+    movingRight = TRUE;
 }
 
 void Car::stopMove()

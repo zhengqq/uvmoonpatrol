@@ -1,8 +1,13 @@
 #include "level.h"
+#include "tile1.h"
+#include "tile2.h"
+#include "tile3.h"
+#include "tile4.h"
 
 int debugLevel[] = {0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,
                     0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,
                     0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3};
+
 
 Level::Level()
 {
@@ -70,7 +75,28 @@ BOOL Level::isGround(int x, int y){
     // or not.
     if ( y < 196 ) return FALSE; // Auto-Fail
     int yOffset = y - 196;
-    int tileNum = debugLevel[x/32];
-    BOOL groundRtn = tileLUT[tileNum][x%32 + yOffset*32];
+    int tileNum = debugLevel[((x%128)/32)];
+    BOOL groundRtn;
+    unsigned char * tileLUT = 0;
+    if ( tileNum == 0 ){
+        tileLUT = tile1;
+    }
+    else if ( tileNum == 1 ){
+        tileLUT = tile2;
+    }
+    else if ( tileNum == 2 ){
+        tileLUT = tile3;
+    }
+    else if ( tileNum == 3 ){
+        tileLUT = tile4;
+    }
+    if ( tileLUT != 0 )
+    {
+        groundRtn = tileLUT[x%32 + yOffset*32];
+    }
+    else{
+        printf("ERROR! Invalid look up table %i",tileNum);
+        groundRtn = TRUE;
+    }
     return groundRtn;
 }

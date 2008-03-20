@@ -39,6 +39,10 @@
 		<Unit filename="moonman.h" />
 		<Unit filename="particle.cpp" />
 		<Unit filename="particle.h" />
+		<Unit filename="tile1.h" />
+		<Unit filename="tile2.h" />
+		<Unit filename="tile3.h" />
+		<Unit filename="tile4.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

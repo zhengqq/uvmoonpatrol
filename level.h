@@ -1,8 +1,10 @@
-#ifndef __LEVEL_H__
-#define __LEVEL_H__
+#pragma once
 
 #include "base.h"
 #include "gfx.h"
+#include "moonman.h"
+
+class MoonMan;
 
 class Level
 {
@@ -12,6 +14,7 @@ public:
     void update(int);
     void draw();
     BOOL isGround(int,int);
+    void generateMoonMen(MoonMan ** manArray);
 private:
     Sprite tiles[4]; // 4 so far
     Sprite spaceBG; // space background
@@ -19,5 +22,3 @@ private:
     Sprite closeBG; // closest background
     int levelX;
 };
-
-#endif // __LEVEL_H__

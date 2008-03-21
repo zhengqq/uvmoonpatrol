@@ -55,33 +55,57 @@ void Car::update(Level * curLevel)
     wheelX[0] = int(carX)-3;
     wheelX[1] = int(carX)+6;
     wheelX[2] = int(carX)+18;
-    // do some y calculations!
-    int lowestY = 0; // wheel 0 has the lowest y
-    for(int i = 0; i < 3; i++)
+    if ( airBorne == FALSE )
     {
-        wheelY[i]=int(carY);
-        BOOL hitFloor=FALSE;
-        while( !curLevel->isGround(wheelX[i]+screenX+3,wheelY[i]+16)){
-            wheelY[i]++;
+        // do some y calculations!
+        int lowestY = 0; // wheel 0 has the lowest y
+        for(int i = 0; i < 3; i++)
+        {
+            wheelY[i]=int(carY);
+            BOOL hitFloor=FALSE;
+            while( !curLevel->isGround(wheelX[i]+screenX+3,wheelY[i]+16)){
+                wheelY[i]++;
+            }
+            if ( wheelY[i] < wheelY[lowestY] )
+                lowestY = i;
         }
-        if ( wheelY[i] < wheelY[lowestY] )
-            lowestY = i;
+        carY = wheelY[lowestY]-16;
+        if ( jumping == TRUE )
+        {
+            velY = -3.0;
+            airBorne = TRUE;
+            jumping = FALSE;
+        }
     }
-    carY = wheelY[lowestY]-16;
-
+    else if ( airBorne == TRUE )
+    {
+        carY += velY;
+        velY += 0.2; // gravity on the moon!
+        if ( velY > 3.0 ){
+            velY = 3.0; // max falling speed
+        }
+        // check to see if we've hit the ground
+        if ( curLevel->isGround(int(carX)+8,int(carY)+32)){
+            airBorne = FALSE;
+        }
+        for(int i = 0; i < 3; i++){
+            wheelY[i] = int(carY) + 14;
+        }
+        jumping = FALSE;
+    }
 
     // Physics!
     if ( movingLeft == TRUE ){
-        if ( velX > 0 ){
+        /*if ( velX > 0 ){
             velX = 0;
-        }
-        velX -= 0.02;
+        }*/
+        velX -= 0.04;
     }
     else if ( movingRight == TRUE ){
-        if ( velX < 0 ){
+        /*if ( velX < 0 ){
             velX = 0;
-        }
-        velX += 0.02;
+        }*/
+        velX += 0.04;
     }
     else {// no outside force{
         if ( int(carX) < 35 ){
@@ -94,11 +118,11 @@ void Car::update(Level * curLevel)
             velX = 0;
         }
     }
-    if ( velX <= -1.0 ){
-            velX = -1.0;
+    if ( velX <= -2.0 ){
+            velX = -2.0;
     }
-    else if ( velX >= 1.0 ){
-            velX = 1.0;
+    else if ( velX >= 2.0 ){
+            velX = 2.0;
     }
     carX += velX;
     if ( carX < 20 )
@@ -123,10 +147,6 @@ void Car::draw()
     }
 }
 
-void Car::fire()
-{
-}
-
 bool Car::moveLeft()
 {
     movingLeft = TRUE;
@@ -144,4 +164,5 @@ void Car::stopMove()
 
 void Car::jump()
 {
+    jumping = TRUE;
 }

@@ -13,6 +13,8 @@
 #include "car.h"
 #include "level.h"
 #include "moonman.h"
+#include "cannon.h"
+#include "missile.h"
 #include "bloodfountain.h"
 
 typedef enum {
@@ -40,7 +42,7 @@ private:
     int         startTime;
     BOOL    	done;			// Bool Variable To Exit Loop
     BOOL		fullscreen;	// Fullscreen Flag Set To Fullscreen Mode By Default
-    BOOL        gKeyLeft,gKeyRight,gKeyUp,gKeyDown;
+    BOOL        gKeyLeft,gKeyRight,gKeyUp,gKeyDown,gKeySpace,gKeyCtrl;
     // INTRO variables
     void InitIntro();
     void ShutdownIntro();
@@ -53,6 +55,10 @@ private:
     void GameRender();
     void GameLogic();
     Car * gameCar;
+    Cannon * carCannon; // one cannon!
+    Missile * carMissile[32]; // up to 32 missiles!
+    MoonMan * gameMoonMen[128]; // 128 moon men (THIS IS A DEBUG, WE MIGHT MAKE THIS DYNAMIC!)
+    BloodFountain * mmFountain[128]; // 128 blood fountains to correspond with our 128 moon men
     Level * gameLevel;
 };
 

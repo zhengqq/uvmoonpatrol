@@ -20,40 +20,42 @@
 	<GL/glu.h>
 	"base.h"
 
-1206053516 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\gfx.cpp
+1206131604 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\gfx.cpp
 	"gfx.h"
 	"base.h"
 
-1206053391 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\car.cpp
+1206133559 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\car.cpp
 	"car.h"
 
-1206051744 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\car.h
+1206133640 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\car.h
 	"base.h"
 	"gfx.h"
 	"level.h"
 
-1206049628 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\level.cpp
+1206118973 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\level.cpp
 	"level.h"
 	"tile1.h"
 	"tile2.h"
 	"tile3.h"
 	"tile4.h"
 
-1206047502 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\level.h
+1206119111 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\level.h
 	"base.h"
 	"gfx.h"
-
-1205448948 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\moonman.cpp
 	"moonman.h"
 
-1205447510 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\moonman.h
+1206131142 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\moonman.cpp
+	"moonman.h"
+
+1206119713 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\moonman.h
 	"base.h"
 	"gfx.h"
+	"level.h"
 
 1205252046 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\base.cpp
 	"base.h"
 
-1205510738 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodfountain.cpp
+1206131368 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodfountain.cpp
 	"bloodfountain.h"
 
 1205509648 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodfountain.h
@@ -63,7 +65,7 @@
 	"base.h"
 	"gfx.h"
 
-1205510693 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\particle.cpp
+1206123407 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\particle.cpp
 	"particle.h"
 	<math.h>
 
@@ -73,10 +75,10 @@
 1205422153 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodcloud.cpp
 	"bloodcloud.h"
 
-1206053508 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\game.cpp
+1206138033 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\game.cpp
 	"game.h"
 
-1205877573 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\game.h
+1206119080 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\game.h
 	<math.h>
 	<stdio.h>
 	<GL/gl.h>
@@ -89,6 +91,8 @@
 	"car.h"
 	"level.h"
 	"moonman.h"
+	"cannon.h"
+	"missile.h"
 	"bloodfountain.h"
 
 1206047616 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\tile1.h
@@ -102,4 +106,18 @@
 
 1206047615 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\tile4.h
 	"base.h"
+
+1206134852 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\cannon.cpp
+	"cannon.h"
+
+1206134266 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\cannon.h
+	"base.h"
+	"gfx.h"
+
+1206116798 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\missile.h
+	"base.h"
+	"gfx.h"
+
+1206116836 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\missile.cpp
+	"missile.h"
 

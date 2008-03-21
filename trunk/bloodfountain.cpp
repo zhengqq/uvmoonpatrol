@@ -110,15 +110,15 @@ void BloodFountain::addDroplet()
         {
             if ( type == FOUNTAIN )
             {
-                pList[i] = new Particle(bloodX, bloodY, 80+rand()%20, 10+rand()%5, gravity, 90, bloodList[rand()%4],FOUNTAIN);
+                pList[i] = new Particle(bloodX, bloodY, int(angle+rand()%20), length+rand()%5, gravity, 90, bloodList[rand()%4],FOUNTAIN);
             }
             else if ( type == CLOUD )
             {
-                pList[i] = new Particle(bloodX+(rand()%20-10), bloodY+(rand()%20-10), 5-rand()%10, 1.0, gravity, 15, bloodList[rand()%4],CLOUD);
+                pList[i] = new Particle(bloodX+(rand()%20-10), bloodY+(rand()%20-10), int(angle-rand()%10), length, gravity, 15, bloodList[rand()%4],CLOUD);
             }
             else if ( type == POP )
             {
-                pList[i] = new Particle(bloodX, bloodY, rand()%360, 0.5+(rand()%10/10), gravity, 25, bloodList[rand()%4],POP);
+                pList[i] = new Particle(bloodX, bloodY, rand()%360, length+(rand()%10/10), gravity, 25, bloodList[rand()%4],POP);
             }
             break;
         }

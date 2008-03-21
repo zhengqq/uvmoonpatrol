@@ -1,12 +1,16 @@
 #include "moonman.h"
 
-enum {
+typedef enum {
     RUNNING = 0,
     WALKING,
     DEAD
 };
 
 MoonMan::MoonMan(){
+    printf("Default constructor does nothing for moon man!\n");
+}
+
+MoonMan::MoonMan(int startX){
     manState = RUNNING;
     currentFrame = 0;
     facingLeft = FALSE;
@@ -19,8 +23,8 @@ MoonMan::MoonMan(){
     {
         printf("Could not load moon man running1_1.bmp\n");
     }
-    manX = rand()%3000 + 300;
-    manY = 190;
+    manX = startX;
+    manY = 100; // will snap to the level
     speed = 2;
 }
 
@@ -29,7 +33,7 @@ MoonMan::~MoonMan(){
     glDeleteTextures( 1, &manSpriteB.texture );
 }
 
-void MoonMan::update(int newScroll){
+void MoonMan::update(int newScroll, Level * currentLevel){
     scrollX = newScroll;
     if ( manState == RUNNING )
     {
@@ -38,6 +42,7 @@ void MoonMan::update(int newScroll){
             spriteA = !spriteA;
             currentFrame = 0;
         }
+        /*
         if ( facingLeft ){
             if ( rand()%50 == 3 ){
                 facingLeft = FALSE;
@@ -53,6 +58,14 @@ void MoonMan::update(int newScroll){
             else{
                 manX += speed;
             }
+        }*/
+        // DEBUG!!
+        if ( manX < 164 * 32 ){
+            manX += speed;
+        }
+        manY = 175; // some number that is always above ground // 196 is the min
+        while( !currentLevel->isGround(manX+8,manY+19)){
+                manY++;
         }
     }
     else if ( manState == DEAD)

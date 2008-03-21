@@ -67,6 +67,7 @@ void Particle::update(int newScroll)
         {
             pX += vX;
             pY -= vY;
+            vY -= gravity;
             life--;
             if ( pY >= 200 )
             {

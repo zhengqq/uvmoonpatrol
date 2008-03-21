@@ -31,11 +31,6 @@ SDL_Surface *LoadBMP2RGBA(char *filename)
     fprintf(stderr, "Unable to load %s: %s\n", filename, SDL_GetError());
     return(NULL);
   }
-  if ( image->w % 8 != 0 || image->h % 8 != 0)
-  {
-    fprintf(stderr, "Unable to load %s: not power of 8\n", filename);
-    free(image->pixels);
-  }
   /* Copy our RGB into an ABGR buffer - C32 */
   // Allocated all 4 pixels for our ABGR
     unsigned char * newPixels = (unsigned char *)malloc((image->w*image->h*4));

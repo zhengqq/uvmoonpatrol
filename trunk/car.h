@@ -20,8 +20,11 @@ public:
     int getScreenX(){return screenX;}
     int getX(){return int(int(carX)+screenX);}
     int getY(){return int(carY);}
+    BOOL isAirBorne(){ return airBorne; }
     int width(){return carSprite.width;}
     int height(){return carSprite.height;}
+    void boostUp(){ velY -= 10.0; } // give it a boost!
+    void slowDown(){ velX -= 2.5; } // slow us down a little
 private:
     unsigned int currentFrame; // what frame are we at? (used for making wheels spin)
     BOOL wheelA;
@@ -30,7 +33,7 @@ private:
     float carX, carY; // where are we in the world?
     float velX,velY;
     unsigned int fireCount; // how long since the last time we fired?
-    BOOL airBorne,movingLeft,movingRight; // are we airborne?
+    BOOL airBorne,jumping,movingLeft,movingRight; // are we airborne?
     Sprite carSprite;
     Sprite wheelSpriteA[3]; // all 3 wheels
     Sprite wheelSpriteB[3]; // all 3 wheels in second animation

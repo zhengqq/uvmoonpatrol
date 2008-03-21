@@ -1,20 +1,24 @@
-#ifndef __MOONMAN_H__
-#define __MOONMAN_H__
+#pragma once
 
 #include "base.h"
 #include "gfx.h"
+#include "level.h"
+
+class Level; // both level & moonman include each other.
 
 class MoonMan {
 public:
     MoonMan();
+    MoonMan(int);
     ~MoonMan();
-    void update(int);
+    void update(int,Level*);
     void draw();
     int getX(){return manX;}
     int getY(){return manY;}
     int width(){return manSpriteA.width;}
     int height(){return manSpriteA.height;}
     void kill();
+    BOOL isDead(){ if(manState == 0) return FALSE; else return TRUE; } // hack
 private:
     unsigned int manState;
     unsigned int currentFrame;
@@ -26,4 +30,3 @@ private:
     Sprite manSpriteB;
 };
 
-#endif // __MOONMAN_H__

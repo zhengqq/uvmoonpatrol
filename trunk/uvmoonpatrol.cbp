@@ -26,6 +26,8 @@
 		<Unit filename="base.h" />
 		<Unit filename="bloodfountain.cpp" />
 		<Unit filename="bloodfountain.h" />
+		<Unit filename="cannon.cpp" />
+		<Unit filename="cannon.h" />
 		<Unit filename="car.cpp" />
 		<Unit filename="car.h" />
 		<Unit filename="game.cpp" />
@@ -35,6 +37,8 @@
 		<Unit filename="level.cpp" />
 		<Unit filename="level.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="missile.cpp" />
+		<Unit filename="missile.h" />
 		<Unit filename="moonman.cpp" />
 		<Unit filename="moonman.h" />
 		<Unit filename="particle.cpp" />

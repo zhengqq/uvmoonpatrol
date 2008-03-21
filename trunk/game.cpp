@@ -18,7 +18,7 @@ int Game::Init(){
     srand((unsigned)time(0));
     gLastTick = SDL_GetTicks();
 
-    gKeyLeft=gKeyRight=gKeyUp=gKeyDown=done=FALSE;
+    gKeyLeft=gKeyRight=gKeyUp=gKeyDown=gKeySpace=gKeyCtrl=done=FALSE;
     fullscreen=FALSE;
 
     /* Initialize SDL */
@@ -90,12 +90,36 @@ void Game::InitGame()
 {
     gameCar = new Car();
     gameLevel = new Level();
+    carCannon = 0; // nothing for this yet!
+    for(int i = 0; i < 32; i++)
+        carMissile[i] = 0;
+    for(int i = 0; i < 128; i++){
+        gameMoonMen[i] = 0;
+        mmFountain[i] = 0;
+    }
+    gameLevel->generateMoonMen(&gameMoonMen[0]);
 }
 
 void Game::ShutdownGame()
 {
     delete gameCar;
     delete gameLevel;
+    if ( carCannon != 0 ){
+        delete carCannon;
+    }
+    for(int i = 0; i < 32; i++){
+        if ( carMissile[i] != 0){
+            delete carMissile[i];
+        }
+    }
+    for(int i = 0; i < 128; i++){
+        if ( gameMoonMen[i] != 0){
+            delete gameMoonMen[i];
+        }
+        if ( mmFountain[i] != 0){
+            delete mmFountain[i];
+        }
+    }
 }
 
 void Game::GameRender()				// Draw Everything
@@ -110,6 +134,22 @@ void Game::GameRender()				// Draw Everything
 
     gameLevel->draw();
     gameCar->draw();
+    if ( carCannon != 0 ){
+        carCannon->draw();
+    }
+    for(int i = 0; i < 32; i++){
+        if ( carMissile[i] != 0){
+            carMissile[i]->draw();
+        }
+    }
+    for(int i = 0; i < 128; i++){
+        if ( gameMoonMen[i] !=  0){
+            gameMoonMen[i]->draw();
+        }
+        if ( mmFountain[i] !=  0){
+            mmFountain[i]->draw();
+        }
+    }
 
     glPopMatrix();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
@@ -128,6 +168,20 @@ void Game::GameLogic()
         gameCar->moveRight();
     else
         gameCar->stopMove();
+    if (gKeySpace)
+        gameCar->jump();
+    if (gKeyCtrl){
+        if ( carCannon == 0){
+            carCannon = new Cannon(gameCar->getX()+32,gameCar->getY()+16);
+        }
+        for(int i = 0; i < 32; i++){
+            if ( carMissile[i] == 0 ){
+                carMissile[i] = new Missile(gameCar->getX()-gameCar->getScreenX()+9,gameCar->getY()+5);
+                gKeyCtrl = FALSE; // hacky way of doing this.
+                break;
+            }
+        }
+    }
     //if (gKeyUp) gKeyUp=gKeyUp;
     //if (gKeyDown) gKeyDown=gKeyDown;
 
@@ -138,6 +192,81 @@ void Game::GameLogic()
     gameCar->update(gameLevel);
     int scrollX = gameCar->getScreenX();
     gameLevel->update(scrollX);
+
+    if ( carCannon!= 0){
+        if ( carCannon->getLife() <= 0 ){
+            delete carCannon;
+            carCannon = 0;
+        }
+        else{
+            carCannon->update(scrollX);
+        }
+    }
+    for(int i = 0; i < 32; i++){
+        if ( carMissile[i] != 0){
+            if ( carMissile[i]->getY() < 10 ){
+                delete carMissile[i];
+                carMissile[i] = 0;
+            }
+            else {
+                carMissile[i]->update();
+            }
+        }
+    }
+    for(int i = 0; i < 128; i++){
+        if ( gameMoonMen[i] !=  0){
+            gameMoonMen[i]->update(scrollX,gameLevel);
+            if ( !gameMoonMen[i]->isDead() ){
+                if (rectCollision(gameCar->getX(),gameCar->getY(),gameCar->width(),gameCar->height()-10, // 10 compensates for bottom of the car
+                    gameMoonMen[i]->getX(),gameMoonMen[i]->getY(),gameMoonMen[i]->width(),gameMoonMen[i]->height())){
+                    // kill moon man!
+                    gameMoonMen[i]->kill();
+                    for(int j = 0; j < 128; j++){
+                        if ( mmFountain[j] == 0 ){
+                            if ( gameCar->isAirBorne() ){
+                                mmFountain[j] = new BloodFountain(gameMoonMen[i]->getX()+3,gameMoonMen[i]->getY()+5, 90, 3.0, 100, 0.05);
+                                mmFountain[j]->setSpurting();
+                            }
+                            else{
+                                mmFountain[j] = new BloodFountain(gameMoonMen[i]->getX(),gameMoonMen[i]->getY(), 90, 2.0, 50, 0.01);
+                                mmFountain[j]->setPop();
+                            }
+                            break;
+                        }
+                    }
+                    if ( gameCar->isAirBorne() ){
+                        gameCar->boostUp();
+                    }
+                    else{
+                        gameCar->slowDown();
+                    }
+                }
+
+                else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height(), // 10 compensates for bottom of the car
+                    gameMoonMen[i]->getX(),gameMoonMen[i]->getY(),gameMoonMen[i]->width(),gameMoonMen[i]->height()))){
+                    gameMoonMen[i]->kill();
+                    for(int j = 0; j < 128; j++){
+                        if ( mmFountain[j] == 0 ){
+                            mmFountain[j] = new BloodFountain(gameMoonMen[i]->getX(),gameMoonMen[i]->getY(), 90, 4.0, 60, 0.1);
+                            mmFountain[j]->setPop();
+                            break;
+                        }
+                    }
+                    delete carCannon;
+                    carCannon = 0;
+                }
+            }
+        }
+    }
+    for(int i = 0; i < 128; i++){
+        if ( mmFountain[i] !=  0){
+            mmFountain[i]->update(scrollX);
+            if ( mmFountain[i]->getLife() <= 0 ){
+                delete mmFountain[i];
+                mmFountain[i] = 0;
+            }
+        }
+    }
 }
 
 void Game::KeyInput()
@@ -170,6 +299,12 @@ void Game::KeyInput()
                 case SDLK_ESCAPE:
                     done=TRUE;
                 break;
+                case SDLK_SPACE:
+                    gKeySpace=TRUE;
+                break;
+                case SDLK_LCTRL:
+                    gKeyCtrl=TRUE;
+                break;
                 default:
 
                 break;
@@ -189,6 +324,12 @@ void Game::KeyInput()
                 break;
                 case SDLK_DOWN:
                     gKeyDown=FALSE;
+                break;
+                case SDLK_SPACE:
+                    gKeySpace=FALSE;
+                break;
+                case SDLK_LCTRL:
+                    gKeyCtrl=FALSE;
                 break;
                 default:
                 break;

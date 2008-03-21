@@ -75,7 +75,7 @@ BOOL Level::isGround(int x, int y){
     // or not.
     if ( y < 196 ) return FALSE; // Auto-Fail
     int yOffset = y - 196;
-    int tileNum = debugLevel[((x%128)/32)];
+    int tileNum = debugLevel[(x/32)];
     BOOL groundRtn;
     unsigned char * tileLUT = 0;
     if ( tileNum == 0 ){

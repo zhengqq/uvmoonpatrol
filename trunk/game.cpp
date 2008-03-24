@@ -242,7 +242,7 @@ void Game::GameLogic()
                     }
                 }
 
-                else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height(), // 10 compensates for bottom of the car
+                else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
                     gameMoonMen[i]->getX(),gameMoonMen[i]->getY(),gameMoonMen[i]->width(),gameMoonMen[i]->height()))){
                     gameMoonMen[i]->kill();
                     for(int j = 0; j < 128; j++){

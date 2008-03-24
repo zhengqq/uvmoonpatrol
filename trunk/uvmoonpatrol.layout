@@ -2,31 +2,37 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="All" />
 	<File name="base.cpp" open="1" top="0" tabpos="10">
-		<Cursor position="775" topLine="0" />
+		<Cursor position="429" topLine="0" />
 	</File>
 	<File name="base.h" open="1" top="0" tabpos="1">
 		<Cursor position="401" topLine="0" />
 	</File>
-	<File name="bloodfountain.cpp" open="1" top="0" tabpos="14">
-		<Cursor position="1080" topLine="30" />
+	<File name="bloodfountain.cpp" open="1" top="0" tabpos="20">
+		<Cursor position="1215" topLine="6" />
 	</File>
-	<File name="bloodfountain.h" open="1" top="0" tabpos="13">
-		<Cursor position="27" topLine="0" />
+	<File name="bloodfountain.h" open="1" top="0" tabpos="19">
+		<Cursor position="0" topLine="0" />
 	</File>
-	<File name="cannon.cpp" open="1" top="0" tabpos="21">
-		<Cursor position="1321" topLine="37" />
+	<File name="boulder.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="641" topLine="1" />
 	</File>
-	<File name="car.cpp" open="1" top="1" tabpos="5">
-		<Cursor position="1415" topLine="28" />
+	<File name="boulder.h" open="0" top="0" tabpos="0">
+		<Cursor position="601" topLine="0" />
+	</File>
+	<File name="cannon.cpp" open="0" top="0" tabpos="21">
+		<Cursor position="525" topLine="22" />
+	</File>
+	<File name="car.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="2746" topLine="58" />
 	</File>
 	<File name="car.h" open="1" top="0" tabpos="4">
-		<Cursor position="879" topLine="18" />
+		<Cursor position="805" topLine="7" />
 	</File>
-	<File name="game.cpp" open="1" top="0" tabpos="15">
-		<Cursor position="6578" topLine="226" />
+	<File name="game.cpp" open="1" top="1" tabpos="11">
+		<Cursor position="1550" topLine="107" />
 	</File>
-	<File name="game.h" open="1" top="0" tabpos="16">
-		<Cursor position="911" topLine="17" />
+	<File name="game.h" open="1" top="0" tabpos="17">
+		<Cursor position="1437" topLine="27" />
 	</File>
 	<File name="gfx.cpp" open="1" top="0" tabpos="3">
 		<Cursor position="220" topLine="0" />
@@ -34,37 +40,49 @@
 	<File name="gfx.h" open="1" top="0" tabpos="2">
 		<Cursor position="329" topLine="0" />
 	</File>
+	<File name="jetfountain.cpp" open="1" top="0" tabpos="15">
+		<Cursor position="1547" topLine="3" />
+	</File>
+	<File name="jetfountain.h" open="1" top="0" tabpos="14">
+		<Cursor position="336" topLine="0" />
+	</File>
+	<File name="jetman.cpp" open="1" top="0" tabpos="12">
+		<Cursor position="1319" topLine="0" />
+	</File>
+	<File name="jetman.h" open="1" top="0" tabpos="13">
+		<Cursor position="447" topLine="0" />
+	</File>
 	<File name="level.cpp" open="1" top="0" tabpos="7">
-		<Cursor position="1228" topLine="0" />
+		<Cursor position="5219" topLine="119" />
 	</File>
 	<File name="level.h" open="1" top="0" tabpos="6">
-		<Cursor position="237" topLine="0" />
+		<Cursor position="506" topLine="0" />
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="1">
 		<Cursor position="103" topLine="0" />
 	</File>
 	<File name="moonman.cpp" open="1" top="0" tabpos="9">
-		<Cursor position="1896" topLine="52" />
+		<Cursor position="1817" topLine="34" />
 	</File>
 	<File name="moonman.h" open="1" top="0" tabpos="8">
-		<Cursor position="213" topLine="0" />
+		<Cursor position="407" topLine="0" />
 	</File>
-	<File name="particle.cpp" open="1" top="0" tabpos="12">
-		<Cursor position="1780" topLine="65" />
+	<File name="particle.cpp" open="1" top="0" tabpos="16">
+		<Cursor position="578" topLine="0" />
 	</File>
-	<File name="particle.h" open="1" top="0" tabpos="11">
-		<Cursor position="556" topLine="0" />
+	<File name="particle.h" open="1" top="0" tabpos="18">
+		<Cursor position="487" topLine="0" />
 	</File>
-	<File name="tile1.h" open="1" top="0" tabpos="17">
+	<File name="tile1.h" open="0" top="0" tabpos="17">
 		<Cursor position="112" topLine="0" />
 	</File>
-	<File name="tile2.h" open="1" top="0" tabpos="18">
+	<File name="tile2.h" open="0" top="0" tabpos="18">
 		<Cursor position="79" topLine="0" />
 	</File>
-	<File name="tile3.h" open="1" top="0" tabpos="19">
+	<File name="tile3.h" open="0" top="0" tabpos="19">
 		<Cursor position="79" topLine="0" />
 	</File>
-	<File name="tile4.h" open="1" top="0" tabpos="20">
+	<File name="tile4.h" open="0" top="0" tabpos="20">
 		<Cursor position="79" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

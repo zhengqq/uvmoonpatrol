@@ -17,8 +17,6 @@ public:
     int getY(){return manY;}
     int width(){return manSpriteA.width;}
     int height(){return manSpriteA.height;}
-    void kill();
-    BOOL isDead(){ if(manState == 0) return FALSE; else return TRUE; } // hack
 private:
     unsigned int manState;
     unsigned int currentFrame;

@@ -25,6 +25,8 @@ public:
     int height(){return carSprite.height;}
     void boostUp(){ velY = -5.0; } // give it a boost!
     void slowDown(){ velX -= 2.5; } // slow us down a little
+    void causeCrash(){ crashed = TRUE; } // cause a crash!
+    BOOL isCrashed(){ return crashed;}
 private:
     unsigned int currentFrame; // what frame are we at? (used for making wheels spin)
     BOOL wheelA;

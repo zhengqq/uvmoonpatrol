@@ -82,6 +82,13 @@ void Particle::update(int newScroll)
             }
         }
     }
+    else if ( pType == JET )
+    {
+        pX += vX;
+        pY -= vY;
+        vY -= gravity;
+        life--;
+    }
 }
 
 void Particle::draw()

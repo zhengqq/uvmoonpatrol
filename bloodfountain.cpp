@@ -58,7 +58,9 @@ void BloodFountain::update(int newScroll)
     {
         if ( type == FOUNTAIN )
         {
-            addDroplet();
+            for(int i = 0; i < 3; i++){
+                addDroplet();
+            }
         }
         else if ( type == CLOUD )
         {

@@ -16,6 +16,9 @@
 #include "cannon.h"
 #include "missile.h"
 #include "bloodfountain.h"
+#include "jetfountain.h"
+#include "jetman.h"
+#include "boulder.h"
 
 typedef enum {
     INTRO=0,
@@ -54,11 +57,15 @@ private:
     void ShutdownGame();
     void GameRender();
     void GameLogic();
+    Sprite guiSprite;
     Car * gameCar;
     Cannon * carCannon; // one cannon!
     Missile * carMissile[32]; // up to 32 missiles!
     MoonMan * gameMoonMen[128]; // 128 moon men (THIS IS A DEBUG, WE MIGHT MAKE THIS DYNAMIC!)
     BloodFountain * mmFountain[128]; // 128 blood fountains to correspond with our 128 moon men
+    JetMan * gameJetMen[128];
+    JetFountain * jmFountain[128];
+    Boulder * gameBoulders[128];
     Level * gameLevel;
 };
 

@@ -7,7 +7,8 @@
 typedef enum {
     FOUNTAIN=0,
     CLOUD,
-    POP
+    POP,
+    JET
 };
 
 class Particle

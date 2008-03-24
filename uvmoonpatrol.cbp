@@ -26,6 +26,8 @@
 		<Unit filename="base.h" />
 		<Unit filename="bloodfountain.cpp" />
 		<Unit filename="bloodfountain.h" />
+		<Unit filename="boulder.cpp" />
+		<Unit filename="boulder.h" />
 		<Unit filename="cannon.cpp" />
 		<Unit filename="cannon.h" />
 		<Unit filename="car.cpp" />
@@ -34,6 +36,10 @@
 		<Unit filename="game.h" />
 		<Unit filename="gfx.cpp" />
 		<Unit filename="gfx.h" />
+		<Unit filename="jetfountain.cpp" />
+		<Unit filename="jetfountain.h" />
+		<Unit filename="jetman.cpp" />
+		<Unit filename="jetman.h" />
 		<Unit filename="level.cpp" />
 		<Unit filename="level.h" />
 		<Unit filename="main.cpp" />

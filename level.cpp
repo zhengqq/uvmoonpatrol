@@ -48,6 +48,9 @@ Level::~Level()
     {
         glDeleteTextures(1, &tiles[i].texture);
     }
+    glDeleteTextures(1, &spaceBG.texture);
+    glDeleteTextures(1, &farBG.texture);
+    glDeleteTextures(1, &closeBG.texture);
 }
 
 void Level::generateMoonMen(MoonMan ** manArray){

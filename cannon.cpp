@@ -55,7 +55,7 @@ int Cannon::width(){
 
 int Cannon::height(){
     if ( life == 18 ){
-        return 4;
+        return 8;
     }
     else {
         return 16;

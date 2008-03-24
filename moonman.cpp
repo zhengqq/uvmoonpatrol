@@ -60,12 +60,14 @@ void MoonMan::update(int newScroll, Level * currentLevel){
             }
         }*/
         // DEBUG!!
-        if ( manX < 164 * 32 ){
-            manX += speed;
-        }
-        manY = 175; // some number that is always above ground // 196 is the min
-        while( !currentLevel->isGround(manX+8,manY+19)){
-                manY++;
+        if ( !currentLevel->isPit(manX+8+speed) ){
+            if ( manX < 164 * 32 ){
+                manX += speed;
+            }
+            manY = 175; // some number that is always above ground // 196 is the min
+            while( !currentLevel->isGround(manX+8,manY+19)){
+                    manY++;
+            }
         }
     }
     else if ( manState == DEAD)

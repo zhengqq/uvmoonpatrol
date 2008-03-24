@@ -4,9 +4,9 @@
 #include "tile3.h"
 #include "tile4.h"
 
-int debugLevel[] = {0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,
-                    0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,
-                    0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3};
+int debugLevel[] = {0,1,2,3,3,2,4,5,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,4,5,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,
+                    0,1,2,3,3,2,1,0,0,0,4,5,2,3,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,
+                    0,1,4,5,3,3,2,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3};
 
 BOOL debugMoonMen[] = {0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,
                     0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,
@@ -26,6 +26,8 @@ Level::Level()
     if(!generateSprite("data\\tile4.bmp",&tiles[3])){
         printf("Could not load tile4.bmp\n");
     }
+    if(!generateSprite("data\\pitfall1.bmp",&tiles[4])) printf("Could not load pitfall1.bmp\n");
+    if(!generateSprite("data\\pitfall2.bmp",&tiles[5])) printf("Could not load pitfall2.bmp\n");
     if(!generateSprite("data\\spacebg1.bmp",&spaceBG)) printf("Could not load spacebg1.bmp\n");
     if(!generateSprite("data\\farbg1.bmp",&farBG)) printf("Could not load farbg1.bmp\n");
     if(!generateSprite("data\\closebg1.bmp",&closeBG)) printf("Could not load closebg1.bmp\n");
@@ -34,7 +36,7 @@ Level::Level()
 
 Level::~Level()
 {
-    for(int i = 0; i < 4; i++)
+    for(int i = 0; i < 6; i++)
     {
         glDeleteTextures(1, &tiles[i].texture);
     }
@@ -81,6 +83,16 @@ void Level::draw()
     }
 }
 
+BOOL Level::isPit(int x){
+    int tileNum = debugLevel[(x/32)];
+    if ( tileNum == 4 || tileNum == 5 ){
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+}
+
 BOOL Level::isGround(int x, int y){
     // first find which "tile" we are looking at with the current x/y
     // Then lookup through our level LUTs, and find if that point is ground
@@ -88,7 +100,7 @@ BOOL Level::isGround(int x, int y){
     if ( y < 196 ) return FALSE; // Auto-Fail
     int yOffset = y - 196;
     int tileNum = debugLevel[(x/32)];
-    BOOL groundRtn;
+    BOOL groundRtn = FALSE;
     unsigned char * tileLUT = 0;
     if ( tileNum == 0 ){
         tileLUT = tile1;
@@ -101,6 +113,9 @@ BOOL Level::isGround(int x, int y){
     }
     else if ( tileNum == 3 ){
         tileLUT = tile4;
+    }
+    else{
+        return TRUE;
     }
     if ( tileLUT != 0 )
     {

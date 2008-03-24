@@ -6,7 +6,7 @@ Car::Car()
     screenX = currentFrame = 0;
     carX = 45;
     carY = 100;
-    airBorne = movingLeft = movingRight = FALSE;
+    airBorne = movingLeft = movingRight = crashed = FALSE;
     speed = 5;
     wheelA = TRUE;
     if (!generateSprite("data\\car.bmp",&carSprite) ){
@@ -45,92 +45,101 @@ Car::~Car()
 
 void Car::update(Level * curLevel)
 {
-    currentFrame ++;
-    if ( currentFrame > 1 )
-    {
-        wheelA = !wheelA;
-        currentFrame = 0;
-    }
-    // Set our wheel sprites x values
-    wheelX[0] = int(carX)-3;
-    wheelX[1] = int(carX)+6;
-    wheelX[2] = int(carX)+18;
-    if ( airBorne == FALSE )
-    {
-        // do some y calculations!
-        int lowestY = 0; // wheel 0 has the lowest y
-        for(int i = 0; i < 3; i++)
+    if ( crashed == FALSE ){
+        currentFrame ++;
+        if ( currentFrame > 1 )
         {
-            wheelY[i]=int(carY);
-            BOOL hitFloor=FALSE;
-            while( !curLevel->isGround(wheelX[i]+screenX+3,wheelY[i]+16)){
-                wheelY[i]++;
-            }
-            if ( wheelY[i] < wheelY[lowestY] )
-                lowestY = i;
+            wheelA = !wheelA;
+            currentFrame = 0;
         }
-        carY = wheelY[lowestY]-16;
-        if ( jumping == TRUE )
+        // Set our wheel sprites x values
+        wheelX[0] = int(carX)-3;
+        wheelX[1] = int(carX)+6;
+        wheelX[2] = int(carX)+18;
+        if ( airBorne == FALSE )
         {
-            velY = -3.0;
-            airBorne = TRUE;
+            // do some y calculations!
+            int lowestY = 0; // wheel 0 has the lowest y
+            for(int i = 0; i < 3; i++)
+            {
+                if ( curLevel->isPit(wheelX[i]+screenX+3) ){
+                        crashed = TRUE;
+                        return; // no more!
+                }
+                wheelY[i]=int(carY);
+                BOOL hitFloor=FALSE;
+                while( !curLevel->isGround(wheelX[i]+screenX+3,wheelY[i]+16)){
+                    wheelY[i]++;
+                }
+                if ( wheelY[i] < wheelY[lowestY] )
+                    lowestY = i;
+            }
+            carY = wheelY[lowestY]-16;
+            if ( jumping == TRUE )
+            {
+                velY = -3.5;
+                airBorne = TRUE;
+                jumping = FALSE;
+            }
+        }
+        else if ( airBorne == TRUE )
+        {
+            if ( velY > 3.0 ){
+                velY = 3.0; // max falling speed
+            }
+            else if ( velY < -11.0 ){
+                velY = -11.0;
+            }
+            carY += velY;
+            velY += 0.2; // gravity on the moon!
+            // check to see if we've hit the ground
+            if ( curLevel->isGround(int(carX)+8,int(carY)+32)){
+                airBorne = FALSE;
+            }
+            for(int i = 0; i < 3; i++){
+                wheelY[i] = int(carY) + 14;
+            }
             jumping = FALSE;
         }
-    }
-    else if ( airBorne == TRUE )
-    {
-        carY += velY;
-        velY += 0.2; // gravity on the moon!
-        if ( velY > 3.0 ){
-            velY = 3.0; // max falling speed
-        }
-        // check to see if we've hit the ground
-        if ( curLevel->isGround(int(carX)+8,int(carY)+32)){
-            airBorne = FALSE;
-        }
-        for(int i = 0; i < 3; i++){
-            wheelY[i] = int(carY) + 14;
-        }
-        jumping = FALSE;
-    }
 
-    // Physics!
-    if ( movingLeft == TRUE ){
-        /*if ( velX > 0 ){
-            velX = 0;
-        }*/
-        velX -= 0.04;
-    }
-    else if ( movingRight == TRUE ){
-        /*if ( velX < 0 ){
-            velX = 0;
-        }*/
-        velX += 0.04;
-    }
-    else {// no outside force{
-        if ( int(carX) < 35 ){
-            velX += 0.03;
+        // Physics!
+        if ( movingLeft == TRUE ){
+            /*if ( velX > 0 ){
+                velX = 0;
+            }*/
+            velX -= 0.04;
         }
-        else if ( int(carX) > 37 ){
-            velX -= 0.03;
+        else if ( movingRight == TRUE ){
+            /*if ( velX < 0 ){
+                velX = 0;
+            }*/
+            velX += 0.04;
         }
-        else{
-            velX = 0;
+        else {// no outside force{
+            if ( int(carX) < 35 ){
+                velX += 0.03;
+            }
+            else if ( int(carX) > 37 ){
+                velX -= 0.03;
+            }
+            else{
+                velX = 0;
+            }
         }
-    }
-    if ( velX <= -2.0 ){
-            velX = -2.0;
-    }
-    else if ( velX >= 2.0 ){
-            velX = 2.0;
-    }
-    carX += velX;
-    if ( carX < 20 )
-        carX = 20.0;
-    else if ( carX > 80 )
-        carX = 80.0;
+        if ( velX <= -2.0 ){
+                velX = -2.0;
+        }
+        else if ( velX >= 2.0 ){
+                velX = 2.0;
+        }
+        carX += velX;
+        if ( carX < 20 )
+            carX = 20.0;
+        else if ( carX > 80 )
+            carX = 80.0;
 
-    screenX += int(carX/20)+2; // ?
+        screenX += int(carX/20)+2; // ?
+    }
 }
 void Car::draw()
 {

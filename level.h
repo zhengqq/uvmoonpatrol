@@ -14,9 +14,10 @@ public:
     void update(int);
     void draw();
     BOOL isGround(int,int);
+    BOOL isPit(int);
     void generateMoonMen(MoonMan ** manArray);
 private:
-    Sprite tiles[4]; // 4 so far
+    Sprite tiles[6]; // 6 so far
     Sprite spaceBG; // space background
     Sprite farBG; // farthest background
     Sprite closeBG; // closest background

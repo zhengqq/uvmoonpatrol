@@ -1,7 +1,7 @@
 #include "gfx.h"
 #include "base.h"
 
-int InitGL(GLvoid)			// All Setup For OpenGL Goes Here
+int InitGL(void)			// All Setup For OpenGL Goes Here
 {
 	glViewport(0, 0,240, 248);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);

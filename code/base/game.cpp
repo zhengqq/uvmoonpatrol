@@ -434,7 +434,7 @@ void Game::Timer()
     startTime = SDL_GetTicks();
 }
 
-GLvoid Game::KillGLWindow(GLvoid)			// Properly Kill The Window
+void Game::KillGLWindow(void)			// Properly Kill The Window
 {
 }
 

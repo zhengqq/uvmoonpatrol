@@ -3,7 +3,7 @@
 
 #include "base.h"
 #include "gfx.h"
-#include "JetFountain.h"
+#include "jetfountain.h"
 
 class JetMan{
 public:

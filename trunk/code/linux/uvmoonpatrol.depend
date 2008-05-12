@@ -1,0 +1,393 @@
+# depslib dependency file v1.0
+1205138165 c:\projects\vgng\ultraviolencemoonpatrol\main.cpp
+	<math.h>
+	<stdio.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<SDL/SDL.h>
+	<cstdlib>
+	<ctime>
+
+1205876433 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\main.cpp
+	<stdio.h>
+	"game.h"
+
+1205251428 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\base.h
+
+1205871375 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\gfx.h
+	<SDL/SDL.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"base.h"
+
+1206131604 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\gfx.cpp
+	"gfx.h"
+	"base.h"
+
+1206372832 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\car.cpp
+	"car.h"
+
+1206394062 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\car.h
+	"base.h"
+	"gfx.h"
+	"level.h"
+
+1206392792 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\level.cpp
+	"level.h"
+	"tile1.h"
+	"tile2.h"
+	"tile3.h"
+	"tile4.h"
+
+1206387169 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\level.h
+	"base.h"
+	"gfx.h"
+	"moonman.h"
+	"jetman.h"
+	"jetfountain.h"
+	"boulder.h"
+
+1206393268 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\moonman.cpp
+	"moonman.h"
+
+1206393228 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\moonman.h
+	"base.h"
+	"gfx.h"
+	"level.h"
+
+1206382920 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\base.cpp
+	"base.h"
+
+1206393322 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodfountain.cpp
+	"bloodfountain.h"
+
+1205509648 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodfountain.h
+	"particle.h"
+
+1206390410 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\particle.h
+	"base.h"
+	"gfx.h"
+
+1206387669 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\particle.cpp
+	"particle.h"
+	<math.h>
+
+1205421804 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodcloud.h
+	"particle.h"
+
+1205422153 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\bloodcloud.cpp
+	"bloodcloud.h"
+
+1206394075 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\game.cpp
+	"game.h"
+
+1206388520 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\game.h
+	<math.h>
+	<stdio.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<SDL/SDL.h>
+	<cstdlib>
+	<ctime>
+	"base.h"
+	"gfx.h"
+	"car.h"
+	"level.h"
+	"moonman.h"
+	"cannon.h"
+	"missile.h"
+	"bloodfountain.h"
+	"jetfountain.h"
+	"jetman.h"
+	"boulder.h"
+
+1206047616 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\tile1.h
+	"base.h"
+
+1206047616 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\tile2.h
+	"base.h"
+
+1206047616 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\tile3.h
+	"base.h"
+
+1206047615 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\tile4.h
+	"base.h"
+
+1206372832 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\cannon.cpp
+	"cannon.h"
+
+1206134266 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\cannon.h
+	"base.h"
+	"gfx.h"
+
+1206116798 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\missile.h
+	"base.h"
+	"gfx.h"
+
+1206116836 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\missile.cpp
+	"missile.h"
+
+1205373376 source:c:\projects\vgng\ultraviolencemoonpatrol\base.cpp
+	"base.h"
+
+1205373376 c:\projects\vgng\ultraviolencemoonpatrol\base.h
+
+1206227117 source:c:\projects\vgng\ultraviolencemoonpatrol\bloodfountain.cpp
+	"bloodfountain.h"
+
+1205540401 c:\projects\vgng\ultraviolencemoonpatrol\bloodfountain.h
+	"particle.h"
+
+1205540401 c:\projects\vgng\ultraviolencemoonpatrol\particle.h
+	"base.h"
+	"gfx.h"
+
+1205986074 c:\projects\vgng\ultraviolencemoonpatrol\gfx.h
+	<SDL/SDL.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"base.h"
+
+1206230634 source:c:\projects\vgng\ultraviolencemoonpatrol\cannon.cpp
+	"cannon.h"
+
+1206227117 c:\projects\vgng\ultraviolencemoonpatrol\cannon.h
+	"base.h"
+	"gfx.h"
+
+1206322156 source:c:\projects\vgng\ultraviolencemoonpatrol\car.cpp
+	"car.h"
+
+1206229677 c:\projects\vgng\ultraviolencemoonpatrol\car.h
+	"base.h"
+	"gfx.h"
+	"level.h"
+
+1206228938 c:\projects\vgng\ultraviolencemoonpatrol\level.h
+	"base.h"
+	"gfx.h"
+	"moonman.h"
+
+1206227117 c:\projects\vgng\ultraviolencemoonpatrol\moonman.h
+	"base.h"
+	"gfx.h"
+	"level.h"
+
+1206230868 source:c:\projects\vgng\ultraviolencemoonpatrol\game.cpp
+	"game.h"
+
+1206227118 c:\projects\vgng\ultraviolencemoonpatrol\game.h
+	<math.h>
+	<stdio.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<SDL/SDL.h>
+	<cstdlib>
+	<ctime>
+	"base.h"
+	"gfx.h"
+	"car.h"
+	"level.h"
+	"moonman.h"
+	"cannon.h"
+	"missile.h"
+	"bloodfountain.h"
+
+1206227117 c:\projects\vgng\ultraviolencemoonpatrol\missile.h
+	"base.h"
+	"gfx.h"
+
+1206227118 source:c:\projects\vgng\ultraviolencemoonpatrol\gfx.cpp
+	"gfx.h"
+	"base.h"
+
+1205986073 source:c:\projects\vgng\ultraviolencemoonpatrol\main.cpp
+	<stdio.h>
+	"game.h"
+
+1206227118 source:c:\projects\vgng\ultraviolencemoonpatrol\missile.cpp
+	"missile.h"
+
+1206229385 source:c:\projects\vgng\ultraviolencemoonpatrol\moonman.cpp
+	"moonman.h"
+
+1206227118 source:c:\projects\vgng\ultraviolencemoonpatrol\particle.cpp
+	"particle.h"
+	<math.h>
+
+1206230479 source:c:\projects\vgng\ultraviolencemoonpatrol\level.cpp
+	"level.h"
+	"tile1.h"
+	"tile2.h"
+	"tile3.h"
+	"tile4.h"
+
+1206066027 c:\projects\vgng\ultraviolencemoonpatrol\tile1.h
+	"base.h"
+
+1206066027 c:\projects\vgng\ultraviolencemoonpatrol\tile2.h
+	"base.h"
+
+1206066027 c:\projects\vgng\ultraviolencemoonpatrol\tile3.h
+	"base.h"
+
+1206066027 c:\projects\vgng\ultraviolencemoonpatrol\tile4.h
+	"base.h"
+
+1206385374 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\boulder.cpp
+	"boulder.h"
+
+1206383938 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\boulder.h
+	"base.h"
+	"gfx.h"
+
+1206390732 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\jetfountain.cpp
+	"Jetfountain.h"
+
+1206393895 source:c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\jetman.cpp
+	"jetman.h"
+	<math.h>
+
+1206392211 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\jetman.h
+	"base.h"
+	"gfx.h"
+	"JetFountain.h"
+
+1206390460 c:\documents and settings\luke\desktop\ultraviolentmoonpatrol\jetfountain.h
+	"particle.h"
+
+1210217723 source:/home/cthulhu32/Projects/uvmoonpatrol/base.cpp
+	"base.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/base.h
+
+1210217723 source:/home/cthulhu32/Projects/uvmoonpatrol/bloodfountain.cpp
+	"bloodfountain.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/bloodfountain.h
+	"particle.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/particle.h
+	"base.h"
+	"gfx.h"
+
+1210220686 /home/cthulhu32/Projects/uvmoonpatrol/gfx.h
+	<SDL/SDL.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	"base.h"
+
+1210217723 source:/home/cthulhu32/Projects/uvmoonpatrol/boulder.cpp
+	"boulder.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/boulder.h
+	"base.h"
+	"gfx.h"
+
+1210217723 source:/home/cthulhu32/Projects/uvmoonpatrol/cannon.cpp
+	"cannon.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/cannon.h
+	"base.h"
+	"gfx.h"
+
+1210217723 source:/home/cthulhu32/Projects/uvmoonpatrol/car.cpp
+	"car.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/car.h
+	"base.h"
+	"gfx.h"
+	"level.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/level.h
+	"base.h"
+	"gfx.h"
+	"moonman.h"
+	"jetman.h"
+	"jetfountain.h"
+	"boulder.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/moonman.h
+	"base.h"
+	"gfx.h"
+	"level.h"
+
+1210221134 /home/cthulhu32/Projects/uvmoonpatrol/jetman.h
+	"base.h"
+	"gfx.h"
+	"jetfountain.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/jetfountain.h
+	"particle.h"
+
+1210221249 source:/home/cthulhu32/Projects/uvmoonpatrol/game.cpp
+	"game.h"
+
+1210221243 /home/cthulhu32/Projects/uvmoonpatrol/game.h
+	<math.h>
+	<stdio.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<SDL/SDL.h>
+	<cstdlib>
+	<ctime>
+	"base.h"
+	"gfx.h"
+	"car.h"
+	"level.h"
+	"moonman.h"
+	"cannon.h"
+	"missile.h"
+	"bloodfountain.h"
+	"jetfountain.h"
+	"jetman.h"
+	"boulder.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/missile.h
+	"base.h"
+	"gfx.h"
+
+1210221255 source:/home/cthulhu32/Projects/uvmoonpatrol/gfx.cpp
+	"gfx.h"
+	"base.h"
+
+1210221263 source:/home/cthulhu32/Projects/uvmoonpatrol/jetfountain.cpp
+	"jetfountain.h"
+
+1210217723 source:/home/cthulhu32/Projects/uvmoonpatrol/jetman.cpp
+	"jetman.h"
+	<math.h>
+
+1210217723 source:/home/cthulhu32/Projects/uvmoonpatrol/level.cpp
+	"level.h"
+	"tile1.h"
+	"tile2.h"
+	"tile3.h"
+	"tile4.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/tile1.h
+	"base.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/tile2.h
+	"base.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/tile3.h
+	"base.h"
+
+1210217723 /home/cthulhu32/Projects/uvmoonpatrol/tile4.h
+	"base.h"
+
+1210217723 source:/home/cthulhu32/Projects/uvmoonpatrol/main.cpp
+	<stdio.h>
+	"game.h"
+
+1210217723 source:/home/cthulhu32/Projects/uvmoonpatrol/missile.cpp
+	"missile.h"
+
+1210217723 source:/home/cthulhu32/Projects/uvmoonpatrol/moonman.cpp
+	"moonman.h"
+
+1210217723 source:/home/cthulhu32/Projects/uvmoonpatrol/particle.cpp
+	"particle.h"
+	<math.h>
+

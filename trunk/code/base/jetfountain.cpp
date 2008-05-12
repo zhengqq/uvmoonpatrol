@@ -1,4 +1,4 @@
-#include "Jetfountain.h"
+#include "jetfountain.h"
 
 JetFountain::JetFountain()
 {

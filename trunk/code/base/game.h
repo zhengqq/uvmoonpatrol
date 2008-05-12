@@ -38,7 +38,7 @@ private:
     void KeyInput();
     void Timer();
     BOOL CreateGLWindow(char* title, int width, int height, int bits, BOOL fullscreenflag);
-    GLvoid KillGLWindow(GLvoid);
+    void KillGLWindow(void);
     unsigned int currentScene;
     int         gLastFrame;
     int         gLastTick;

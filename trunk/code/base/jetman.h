@@ -11,7 +11,7 @@ public:
     JetMan();
     JetMan(int);
     ~JetMan();
-    void update(int,std::vector<JetFountain>::iterator,int,int);
+    void update(int,std::vector<JetFountain*>::iterator,int,int);
     void draw();
     int getX(){return int(jetX);}
     int getY(){return int(jetY);}

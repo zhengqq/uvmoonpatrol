@@ -12,7 +12,7 @@ BOOL debugMoonMen[] = {0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
                     0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,
                     1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0};
 
-int debugBoulders[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+int debugBoulders[] = {0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                     0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                     0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
@@ -53,27 +53,27 @@ Level::~Level()
     glDeleteTextures(1, &closeBG.texture);
 }
 
-void Level::generateMoonMen(std::vector<MoonMan> manArray){
+void Level::generateMoonMen(std::vector<MoonMan*> * manArray){
     for ( int i = 0; i < 164; i++){
         if (debugMoonMen[i] == TRUE){
-            manArray.push_back(MoonMan(i*32));
+            manArray->push_back(new MoonMan(i*32));
         }
     }
 }
 
-void Level::generateBoulders(std::vector<Boulder> boulderArray){
+void Level::generateBoulders(std::vector<Boulder*> * boulderArray){
     for ( int i = 0; i < 164; i++){
         if (debugBoulders[i] > 0){
-            boulderArray.push_back(Boulder(i*32,debugBoulders[i]-1));
+            boulderArray->push_back(new Boulder(i*32,debugBoulders[i]-1));
         }
     }
 }
 
-void Level::generateJetMen(std::vector<JetMan> jetArray, std::vector<JetFountain> ftnArray){
+void Level::generateJetMen(std::vector<JetMan*> * jetArray, std::vector<JetFountain*> *ftnArray){
     for ( int i = 0; i < 164; i++){
         if (debugJetMen[i] == TRUE){
-            jetArray.push_back(JetMan(i*32));
-            ftnArray.push_back(JetFountain(i*32,jetArray.back().getY(),270,1,0));
+            jetArray->push_back(new JetMan(i*32));
+            ftnArray->push_back(new JetFountain(i*32,jetArray->back()->getY(),270,1,0));
         }
     }
 }

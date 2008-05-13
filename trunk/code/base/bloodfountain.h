@@ -1,6 +1,7 @@
 #ifndef __BLOODFOUNTAIN_H__
 #define __BLOODFOUNTAIN_H__
 
+#include <vector>
 #include "particle.h"
 
 class BloodFountain
@@ -17,7 +18,7 @@ public:
     int getLife(){return lifeSpan;}
 private:
     void addDroplet();
-    Particle * pList[256]; // particle list for our blood sprites
+    std::vector<Particle*> pList;
     int scrollX;
     int bloodX, bloodY; // Where is the fountain spewing from?
     int lifeSpan;       // how long do we want the fountain to last?

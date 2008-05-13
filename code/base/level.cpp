@@ -53,31 +53,27 @@ Level::~Level()
     glDeleteTextures(1, &closeBG.texture);
 }
 
-void Level::generateMoonMen(MoonMan ** manArray){
-    int manCount = 0;
+void Level::generateMoonMen(std::vector<MoonMan> manArray){
     for ( int i = 0; i < 164; i++){
         if (debugMoonMen[i] == TRUE){
-            manArray[manCount++] = new MoonMan(i*32);
+            manArray.push_back(MoonMan(i*32));
         }
     }
 }
 
-void Level::generateBoulders(Boulder ** boulderArray){
-    int boulderCount = 0;
+void Level::generateBoulders(std::vector<Boulder> boulderArray){
     for ( int i = 0; i < 164; i++){
         if (debugBoulders[i] > 0){
-            boulderArray[boulderCount++] = new Boulder(i*32,debugBoulders[i]-1);
+            boulderArray.push_back(Boulder(i*32,debugBoulders[i]-1));
         }
     }
 }
 
-void Level::generateJetMen(JetMan ** jetArray, JetFountain ** ftnArray){
-    int jetCount = 0;
+void Level::generateJetMen(std::vector<JetMan> jetArray, std::vector<JetFountain> ftnArray){
     for ( int i = 0; i < 164; i++){
         if (debugJetMen[i] == TRUE){
-            jetArray[jetCount] = new JetMan(i*32);
-            ftnArray[jetCount] = new JetFountain(i*32,jetArray[jetCount]->getY(),270,1,0);
-            jetCount++;
+            jetArray.push_back(JetMan(i*32));
+            ftnArray.push_back(JetFountain(i*32,jetArray.back().getY(),270,1,0));
         }
     }
 }

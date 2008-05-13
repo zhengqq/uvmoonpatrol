@@ -434,7 +434,8 @@
 	"gfx.h"
 	"level.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/level.h
+1210658633 /home/cthulhu32/Projects/uvmoonpatrol/code/base/level.h
+	<vector>
 	"base.h"
 	"gfx.h"
 	"moonman.h"
@@ -447,7 +448,8 @@
 	"gfx.h"
 	"level.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/jetman.h
+1210659000 /home/cthulhu32/Projects/uvmoonpatrol/code/base/jetman.h
+	<vector>
 	"base.h"
 	"gfx.h"
 	"jetfountain.h"
@@ -455,10 +457,10 @@
 1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/jetfountain.h
 	"particle.h"
 
-1210564967 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/game.cpp
+1210659804 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/game.cpp
 	"game.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/game.h
+1210658644 /home/cthulhu32/Projects/uvmoonpatrol/code/base/game.h
 	<math.h>
 	<stdio.h>
 	<GL/gl.h>
@@ -466,6 +468,7 @@
 	<SDL/SDL.h>
 	<cstdlib>
 	<ctime>
+	<vector>
 	"base.h"
 	"gfx.h"
 	"car.h"
@@ -489,11 +492,11 @@
 1210564967 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/jetfountain.cpp
 	"jetfountain.h"
 
-1210564967 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/jetman.cpp
+1210659165 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/jetman.cpp
 	"jetman.h"
 	<math.h>
 
-1210564967 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/level.cpp
+1210659459 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/level.cpp
 	"level.h"
 	"tile1.h"
 	"tile2.h"

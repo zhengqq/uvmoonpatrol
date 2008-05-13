@@ -25,11 +25,12 @@ JetMan::~JetMan(){
     glDeleteTextures( 1, &jetSprite.texture );
 }
 
-void JetMan::update(int newScroll, JetFountain * myFountain, int carX, int carY){
+void JetMan::update(int newScroll, std::vector<JetFountain>::iterator myFountain, int carX, int carY){
+    JetFountain curFountain = *(myFountain);
     if ( state == WAITING ){
         if ( int(jetX) - carX < 300 ){
             state = ACTIVATED;
-            myFountain->setActive(TRUE);
+            curFountain.setActive(TRUE);
         }
     }
     if ( state == ACTIVATED ){
@@ -47,13 +48,13 @@ void JetMan::update(int newScroll, JetFountain * myFountain, int carX, int carY)
         velY -= gravity;
         jetY -= velY;
         if ( velY < -2.0 ){
-            myFountain->setActive(FALSE);
+            curFountain.setActive(FALSE);
             velY = -2.0;
         }
         else{
-            myFountain->setActive(TRUE);
+            curFountain.setActive(TRUE);
         }
-        myFountain->setPosition(int(jetX)+8,int(jetY)+8);
+        curFountain.setPosition(int(jetX)+8,int(jetY)+8);
         if ( carX - int(jetX) > 200 ){
             state == DONE;
         }

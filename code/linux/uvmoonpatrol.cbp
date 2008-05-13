@@ -7,10 +7,15 @@
 		<Option compiler="mingw32_compiler" />
 		<Build>
 			<Target title="default">
-				<Option output="UVmpatrol.exe" prefix_auto="0" extension_auto="0" />
+				<Option output="../../build/windows/UVmpatrol.exe" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="../../build/windows" />
+				<Option object_output="../../build/windows/.objs" />
 				<Option type="1" />
 				<Option compiler="mingw32_compiler" />
 				<Option projectResourceIncludeDirsRelation="1" />
+				<Compiler>
+					<Add directory="../base/" />
+				</Compiler>
 			</Target>
 		</Build>
 		<VirtualTargets>
@@ -22,37 +27,37 @@
 			<Add library="SDL" />
 			<Add library="opengl32" />
 		</Linker>
-		<Unit filename="base.cpp" />
-		<Unit filename="base.h" />
-		<Unit filename="bloodfountain.cpp" />
-		<Unit filename="bloodfountain.h" />
-		<Unit filename="boulder.cpp" />
-		<Unit filename="boulder.h" />
-		<Unit filename="cannon.cpp" />
-		<Unit filename="cannon.h" />
-		<Unit filename="car.cpp" />
-		<Unit filename="car.h" />
-		<Unit filename="game.cpp" />
-		<Unit filename="game.h" />
-		<Unit filename="gfx.cpp" />
-		<Unit filename="gfx.h" />
-		<Unit filename="jetfountain.cpp" />
-		<Unit filename="jetfountain.h" />
-		<Unit filename="jetman.cpp" />
-		<Unit filename="jetman.h" />
-		<Unit filename="level.cpp" />
-		<Unit filename="level.h" />
-		<Unit filename="main.cpp" />
-		<Unit filename="missile.cpp" />
-		<Unit filename="missile.h" />
-		<Unit filename="moonman.cpp" />
-		<Unit filename="moonman.h" />
-		<Unit filename="particle.cpp" />
-		<Unit filename="particle.h" />
-		<Unit filename="tile1.h" />
-		<Unit filename="tile2.h" />
-		<Unit filename="tile3.h" />
-		<Unit filename="tile4.h" />
+		<Unit filename="../base/base.cpp" />
+		<Unit filename="../base/base.h" />
+		<Unit filename="../base/bloodfountain.cpp" />
+		<Unit filename="../base/bloodfountain.h" />
+		<Unit filename="../base/boulder.cpp" />
+		<Unit filename="../base/boulder.h" />
+		<Unit filename="../base/cannon.cpp" />
+		<Unit filename="../base/cannon.h" />
+		<Unit filename="../base/car.cpp" />
+		<Unit filename="../base/car.h" />
+		<Unit filename="../base/game.cpp" />
+		<Unit filename="../base/game.h" />
+		<Unit filename="../base/gfx.cpp" />
+		<Unit filename="../base/gfx.h" />
+		<Unit filename="../base/jetfountain.cpp" />
+		<Unit filename="../base/jetfountain.h" />
+		<Unit filename="../base/jetman.cpp" />
+		<Unit filename="../base/jetman.h" />
+		<Unit filename="../base/level.cpp" />
+		<Unit filename="../base/level.h" />
+		<Unit filename="../base/main.cpp" />
+		<Unit filename="../base/missile.cpp" />
+		<Unit filename="../base/missile.h" />
+		<Unit filename="../base/moonman.cpp" />
+		<Unit filename="../base/moonman.h" />
+		<Unit filename="../base/particle.cpp" />
+		<Unit filename="../base/particle.h" />
+		<Unit filename="../base/tile1.h" />
+		<Unit filename="../base/tile2.h" />
+		<Unit filename="../base/tile3.h" />
+		<Unit filename="../base/tile4.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

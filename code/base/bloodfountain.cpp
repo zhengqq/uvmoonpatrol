@@ -10,7 +10,7 @@
 #define LIFE_CLOUD 15
 #define LIFE_POP 20
 
-char * bloodList[4] = {"data\\blood1.bmp","data\\blood2.bmp","data\\blood3.bmp","data\\blood4.bmp"};
+char * bloodList[6] = {"data\\blood1.bmp","data\\blood2.bmp","data\\blood3.bmp","data\\blood4.bmp","data\\guts1.bmp","data\\guts2.bmp"};
 
 BloodFountain::BloodFountain()
 {
@@ -118,6 +118,6 @@ void BloodFountain::addDroplet()
     }
     else if ( type == POP )
     {
-        pList.push_back(new Particle(bloodX, bloodY, rand()%360, length+(rand()%10/10), gravity, LIFE_POP, bloodList[rand()%4],POP));
+        pList.push_back(new Particle(bloodX, bloodY, rand()%360, length+(rand()%10/10), gravity, LIFE_POP, bloodList[rand()%6],POP));
     }
 }

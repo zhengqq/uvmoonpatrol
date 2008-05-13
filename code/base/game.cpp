@@ -299,7 +299,7 @@ void Game::GameLogic()
             }
 
             if (missileHit == TRUE){
-                BloodFountain * newFountain = new BloodFountain(jMan->getX(),jMan->getY(), 0, 2.0, 40, 0.1);
+                BloodFountain * newFountain = new BloodFountain(jMan->getX(),jMan->getY(), 0, 2.0, 30, 0.15);
                 newFountain->setPop();
                 mmFountain.push_back(newFountain);
                 jetIter = gameJetMen.erase(jetIter);

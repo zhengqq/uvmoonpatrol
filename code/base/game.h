@@ -61,12 +61,12 @@ private:
     Sprite guiSprite;
     Car * gameCar;
     Cannon * carCannon; // one cannon!
-    std::vector<Missile> carMissile;
-    std::vector<MoonMan> gameMoonMen;
-    std::vector<BloodFountain> mmFountain;
-    std::vector<JetMan> gameJetMen;
-    std::vector<JetFountain> jmFountain;
-    std::vector<Boulder> gameBoulders;
+    std::vector<Missile*> carMissile;
+    std::vector<MoonMan*> gameMoonMen;
+    std::vector<BloodFountain*> mmFountain;
+    std::vector<JetMan*> gameJetMen;
+    std::vector<JetFountain*> jmFountain;
+    std::vector<Boulder*> gameBoulders;
     Level * gameLevel;
 };
 

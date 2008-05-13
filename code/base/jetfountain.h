@@ -1,6 +1,7 @@
 #ifndef __JETFOUNTAIN_H__
 #define __JETFOUNTAIN_H__
 
+#include <vector>
 #include "particle.h"
 
 class JetFountain
@@ -15,7 +16,7 @@ public:
     void setActive(BOOL);
 private:
     void addJetlet(); // droplet?
-    Particle * pList[256]; // particle list for our blood sprites
+    std::vector<Particle*> pList;
     BOOL isActive;
     int scrollX;
     int JetX, JetY; // Where is the fountain spewing from?

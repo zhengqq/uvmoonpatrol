@@ -1,19 +1,21 @@
 #include "bloodfountain.h"
 
+// These defines tell the blood particle explosion how many max
+//  blood droplets for each we can have before it starts slowing down.
+#define MAX_FOUNTAIN 128
+#define MAX_CLOUD 64
+#define MAX_POP 48
+
 char * bloodList[4] = {"data\\blood1.bmp","data\\blood2.bmp","data\\blood3.bmp","data\\blood4.bmp"};
 
 BloodFountain::BloodFountain()
 {
-    for(int i = 0; i < 256; i++)
-        pList[i] = 0;
     bloodX = bloodY = lifeSpan = decay = 0;
     angle = length = gravity = 0.0;
 }
 
 BloodFountain::BloodFountain(int x, int y, double a, double l, int life, double g)
 {
-    for(int i = 0; i < 256; i++)
-        pList[i] = 0;
     bloodX = x;
     bloodY = y;
     lifeSpan = life;
@@ -26,13 +28,8 @@ BloodFountain::BloodFountain(int x, int y, double a, double l, int life, double 
 
 BloodFountain::~BloodFountain()
 {
-    for(int i = 0; i < 256; i++)
-    {
-        if (pList[i] != 0)
-        {
-            delete pList[i];
-            pList[i] = 0;
-        }
+    while (!pList.empty()){
+        delete pList.back(); pList.pop_back();
     }
 }
 
@@ -58,71 +55,65 @@ void BloodFountain::update(int newScroll)
     {
         if ( type == FOUNTAIN )
         {
-            for(int i = 0; i < 3; i++){
-                addDroplet();
+            if ( pList.size() < MAX_FOUNTAIN ){
+                for(int i = 0; i < 3; i++){
+                    addDroplet();
+                }
             }
         }
         else if ( type == CLOUD )
         {
-            for(int i = 0; i < rand()%2+2; i++){
-                addDroplet();
+            if ( pList.size() < MAX_CLOUD ){
+                for(int i = 0; i < rand()%2+2; i++){
+                    addDroplet();
+                }
             }
         }
         else if ( type == POP )
         {
-            for(int i = 0; i < 8; i++){
-                addDroplet();
+            if ( pList.size() < MAX_POP ){
+                for(int i = 0; i < 8; i++){
+                    addDroplet();
+                }
             }
         }
         lifeSpan--;
     }
-    for(int i = 0; i < 256; i++)
-    {
-        if ( pList[i] != 0 )
-        {
-            if ( pList[i]->getLife() > 0 )
-            {
-                pList[i]->update(newScroll);
-            }
-            else
-            {
-                delete pList[i];
-                pList[i] = 0;
-            }
+    std::vector<Particle*>::iterator pIter = pList.begin();
+    while( pIter != pList.end()){
+        Particle * p = *(pIter);
+        if ( p->getLife() > 0 ){
+            p->update(newScroll);
+            ++pIter;
+        }
+        else{
+            pIter = pList.erase(pIter);
         }
     }
 }
 
 void BloodFountain::draw()
 {
-    for(int i = 0; i < 256; i++)
-    {
-        if ( pList[i] != 0 )
-        {
-            pList[i]->draw();
-        }
+    std::vector<Particle*>::iterator pIter = pList.begin();
+    while ( pIter != pList.end()){
+        Particle * p = *(pIter);
+        p->draw();
+        ++pIter;
     }
 }
 
 void BloodFountain::addDroplet()
 {
-    for(int i = 0; i < 256; i++)
+    if ( type == FOUNTAIN )
     {
-        if ( pList[i] == 0 )
-        {
-            if ( type == FOUNTAIN )
-            {
-                pList[i] = new Particle(bloodX, bloodY, int(angle+rand()%20), length+rand()%5, gravity, 90, bloodList[rand()%4],FOUNTAIN);
-            }
-            else if ( type == CLOUD )
-            {
-                pList[i] = new Particle(bloodX+(rand()%20-10), bloodY+(rand()%20-10), int(angle-rand()%10), length, gravity, 15, bloodList[rand()%4],CLOUD);
-            }
-            else if ( type == POP )
-            {
-                pList[i] = new Particle(bloodX, bloodY, rand()%360, length+(rand()%10/10), gravity, 25, bloodList[rand()%4],POP);
-            }
-            break;
-        }
+        pList.push_back(new Particle(bloodX, bloodY, int(angle+rand()%20), length+rand()%5, gravity, 90, bloodList[rand()%4],FOUNTAIN));
+    }
+    else if ( type == CLOUD )
+    {
+        pList.push_back(new Particle(bloodX+(rand()%20-10), bloodY+(rand()%20-10), int(angle-rand()%10), length, gravity, 15, bloodList[rand()%4],CLOUD));
+    }
+    else if ( type == POP )
+    {
+        pList.push_back(new Particle(bloodX, bloodY, rand()%360, length+(rand()%10/10), gravity, 25, bloodList[rand()%4],POP));
     }
 }

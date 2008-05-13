@@ -2,16 +2,12 @@
 
 JetFountain::JetFountain()
 {
-    for(int i = 0; i < 256; i++)
-        pList[i] = 0;
     JetX = JetY = decay = 0;
     angle = length = gravity = 0.0;
 }
 
 JetFountain::JetFountain(int x, int y, double a, double l, double g)
 {
-    for(int i = 0; i < 256; i++)
-        pList[i] = 0;
     JetX = x;
     JetY = y;
     decay = 1;
@@ -23,13 +19,8 @@ JetFountain::JetFountain(int x, int y, double a, double l, double g)
 
 JetFountain::~JetFountain()
 {
-    for(int i = 0; i < 256; i++)
-    {
-        if (pList[i] != 0)
-        {
-            delete pList[i];
-            pList[i] = 0;
-        }
+    while(!pList.empty()){
+        delete pList.back(); pList.pop_back();
     }
 }
 
@@ -39,31 +30,26 @@ void JetFountain::update(int newScroll)
     if ( isActive ){
         addJetlet();
     }
-    for(int i = 0; i < 256; i++)
-    {
-        if ( pList[i] != 0 )
-        {
-            if ( pList[i]->getLife() > 0 )
-            {
-                pList[i]->update(newScroll);
-            }
-            else
-            {
-                delete pList[i];
-                pList[i] = 0;
-            }
+    std::vector<Particle*>::iterator pIter = pList.begin();
+    while(pIter != pList.end()){
+        Particle * p = *(pIter);
+        if ( p->getLife() > 0){
+            p->update(newScroll);
+            ++pIter;
+        }
+        else{
+            pIter = pList.erase(pIter);
         }
     }
 }
 
 void JetFountain::draw()
 {
-    for(int i = 0; i < 256; i++)
-    {
-        if ( pList[i] != 0 )
-        {
-            pList[i]->draw();
-        }
+    std::vector<Particle*>::iterator pIter = pList.begin();
+    while(pIter != pList.end()){
+        Particle * p = *(pIter);
+        p->draw();
+        ++pIter;
     }
 }
 
@@ -73,12 +59,5 @@ void JetFountain::setActive(BOOL newActiveState){
 
 void JetFountain::addJetlet()
 {
-    for(int i = 0; i < 256; i++)
-    {
-        if ( pList[i] == 0 )
-        {
-            pList[i] = new Particle(JetX, JetY, int(angle+rand()%15), length+rand()%30/10, gravity, 6, "data\\Jetparticle.bmp",JET);
-            break;
-        }
-    }
+    pList.push_back(new Particle(JetX, JetY, int(angle+rand()%15), length+rand()%30/10, gravity, 6, "data\\Jetparticle.bmp",JET));
 }

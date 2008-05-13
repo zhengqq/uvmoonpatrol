@@ -8,6 +8,7 @@
 #include <SDL/SDL.h>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 #include "base.h"
 #include "gfx.h"
 #include "car.h"
@@ -60,12 +61,12 @@ private:
     Sprite guiSprite;
     Car * gameCar;
     Cannon * carCannon; // one cannon!
-    Missile * carMissile[32]; // up to 32 missiles!
-    MoonMan * gameMoonMen[128]; // 128 moon men (THIS IS A DEBUG, WE MIGHT MAKE THIS DYNAMIC!)
-    BloodFountain * mmFountain[128]; // 128 blood fountains to correspond with our 128 moon men
-    JetMan * gameJetMen[128];
-    JetFountain * jmFountain[128];
-    Boulder * gameBoulders[128];
+    std::vector<Missile> carMissile;
+    std::vector<MoonMan> gameMoonMen;
+    std::vector<BloodFountain> mmFountain;
+    std::vector<JetMan> gameJetMen;
+    std::vector<JetFountain> jmFountain;
+    std::vector<Boulder> gameBoulders;
     Level * gameLevel;
 };
 

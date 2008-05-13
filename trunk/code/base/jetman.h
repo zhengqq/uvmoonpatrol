@@ -1,6 +1,7 @@
 #ifndef __JETMAN_H__
 #define __JETMAN_H__
 
+#include <vector>
 #include "base.h"
 #include "gfx.h"
 #include "jetfountain.h"
@@ -10,7 +11,7 @@ public:
     JetMan();
     JetMan(int);
     ~JetMan();
-    void update(int,JetFountain*,int,int);
+    void update(int,std::vector<JetFountain>::iterator,int,int);
     void draw();
     int getX(){return int(jetX);}
     int getY(){return int(jetY);}

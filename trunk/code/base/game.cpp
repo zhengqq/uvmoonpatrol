@@ -98,18 +98,9 @@ void Game::InitGame()
     gameCar = new Car();
     gameLevel = new Level();
     carCannon = 0; // nothing for this yet!
-    for(int i = 0; i < 32; i++)
-        carMissile[i] = 0;
-    for(int i = 0; i < 128; i++){
-        gameMoonMen[i] = 0;
-        gameJetMen[i] = 0;
-        mmFountain[i] = 0;
-        jmFountain[i] = 0;
-        gameBoulders[i] = 0;
-    }
-    gameLevel->generateMoonMen(&gameMoonMen[0]);
-    gameLevel->generateBoulders(&gameBoulders[0]);
-    gameLevel->generateJetMen(&gameJetMen[0],&jmFountain[0]);
+    gameLevel->generateMoonMen(gameMoonMen);
+    gameLevel->generateBoulders(gameBoulders);
+    gameLevel->generateJetMen(gameJetMen,jmFountain);
 }
 
 void Game::ShutdownGame()
@@ -119,28 +110,14 @@ void Game::ShutdownGame()
     if ( carCannon != 0 ){
         delete carCannon;
     }
-    for(int i = 0; i < 32; i++){
-        if ( carMissile[i] != 0){
-            delete carMissile[i];
-        }
-    }
-    for(int i = 0; i < 128; i++){
-        if ( gameMoonMen[i] != 0){
-            delete gameMoonMen[i];
-        }
-        if ( gameJetMen[i] != 0){
-            delete gameJetMen[i];
-        }
-        if ( mmFountain[i] != 0){
-            delete mmFountain[i];
-        }
-        if ( jmFountain[i] != 0){
-            delete jmFountain[i];
-        }
-        if ( gameBoulders[i] !=  0){
-            delete gameBoulders[i];
-        }
-    }
+
+    carMissile.clear();
+    gameMoonMen.clear();
+    mmFountain.clear();
+    gameJetMen.clear();
+    jmFountain.clear();
+    gameBoulders.clear();
+
     glDeleteTextures( 1, &guiSprite.texture );
 }
 
@@ -159,27 +136,23 @@ void Game::GameRender()				// Draw Everything
     if ( carCannon != 0 ){
         carCannon->draw();
     }
-    for(int i = 0; i < 32; i++){
-        if ( carMissile[i] != 0){
-            carMissile[i]->draw();
-        }
+    for(int i = 0; i < carMissile.size(); i++){
+        carMissile[i].draw();
     }
-    for(int i = 0; i < 128; i++){
-        if ( gameMoonMen[i] !=  0){
-            gameMoonMen[i]->draw();
-        }
-        if ( jmFountain[i] != 0 ){
-            jmFountain[i]->draw();
-        }
-        if ( gameJetMen[i] != 0){
-            gameJetMen[i]->draw();
-        }
-        if ( mmFountain[i] !=  0){
-            mmFountain[i]->draw();
-        }
-        if ( gameBoulders[i] != 0){
-            gameBoulders[i]->draw();
-        }
+    for(int i = 0; i < gameMoonMen.size(); i++){
+        gameMoonMen[i].draw();
+    }
+    for(int i = 0; i < jmFountain.size(); i++){
+        jmFountain[i].draw();
+    }
+    for(int i = 0; i < gameJetMen.size(); i++){
+        gameJetMen[i].draw();
+    }
+    for(int i = 0; i < mmFountain.size(); i++){
+        mmFountain[i].draw();
+    }
+    for(int i = 0; i < gameBoulders.size(); i++){
+        gameBoulders[i].draw();
     }
 
     DrawSprite(guiSprite, 0, 0, FALSE);
@@ -206,13 +179,8 @@ void Game::GameLogic()
         if ( carCannon == 0){
             carCannon = new Cannon(gameCar->getX()+32,gameCar->getY()+16);
         }
-        for(int i = 0; i < 32; i++){
-            if ( carMissile[i] == 0 ){
-                carMissile[i] = new Missile(gameCar->getX()-gameCar->getScreenX()+9,gameCar->getY()+5);
-                gKeyCtrl = FALSE; // hacky way of doing this.
-                break;
-            }
-        }
+        carMissile.push_back(Missile(gameCar->getX()-gameCar->getScreenX()+9,gameCar->getY()+5));
+        gKeyCtrl = FALSE;
     }
 
     gameCar->update(gameLevel);
@@ -228,131 +196,103 @@ void Game::GameLogic()
             carCannon->update(scrollX);
         }
     }
-    for(int i = 0; i < 32; i++){
-        if ( carMissile[i] != 0){
-            if ( carMissile[i]->getY() < 10 ){
-                delete carMissile[i];
-                carMissile[i] = 0;
-            }
-            else {
-                carMissile[i]->update();
-            }
+    for(int i = 0; i < carMissile.size(); i++){
+        if ( carMissile[i].getY() < 10 ){
+            carMissile.erase(carMissile.begin() + i);
+            i--; // move down one after we remove it, don't know if this is necessary
+        }
+        else{
+            carMissile[i].update();
         }
     }
-    for(int i = 0; i < 128; i++){
-        // Update the land moon men
-        if ( gameMoonMen[i] !=  0){
-            gameMoonMen[i]->update(scrollX,gameLevel);
-            if (rectCollision(gameCar->getX(),gameCar->getY(),gameCar->width(),gameCar->height()-10, // 10 compensates for bottom of the car
-                gameMoonMen[i]->getX(),gameMoonMen[i]->getY(),gameMoonMen[i]->width(),gameMoonMen[i]->height())){
-                // kill moon man!
-                for(int j = 0; j < 128; j++){
-                    if ( mmFountain[j] == 0 ){
-                        if ( gameCar->isAirBorne() ){
-                            mmFountain[j] = new BloodFountain(gameMoonMen[i]->getX()+3,gameMoonMen[i]->getY()+15, 90, 3.0, 100, 0.05);
-                            mmFountain[j]->setSpurting();
-                        }
-                        else{
-                            mmFountain[j] = new BloodFountain(gameMoonMen[i]->getX(),gameMoonMen[i]->getY(), 90, 2.0, 50, 0.01);
-                            mmFountain[j]->setPop();
-                        }
-                        break;
-                    }
-                }
-                if ( gameCar->isAirBorne() ){
-                    gameCar->boostUp();
-                }
-                else{
-                    gameCar->slowDown();
-                }
-                delete gameMoonMen[i];
-                gameMoonMen[i] = 0;
+    for(int i = 0; i < gameMoonMen.size(); i++){
+        gameMoonMen[i].update(scrollX, gameLevel);
+        if (rectCollision(gameCar->getX(),gameCar->getY(),gameCar->width(),gameCar->height()-10, // 10 compensates for bottom of the car
+                gameMoonMen[i].getX(),gameMoonMen[i].getY(),gameMoonMen[i].width(),gameMoonMen[i].height())){
+            if ( gameCar->isAirBorne() ){
+                BloodFountain newFountain = BloodFountain(gameMoonMen[i].getX()+3,gameMoonMen[i].getY()+15, 90, 3.0, 100, 0.05);
+                newFountain.setSpurting();
+                mmFountain.push_back(newFountain);
             }
-
-            else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
-                gameMoonMen[i]->getX(),gameMoonMen[i]->getY(),gameMoonMen[i]->width(),gameMoonMen[i]->height()))){
-                for(int j = 0; j < 128; j++){
-                    if ( mmFountain[j] == 0 ){
-                        mmFountain[j] = new BloodFountain(gameMoonMen[i]->getX(),gameMoonMen[i]->getY(), 90, 4.0, 60, 0.1);
-                        mmFountain[j]->setPop();
-                        break;
-                    }
-                }
-                delete carCannon;
-                carCannon = 0;
-                delete gameMoonMen[i];
-                gameMoonMen[i] = 0;
+            else{
+                BloodFountain newFountain = BloodFountain(gameMoonMen[i].getX(),gameMoonMen[i].getY(), 90, 2.0, 50, 0.01);
+                newFountain.setPop();
+                mmFountain.push_back(newFountain);
             }
-        }
-        if ( gameJetMen[i] !=  0){
-            gameJetMen[i]->update(scrollX, jmFountain[i],gameCar->getX(),gameCar->getY());
-            if (rectCollision(gameCar->getX()+5,gameCar->getY()+30,gameCar->width()-5,gameCar->height()-30, // only 6 pixels will actually collide
-                gameJetMen[i]->getX()+3,gameJetMen[i]->getY()+3,gameJetMen[i]->width()-3,gameJetMen[i]->height()-3)){
-                // kill Jet man!
-                for(int j = 0; j < 128; j++){
-                    if ( mmFountain[j] == 0 ){
-                        mmFountain[j] = new BloodFountain(gameJetMen[i]->getX(),gameJetMen[i]->getY(), 270, 2.0, 50, 0.3);
-                        mmFountain[j]->setPop();
-                        break;
-                    }
-                }
+            if ( gameCar->isAirBorne() ){
                 gameCar->boostUp();
-                delete gameJetMen[i];
-                gameJetMen[i] = 0;
-                delete jmFountain[i];
-                jmFountain[i] = 0;
+            }
+            else{
+                gameCar->slowDown();
+            }
+            gameMoonMen.erase(gameMoonMen.begin() + i);
+            i--; // move down index (might not be necessary)
+        }
+        else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
+                gameMoonMen[i].getX(),gameMoonMen[i].getY(),gameMoonMen[i].width(),gameMoonMen[i].height()))){
+            BloodFountain newFountain = BloodFountain(gameMoonMen[i].getX(),gameMoonMen[i].getY(), 90, 4.0, 60, 0.1);
+            newFountain.setPop();
+            mmFountain.push_back(newFountain);
+            delete carCannon;
+            carCannon = 0;
+            gameMoonMen.erase( gameMoonMen.begin() + i);
+            i--; // might not be necessary
+        }
+    }
+    for(int i = 0; i < gameJetMen.size(); i++){
+        gameJetMen[i].update(scrollX, (jmFountain.begin()+i),gameCar->getX(),gameCar->getY());
+        if (rectCollision(gameCar->getX()+5,gameCar->getY()+30,gameCar->width()-5,gameCar->height()-30, // only 6 pixels will actually collide
+                gameJetMen[i].getX()+3,gameJetMen[i].getY()+3,gameJetMen[i].width()-3,gameJetMen[i].height()-3)){
+            BloodFountain newFountain = BloodFountain(gameJetMen[i].getX(),gameJetMen[i].getY(), 270, 2.0, 50, 0.3);
+            newFountain.setPop();
+            mmFountain.push_back(newFountain);
+            gameCar->boostUp();
+            gameJetMen.erase( gameJetMen.begin() + i);
+            jmFountain.erase( jmFountain.begin() + i);
+            i--;
+        }
+        else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
+                gameJetMen[i].getX(),gameJetMen[i].getY(),gameJetMen[i].width(),gameJetMen[i].height()))){
+            BloodFountain newFountain = BloodFountain(gameJetMen[i].getX(),gameJetMen[i].getY(), 0, 2.0, 40, 0.1);
+            newFountain.setPop();
+            mmFountain.push_back(newFountain);
+            delete carCannon;
+            carCannon = 0;
+            gameJetMen.erase( gameJetMen.begin() + i);
+            jmFountain.erase( jmFountain.begin() + i);
+            i--;
+        }
+    }
+
+    for(int i = 0; i < mmFountain.size(); i++){
+        mmFountain[i].update(scrollX);
+        if ( mmFountain[i].getLife() <= 0){
+            mmFountain.erase( mmFountain.begin() + i);
+            i--;
+        }
+    }
+
+    for(int i = 0; i < jmFountain.size(); i++){
+        jmFountain[i].update(scrollX);
+    }
+
+    for(int i = 0; i < gameBoulders.size(); i++){
+        gameBoulders[i].update(scrollX);
+        if ( gameBoulders[i].isActive()){
+            if ( rectCollision(gameCar->getX()+5,gameCar->getY(),gameCar->width()-5,gameCar->height()-10, // 10 compensates for bottom of the car
+                        gameBoulders[i].getX(),gameBoulders[i].getY()+2,gameBoulders[i].width(),gameBoulders[i].height())){
+                gameCar->causeCrash();
             }
             else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
-                gameJetMen[i]->getX(),gameJetMen[i]->getY(),gameJetMen[i]->width(),gameJetMen[i]->height()))){
-                for(int j = 0; j < 128; j++){
-                    if ( mmFountain[j] == 0 ){
-                        mmFountain[j] = new BloodFountain(gameJetMen[i]->getX(),gameJetMen[i]->getY(), 0, 2.0, 40, 0.1);
-                        mmFountain[j]->setPop();
-                        break;
-                    }
-                }
+                        gameBoulders[i].getX(),gameBoulders[i].getY(),gameBoulders[i].width(),gameBoulders[i].height()))){
+                gameBoulders[i].setExplode(); // sets our boulder to explode!
                 delete carCannon;
                 carCannon = 0;
-                delete gameJetMen[i];
-                gameJetMen[i] = 0;
-                delete jmFountain[i];
-                jmFountain[i] = 0;
-            }
-            // check against missiles!
-        }
-    }
-    // Update our particle fountains
-    for(int i = 0; i < 128; i++){
-        if ( mmFountain[i] !=  0){
-            mmFountain[i]->update(scrollX);
-            if ( mmFountain[i]->getLife() <= 0 ){
-                delete mmFountain[i];
-                mmFountain[i] = 0;
             }
         }
-        if ( jmFountain[i] !=  0){
-            jmFountain[i]->update(scrollX);
-        }
-    }
-    for(int i = 0; i < 128; i++){
-        if ( gameBoulders[i] !=  0){
-            gameBoulders[i]->update(scrollX);
-            if ( gameBoulders[i]->isActive() ){
-                if ( rectCollision(gameCar->getX()+5,gameCar->getY(),gameCar->width()-5,gameCar->height()-10, // 10 compensates for bottom of the car
-                        gameBoulders[i]->getX(),gameBoulders[i]->getY()+2,gameBoulders[i]->width(),gameBoulders[i]->height())){
-                    gameCar->causeCrash();
-                }
-                else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
-                        gameBoulders[i]->getX(),gameBoulders[i]->getY(),gameBoulders[i]->width(),gameBoulders[i]->height()))){
-                    gameBoulders[i]->setExplode(); // sets our boulder to explode!
-                    delete carCannon;
-                    carCannon = 0;
-                }
-            }
-            else if ( gameBoulders[i]->isDead() ){
-                delete gameBoulders[i];
-                gameBoulders[i] = 0;
-            }
+        else if ( gameBoulders[i].isDead() ){
+            gameBoulders.erase(gameBoulders.begin() + i);
+            i--;
         }
     }
 }

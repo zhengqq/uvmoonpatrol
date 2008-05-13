@@ -23,7 +23,7 @@ public:
     void generateBoulders(std::vector<Boulder*> *boulderArray);
     void generateJetMen(std::vector<JetMan*> *, std::vector<JetFountain*> *);
 private:
-    Sprite tiles[6]; // 6 so far
+    Sprite tiles[7]; // 7 so far
     Sprite spaceBG; // space background
     Sprite farBG; // farthest background
     Sprite closeBG; // closest background

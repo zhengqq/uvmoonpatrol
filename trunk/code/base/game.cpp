@@ -64,7 +64,7 @@ void Game::Run(){
                 GameLogic();
                 GameRender();
                 // HUGE HUGE HUGE DEBUG!!!
-                if ( gameCar->getX() > 146*32 || gameCar->isCrashed() == TRUE){
+                if ( gameCar->isCrashed() == TRUE ){
                     ShutdownGame();
                     InitGame();
                 }
@@ -245,7 +245,7 @@ void Game::GameLogic()
         }
         else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
                 mMan->getX(),mMan->getY(),mMan->width(),mMan->height()))){
-            BloodFountain * newFountain = new BloodFountain(mMan->getX(),mMan->getY(), 90, 4.0, 60, 0.1);
+            BloodFountain * newFountain = new BloodFountain(mMan->getX(),mMan->getY(), 90, 4.0, 50, 0.25);
             newFountain->setPop();
             mmFountain.push_back(newFountain);
             delete carCannon;
@@ -283,8 +283,33 @@ void Game::GameLogic()
             jfIter = jmFountain.erase(jfIter);
         }
         else{
-            ++jetIter;
-            ++jfIter;
+            BOOL missileHit = FALSE;
+            std::vector<Missile*>::iterator mIter = carMissile.begin();
+            while(mIter != carMissile.end()){
+                Missile * m = *(mIter);
+                if ( rectCollision(jMan->getX(),jMan->getY(),jMan->width(),jMan->height(),
+                        m->getX()+scrollX,m->getY(),m->width(),m->height())){
+                    missileHit = TRUE;
+                    carMissile.erase(mIter);
+                    mIter = carMissile.end();
+                }
+                else{
+                    ++mIter;
+                }
+            }
+
+            if (missileHit == TRUE){
+                BloodFountain * newFountain = new BloodFountain(jMan->getX(),jMan->getY(), 0, 2.0, 40, 0.1);
+                newFountain->setPop();
+                mmFountain.push_back(newFountain);
+                jetIter = gameJetMen.erase(jetIter);
+                jfIter = jmFountain.erase(jfIter);
+
+            }
+            else{
+                ++jetIter;
+                ++jfIter;
+            }
         }
     }
     std::vector<BloodFountain*>::iterator bfIter = mmFountain.begin();

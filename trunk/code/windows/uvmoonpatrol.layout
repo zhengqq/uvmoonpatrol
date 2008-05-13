@@ -5,28 +5,28 @@
 		<Cursor position="1307" topLine="45" />
 	</File>
 	<File name="..\base\bloodfountain.h" open="1" top="0" tabpos="14">
-		<Cursor position="511" topLine="7" />
+		<Cursor position="511" topLine="0" />
 	</File>
-	<File name="..\base\boulder.cpp" open="1" top="1" tabpos="11">
-		<Cursor position="673" topLine="26" />
+	<File name="..\base\boulder.cpp" open="1" top="0" tabpos="11">
+		<Cursor position="1456" topLine="5" />
 	</File>
 	<File name="..\base\boulder.h" open="1" top="0" tabpos="12">
 		<Cursor position="308" topLine="0" />
 	</File>
 	<File name="..\base\cannon.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="327" topLine="38" />
+		<Cursor position="327" topLine="26" />
 	</File>
-	<File name="..\base\game.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="10227" topLine="312" />
+	<File name="..\base\game.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="10258" topLine="236" />
 	</File>
 	<File name="..\base\game.h" open="1" top="0" tabpos="6">
-		<Cursor position="1334" topLine="48" />
+		<Cursor position="1334" topLine="36" />
 	</File>
 	<File name="..\base\jetfountain.cpp" open="1" top="0" tabpos="17">
-		<Cursor position="1052" topLine="29" />
+		<Cursor position="1052" topLine="26" />
 	</File>
 	<File name="..\base\jetfountain.h" open="1" top="0" tabpos="16">
-		<Cursor position="435" topLine="4" />
+		<Cursor position="435" topLine="0" />
 	</File>
 	<File name="..\base\jetman.cpp" open="1" top="0" tabpos="8">
 		<Cursor position="785" topLine="11" />
@@ -41,7 +41,7 @@
 		<Cursor position="530" topLine="0" />
 	</File>
 	<File name="..\base\missile.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="195" topLine="1" />
+		<Cursor position="195" topLine="0" />
 	</File>
 	<File name="..\base\missile.h" open="1" top="0" tabpos="5">
 		<Cursor position="281" topLine="0" />

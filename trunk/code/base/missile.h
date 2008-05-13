@@ -12,7 +12,10 @@ public:
     ~Missile();
     void update();
     void draw();
+    int getX(){ return misX; }
     int getY(){ return misY; }
+    int width(){ return 1; }
+    int height(){ return 4; }
 private:
     int misX,misY;
     Sprite missileSprite;

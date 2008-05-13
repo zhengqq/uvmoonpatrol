@@ -2,9 +2,13 @@
 
 // These defines tell the blood particle explosion how many max
 //  blood droplets for each we can have before it starts slowing down.
-#define MAX_FOUNTAIN 128
-#define MAX_CLOUD 64
-#define MAX_POP 48
+#define MAX_FOUNTAIN 32
+#define MAX_CLOUD 32
+#define MAX_POP 64
+
+#define LIFE_FOUNTAIN 90
+#define LIFE_CLOUD 15
+#define LIFE_POP 20
 
 char * bloodList[4] = {"data\\blood1.bmp","data\\blood2.bmp","data\\blood3.bmp","data\\blood4.bmp"};
 
@@ -72,7 +76,7 @@ void BloodFountain::update(int newScroll)
         else if ( type == POP )
         {
             if ( pList.size() < MAX_POP ){
-                for(int i = 0; i < 8; i++){
+                for(int i = 0; i < 6; i++){
                     addDroplet();
                 }
             }
@@ -106,14 +110,14 @@ void BloodFountain::addDroplet()
 {
     if ( type == FOUNTAIN )
     {
-        pList.push_back(new Particle(bloodX, bloodY, int(angle+rand()%20), length+rand()%5, gravity, 90, bloodList[rand()%4],FOUNTAIN));
+        pList.push_back(new Particle(bloodX, bloodY, int(angle+rand()%20), length+rand()%5, gravity, LIFE_FOUNTAIN, bloodList[rand()%4],FOUNTAIN));
     }
     else if ( type == CLOUD )
     {
-        pList.push_back(new Particle(bloodX+(rand()%20-10), bloodY+(rand()%20-10), int(angle-rand()%10), length, gravity, 15, bloodList[rand()%4],CLOUD));
+        pList.push_back(new Particle(bloodX+(rand()%20-10), bloodY+(rand()%20-10), int(angle-rand()%10), length, gravity, LIFE_CLOUD, bloodList[rand()%4],CLOUD));
     }
     else if ( type == POP )
     {
-        pList.push_back(new Particle(bloodX, bloodY, rand()%360, length+(rand()%10/10), gravity, 25, bloodList[rand()%4],POP));
+        pList.push_back(new Particle(bloodX, bloodY, rand()%360, length+(rand()%10/10), gravity, LIFE_POP, bloodList[rand()%4],POP));
     }
 }

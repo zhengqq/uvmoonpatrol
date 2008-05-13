@@ -1,55 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="All" />
-	<File name="..\base\bloodfountain.cpp" open="1" top="0" tabpos="13">
-		<Cursor position="1307" topLine="45" />
+	<File name="..\base\bloodfountain.cpp" open="1" top="0" tabpos="9">
+		<Cursor position="2870" topLine="34" />
 	</File>
-	<File name="..\base\bloodfountain.h" open="1" top="0" tabpos="14">
+	<File name="..\base\bloodfountain.h" open="1" top="0" tabpos="8">
 		<Cursor position="511" topLine="0" />
 	</File>
-	<File name="..\base\boulder.cpp" open="1" top="0" tabpos="11">
+	<File name="..\base\boulder.cpp" open="0" top="0" tabpos="11">
 		<Cursor position="1456" topLine="5" />
 	</File>
-	<File name="..\base\boulder.h" open="1" top="0" tabpos="12">
+	<File name="..\base\boulder.h" open="1" top="0" tabpos="7">
 		<Cursor position="308" topLine="0" />
 	</File>
-	<File name="..\base\cannon.cpp" open="1" top="0" tabpos="1">
-		<Cursor position="327" topLine="26" />
+	<File name="..\base\cannon.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="1161" topLine="25" />
 	</File>
-	<File name="..\base\game.cpp" open="1" top="1" tabpos="2">
-		<Cursor position="10258" topLine="236" />
+	<File name="..\base\cannon.h" open="1" top="0" tabpos="2">
+		<Cursor position="242" topLine="0" />
 	</File>
-	<File name="..\base\game.h" open="1" top="0" tabpos="6">
-		<Cursor position="1334" topLine="36" />
+	<File name="..\base\game.cpp" open="1" top="1" tabpos="5">
+		<Cursor position="9611" topLine="280" />
 	</File>
-	<File name="..\base\jetfountain.cpp" open="1" top="0" tabpos="17">
-		<Cursor position="1052" topLine="26" />
+	<File name="..\base\game.h" open="0" top="0" tabpos="6">
+		<Cursor position="1334" topLine="35" />
 	</File>
-	<File name="..\base\jetfountain.h" open="1" top="0" tabpos="16">
+	<File name="..\base\jetfountain.cpp" open="0" top="0" tabpos="17">
+		<Cursor position="1052" topLine="25" />
+	</File>
+	<File name="..\base\jetfountain.h" open="0" top="0" tabpos="16">
 		<Cursor position="435" topLine="0" />
 	</File>
-	<File name="..\base\jetman.cpp" open="1" top="0" tabpos="8">
+	<File name="..\base\jetman.cpp" open="0" top="0" tabpos="8">
 		<Cursor position="785" topLine="11" />
 	</File>
-	<File name="..\base\jetman.h" open="1" top="0" tabpos="9">
+	<File name="..\base\jetman.h" open="0" top="0" tabpos="9">
 		<Cursor position="247" topLine="0" />
 	</File>
-	<File name="..\base\level.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="1680" topLine="52" />
+	<File name="..\base\level.cpp" open="1" top="0" tabpos="6">
+		<Cursor position="1680" topLine="36" />
 	</File>
-	<File name="..\base\level.h" open="1" top="0" tabpos="7">
-		<Cursor position="530" topLine="0" />
+	<File name="..\base\level.h" open="1" top="0" tabpos="11">
+		<Cursor position="569" topLine="0" />
 	</File>
 	<File name="..\base\missile.cpp" open="1" top="0" tabpos="3">
-		<Cursor position="195" topLine="0" />
+		<Cursor position="420" topLine="0" />
 	</File>
-	<File name="..\base\missile.h" open="1" top="0" tabpos="5">
-		<Cursor position="281" topLine="0" />
+	<File name="..\base\missile.h" open="1" top="0" tabpos="1">
+		<Cursor position="421" topLine="0" />
 	</File>
-	<File name="..\base\moonman.cpp" open="1" top="0" tabpos="10">
+	<File name="..\base\moonman.cpp" open="0" top="0" tabpos="10">
 		<Cursor position="686" topLine="21" />
 	</File>
-	<File name="..\base\particle.h" open="1" top="0" tabpos="15">
+	<File name="..\base\particle.cpp" open="1" top="0" tabpos="10">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="..\base\particle.h" open="0" top="0" tabpos="15">
 		<Cursor position="0" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

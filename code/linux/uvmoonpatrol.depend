@@ -391,51 +391,51 @@
 	"particle.h"
 	<math.h>
 
-1210564967 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/base.cpp
+1210910070 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/base.cpp
 	"base.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/base.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/base.h
 
-1210730810 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/bloodfountain.cpp
+1210910070 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/bloodfountain.cpp
 	"bloodfountain.h"
 
-1210730810 /home/cthulhu32/Projects/uvmoonpatrol/code/base/bloodfountain.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/bloodfountain.h
 	<vector>
 	"particle.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/particle.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/particle.h
 	"base.h"
 	"gfx.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/gfx.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/gfx.h
 	<SDL/SDL.h>
 	<GL/gl.h>
 	<GL/glu.h>
 	"base.h"
 
-1210564967 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/boulder.cpp
+1210910070 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/boulder.cpp
 	"boulder.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/boulder.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/boulder.h
 	"base.h"
 	"gfx.h"
 
-1210564967 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/cannon.cpp
+1210910070 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/cannon.cpp
 	"cannon.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/cannon.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/cannon.h
 	"base.h"
 	"gfx.h"
 
-1210564967 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/car.cpp
+1210910070 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/car.cpp
 	"car.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/car.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/car.h
 	"base.h"
 	"gfx.h"
 	"level.h"
 
-1210730810 /home/cthulhu32/Projects/uvmoonpatrol/code/base/level.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/level.h
 	<vector>
 	"base.h"
 	"gfx.h"
@@ -444,25 +444,25 @@
 	"jetfountain.h"
 	"boulder.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/moonman.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/moonman.h
 	"base.h"
 	"gfx.h"
 	"level.h"
 
-1210730810 /home/cthulhu32/Projects/uvmoonpatrol/code/base/jetman.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/jetman.h
 	<vector>
 	"base.h"
 	"gfx.h"
 	"jetfountain.h"
 
-1210730810 /home/cthulhu32/Projects/uvmoonpatrol/code/base/jetfountain.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/jetfountain.h
 	<vector>
 	"particle.h"
 
-1210730802 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/game.cpp
+1211846292 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/game.cpp
 	"game.h"
 
-1210730810 /home/cthulhu32/Projects/uvmoonpatrol/code/base/game.h
+1211846227 /home/cthulhu32/Projects/uvmoonpatrol/code/base/game.h
 	<math.h>
 	<stdio.h>
 	<GL/gl.h>
@@ -472,6 +472,7 @@
 	<ctime>
 	<vector>
 	"base.h"
+	"font.h"
 	"gfx.h"
 	"car.h"
 	"level.h"
@@ -483,51 +484,61 @@
 	"jetman.h"
 	"boulder.h"
 
-1210730810 /home/cthulhu32/Projects/uvmoonpatrol/code/base/missile.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/missile.h
 	"base.h"
 	"gfx.h"
 
-1210564967 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/gfx.cpp
+1210910070 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/gfx.cpp
 	"gfx.h"
 	"base.h"
 
-1210730810 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/jetfountain.cpp
+1210910070 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/jetfountain.cpp
 	"jetfountain.h"
 
-1210730810 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/jetman.cpp
+1210910070 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/jetman.cpp
 	"jetman.h"
 	<math.h>
 
-1210730810 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/level.cpp
+1211842047 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/level.cpp
 	"level.h"
 	"tile1.h"
 	"tile2.h"
 	"tile3.h"
 	"tile4.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/tile1.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/tile1.h
 	"base.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/tile2.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/tile2.h
 	"base.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/tile3.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/tile3.h
 	"base.h"
 
-1210564967 /home/cthulhu32/Projects/uvmoonpatrol/code/base/tile4.h
+1210910070 /home/cthulhu32/Projects/uvmoonpatrol/code/base/tile4.h
 	"base.h"
 
-1210564967 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/main.cpp
+1210910070 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/main.cpp
 	<stdio.h>
 	"game.h"
 
-1210659868 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/missile.cpp
+1210910070 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/missile.cpp
 	"missile.h"
 
-1210564967 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/moonman.cpp
+1210910070 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/moonman.cpp
 	"moonman.h"
 
-1210564967 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/particle.cpp
+1210910070 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/particle.cpp
 	"particle.h"
 	<math.h>
+
+1211842859 /home/cthulhu32/Projects/uvmoonpatrol/code/base/font.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"gfx.h"
+
+1211846009 source:/home/cthulhu32/Projects/uvmoonpatrol/code/base/font.cpp
+	"font.h"
+	"gfx.h"
+	<SDL/SDL.h>
 

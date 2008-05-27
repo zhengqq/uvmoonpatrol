@@ -10,6 +10,7 @@
 #include <ctime>
 #include <vector>
 #include "base.h"
+#include "font.h"
 #include "gfx.h"
 #include "car.h"
 #include "level.h"
@@ -59,6 +60,8 @@ private:
     void GameRender();
     void GameLogic();
     Sprite guiSprite;
+    int playerScore;
+    int highScore;
     Car * gameCar;
     Cannon * carCannon; // one cannon!
     std::vector<Missile*> carMissile;
@@ -68,6 +71,7 @@ private:
     std::vector<JetFountain*> jmFountain;
     std::vector<Boulder*> gameBoulders;
     Level * gameLevel;
+    Font * gameFont;
 };
 
 #endif // __GAME_H__

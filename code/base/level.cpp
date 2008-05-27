@@ -22,6 +22,7 @@ BOOL debugJetMen[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
 
 Level::Level()
 {
+
     if(!generateSprite("data\\tile1.bmp",&tiles[0])){
         printf("Could not load tile1.bmp\n");
     }

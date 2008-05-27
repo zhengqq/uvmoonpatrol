@@ -16,6 +16,9 @@
 	<File name="../base/game.h" open="1" top="0" tabpos="1">
 		<Cursor position="1487" topLine="35" />
 	</File>
+	<File name="../base/gfx.h" open="1" top="1" tabpos="12">
+		<Cursor position="228" topLine="0" />
+	</File>
 	<File name="../base/jetman.cpp" open="1" top="0" tabpos="9">
 		<Cursor position="1527" topLine="36" />
 	</File>
@@ -28,7 +31,7 @@
 	<File name="../base/level.h" open="1" top="0" tabpos="6">
 		<Cursor position="540" topLine="5" />
 	</File>
-	<File name="../base/missile.cpp" open="1" top="1" tabpos="11">
+	<File name="../base/missile.cpp" open="1" top="0" tabpos="11">
 		<Cursor position="367" topLine="0" />
 	</File>
 	<File name="../base/missile.h" open="1" top="0" tabpos="10">

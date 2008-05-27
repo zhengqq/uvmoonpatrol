@@ -39,6 +39,7 @@ int Game::Init(){
         KillGLWindow();			// Reset The Display
         return -1;			// Return Error
     }
+
     return 1;
 }
 
@@ -95,16 +96,22 @@ void Game::IntroLogic()
 void Game::InitGame()
 {
     generateSprite("data\\gui.bmp",&guiSprite);
+    // Create a new font
     gameCar = new Car();
     gameLevel = new Level();
+    gameFont = new Font();
     carCannon = 0; // nothing for this yet!
     gameLevel->generateMoonMen(&gameMoonMen);
     gameLevel->generateBoulders(&gameBoulders);
     gameLevel->generateJetMen(&gameJetMen,&jmFountain);
+
+    playerScore = 0;
+    highScore = 15000; // will be filled in later
 }
 
 void Game::ShutdownGame()
 {
+    delete gameFont;
     delete gameCar;
     delete gameLevel;
     if ( carCannon != 0 ){
@@ -166,6 +173,13 @@ void Game::GameRender()				// Draw Everything
     }
 
     DrawSprite(guiSprite, 0, 0, FALSE);
+
+
+    gameFont->drawNum(14,10,highScore,6);
+    gameFont->drawNum(26,25,playerScore,6); // x = 0, y = 0, score = 13525, buffer = 6
+
+    gameFont->drawNum(220,30,3,1);
+
     glPopMatrix();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     glFlush();
@@ -242,6 +256,7 @@ void Game::GameLogic()
                 gameCar->slowDown();
             }
             moonIter = gameMoonMen.erase(moonIter);
+            playerScore += 500;
         }
         else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
                 mMan->getX(),mMan->getY(),mMan->width(),mMan->height()))){
@@ -251,6 +266,7 @@ void Game::GameLogic()
             delete carCannon;
             carCannon = 0;
             moonIter = gameMoonMen.erase(moonIter);
+            playerScore += 500;
         }
         else{
             ++moonIter;
@@ -271,6 +287,7 @@ void Game::GameLogic()
             gameCar->boostUp();
             jetIter = gameJetMen.erase(jetIter);
             jfIter = jmFountain.erase(jfIter);
+            playerScore += 650;
         }
         else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
                 jMan->getX(),jMan->getY(),jMan->width(),jMan->height()))){
@@ -281,6 +298,7 @@ void Game::GameLogic()
             carCannon = 0;
             jetIter = gameJetMen.erase(jetIter);
             jfIter = jmFountain.erase(jfIter);
+            playerScore += 650;
         }
         else{
             BOOL missileHit = FALSE;
@@ -304,6 +322,7 @@ void Game::GameLogic()
                 mmFountain.push_back(newFountain);
                 jetIter = gameJetMen.erase(jetIter);
                 jfIter = jmFountain.erase(jfIter);
+                playerScore += 650;
 
             }
             else{

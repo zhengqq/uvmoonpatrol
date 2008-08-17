@@ -107,6 +107,7 @@ void Game::InitGame()
 
     playerScore = 0;
     highScore = 15000; // will be filled in later
+    currentTime = currentTimeBuffer = 0;
 }
 
 void Game::ShutdownGame()
@@ -175,10 +176,13 @@ void Game::GameRender()				// Draw Everything
     DrawSprite(guiSprite, 0, 0, FALSE);
 
 
-    gameFont->drawNum(14,10,highScore,6);
-    gameFont->drawNum(26,25,playerScore,6); // x = 0, y = 0, score = 13525, buffer = 6
+    gameFont->drawOrangeNum(16,10,highScore,6);
+    gameFont->drawYellowNum(26,25,playerScore,6); // x = 0, y = 0, score = 13525, buffer = 6
 
-    gameFont->drawNum(220,30,3,1);
+    gameFont->drawOrangeNum(233,17,2,1);
+
+    gameFont->drawOrangeNum(122,25,currentTime,3);
+
 
     glPopMatrix();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
@@ -366,6 +370,13 @@ void Game::GameLogic()
         else{
             ++bldIter;
         }
+    }
+
+    // Timer
+    currentTimeBuffer++;
+    if ( currentTimeBuffer >= PHYSICSFPS ){
+        currentTimeBuffer = 0;
+        currentTime++;
     }
 }
 

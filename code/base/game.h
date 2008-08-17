@@ -62,6 +62,8 @@ private:
     Sprite guiSprite;
     int playerScore;
     int highScore;
+    int currentTime;
+    int currentTimeBuffer;
     Car * gameCar;
     Cannon * carCannon; // one cannon!
     std::vector<Missile*> carMissile;

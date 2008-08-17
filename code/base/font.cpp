@@ -5,16 +5,31 @@
 Font::Font()
 {
     generateSprite("data\\font.bmp",&fontTexture);
+    generateSprite("data\\fonty.bmp",&fontTextureYellow);
 }
 
 Font::~Font()
 {
 	glDeleteTextures( 1, &fontTexture.texture );
+	glDeleteTextures( 1, &fontTextureYellow.texture );
 }
 
-void Font::drawNum(int x, int y, int score, int buffer)
+void Font::drawOrangeNum(int x, int y, int score, int buffer)
 {
-	glBindTexture(GL_TEXTURE_2D, fontTexture.texture);
+    drawNum(x,y,score,buffer,true);
+}
+
+void Font::drawYellowNum(int x, int y, int score, int buffer)
+{
+    drawNum(x,y,score,buffer,false);
+}
+
+void Font::drawNum(int x, int y, int score, int buffer, bool isOrange)
+{
+    if ( isOrange == true )
+        glBindTexture(GL_TEXTURE_2D, fontTexture.texture);
+	else
+        glBindTexture(GL_TEXTURE_2D, fontTextureYellow.texture);
 	glBegin(GL_QUADS);
 	for(int i = 0; i < buffer; i++)
 	{

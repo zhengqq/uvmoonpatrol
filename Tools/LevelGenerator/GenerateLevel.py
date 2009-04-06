@@ -69,10 +69,10 @@ def initTiles():
 
 def defaultSaveLevel(name):
     levelFile = open(name, 'wb')
-    levelFile.write(struct.pack('d',500)) # unsigned int
+    levelFile.write(struct.pack('d',750)) # unsigned tileListint
     levelFile.write(struct.pack('c',name))
     levelFile.write(struct.pack('c',chr(0)))
-    for i in range(500):
+    for i in range(2500):
         levelFile.write(struct.pack('c',chr(0)))
         levelFile.write(struct.pack('c',chr(0)))
         levelFile.write(struct.pack('c',chr(0)))
@@ -90,12 +90,12 @@ def saveLevel(name,length,bg,sky,ground,tiles,special):
         levelFile = open(name, 'wb')
         levelFile.write(struct.pack('d',length)) # unsigned int
         levelFile.write(struct.pack('c',name))
-        levelFile.write(struct.pack('c',chr(bg)))
+        levelFile.write(struct.pack('c',bg))
         for i in range(length):
-            levelFile.write(struct.pack('c',chr(sky[i])))
-            levelFile.write(struct.pack('c',chr(ground[i])))
-            levelFile.write(struct.pack('c',chr(tiles[i])))
-            levelFile.write(struct.pack('c',chr(special[i])))
+            levelFile.write(struct.pack('c',sky[i]))
+            levelFile.write(struct.pack('c',ground[i]))
+            levelFile.write(struct.pack('c',tiles[i]))
+            levelFile.write(struct.pack('c',special[i]))
         levelFile.close()
         print "Finished saving level " + name
     else:
@@ -130,6 +130,16 @@ def loadLevel(name):
         print "Invalid file name..."
         return (0,0,0,0,0,0)
 
+def addTileUp(mousePos,xOff,ground,tiles,special):
+    mx,my = mousePos
+    mx += xOff
+    if my > 145:
+        ox = int(mx/32)
+        tile = ord(tiles[ox]) + 1
+        if (tile == 7):
+            tile = 0
+        tiles[ox] = chr(tile)
+
 def nextLevel(name):
     if name < 'z':
         name = chr(ord(name) + 1)
@@ -157,14 +167,13 @@ def drawText(screen, name, layer, tile, xOffset):
         screen.blit(tileText,(0,36))
         screen.blit(xOffsetText,(0,48))
 
-def drawLevel(screen,bgImage,sky,ground,tiles,special,xOffset,tile1,tile2,tile3,tile4,tileList,pit1,pit2,pit3,moonman,jetman,ship1,ship2,bus,boulder1,boulder2):
+def drawLevel(screen,bgImage,sky,ground,tiles,special,xOffset,tileList):
     screen.blit(bgImage,(0,0))
     # lets draw the tiles first
-    for i in range(xOffset/32,(xOffset/32)+8):
-        idx = int(i + (xOffset/32))
+    xGrid = int(xOffset/32)
+    for idx in range(xGrid,xGrid+8):
         value = ord(tiles[idx])
-        
-        screen.blit(tileList[value],(i*32,128))
+        screen.blit(tileList[value],((idx-xGrid)*32,128))
 
 def main():
     """this function is called when the program starts.
@@ -174,7 +183,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((256, 192))
     pygame.display.set_caption('UV Moon Patrol Level Editor')
-    pygame.mouse.set_visible(0)
+    pygame.mouse.set_visible(1)
 
 #Create The Backgound
     background = pygame.Surface(screen.get_size())
@@ -192,6 +201,14 @@ def main():
 #Predefined game definitions
     fileName = 'a'
     length, bg, sky, ground, tiles, special = loadLevel(fileName)
+
+#names
+    layerNames = [ "obstacles", "groundenemies", "airenemies" ]
+    obstacleNames = [ "boulder1","boulder2" ]
+    groundNames = ["runningman", "bus" ]
+    skyNames = ["ship", "jetman","saucer"]
+    cLayer = 0
+    cTile = 0
 
 # Init the tiles
 # our global tile images
@@ -247,34 +264,51 @@ def main():
                     if tmp != fileName:
                         print "Moved to level " + fileName
                         length,bg,sky,ground,tiles,special = loadLevel(fileName)
+                    cLayer = cTile = xOffset = 0
                 elif event.key == K_PAGEUP:
                     tmp = fileName
                     fileName = prevLevel(fileName)
                     if tmp != fileName:
                         print "Moved to level " + fileName
                         length,bg,sky,ground,tiles,special = loadLevel(fileName)
-                elif event.key == K_LEFT:
-                    if xOffset > 0:
-                        xOffset -= 1
+                    cLayer = cTile = xOffset = 0
                 elif event.key == K_RIGHT:
                     if xOffset < length:
-                        xOffset += 1
+                        xOffset += 32
+                elif event.key == K_LEFT:
+                    if xOffset > 0:
+                        xOffset -= 32
+                elif event.key == K_UP:
+                    cLayer -= 1                    
+                    if cLayer < 0:
+                        cLayer = 2
+                elif event.key == K_DOWN:
+                    cLayer += 1                    
+                    if cLayer > 2:
+                        cLayer = 0
                 elif event.key == ord('g'):
                     displayGrid = not displayGrid
             elif event.type == MOUSEBUTTONDOWN:
-                print "Mouse Down!"
+                #print "Mouse Down!"
+                pass
             elif event.type is MOUSEBUTTONUP:
-                print "Mouse Up!"
+                addTileUp(pygame.mouse.get_pos(),xOffset,ground, tiles, special)
 
         allsprites.update()
 
     #Draw Everything
         screen.blit(background, (0, 0))
-        drawLevel(screen,bgImage,sky,ground,tiles,special,xOffset,tile1,tile2,tile3,tile4,tileList,pit1,pit2,pit3,moonman,jetman,ship1,ship2,bus,boulder1,boulder2)
+        drawLevel(screen,bgImage,sky,ground,tiles,special,xOffset,tileList)
         allsprites.draw(screen)
         if displayGrid == True:
             screen.blit(gridImage, (0,0))
-        drawText(screen, fileName, "Ground", "Pit1", xOffset)
+        if ( cLayer == 0 ):
+            drawText(screen, fileName, layerNames[cLayer], obstacleNames[0], xOffset)
+        elif ( cLayer == 1 ):
+            drawText(screen, fileName, layerNames[cLayer], groundNames[0], xOffset)
+        elif ( cLayer == 2 ):
+            drawText(screen, fileName, layerNames[cLayer], skyNames[0], xOffset)
+
         pygame.display.flip()
 
 #Game Over

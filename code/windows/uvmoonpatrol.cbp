@@ -34,6 +34,8 @@
 		<Unit filename="..\base\cannon.h" />
 		<Unit filename="..\base\car.cpp" />
 		<Unit filename="..\base\car.h" />
+		<Unit filename="..\base\font.cpp" />
+		<Unit filename="..\base\font.h" />
 		<Unit filename="..\base\game.cpp" />
 		<Unit filename="..\base\game.h" />
 		<Unit filename="..\base\gfx.cpp" />

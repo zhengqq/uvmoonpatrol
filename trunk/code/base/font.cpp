@@ -2,16 +2,17 @@
 #include "gfx.h"
 #include <SDL/SDL.h>
 
-Font::Font()
+Font::Font(SpriteManager * newManager)
 {
-    generateSprite("data\\font.bmp",&fontTexture);
-    generateSprite("data\\fonty.bmp",&fontTextureYellow);
+    sManager = newManager;
+    fontTexture = sManager->newSprite("data\\font.bmp");
+    fontTextureYellow = sManager->newSprite("data\\fonty.bmp");
 }
 
 Font::~Font()
 {
-	glDeleteTextures( 1, &fontTexture.texture );
-	glDeleteTextures( 1, &fontTextureYellow.texture );
+    sManager->removeSprite(fontTexture);
+    sManager->removeSprite(fontTextureYellow);
 }
 
 void Font::drawOrangeNum(int x, int y, int score, int buffer)
@@ -27,9 +28,9 @@ void Font::drawYellowNum(int x, int y, int score, int buffer)
 void Font::drawNum(int x, int y, int score, int buffer, bool isOrange)
 {
     if ( isOrange == true )
-        glBindTexture(GL_TEXTURE_2D, fontTexture.texture);
+        glBindTexture(GL_TEXTURE_2D, fontTexture->texture);
 	else
-        glBindTexture(GL_TEXTURE_2D, fontTextureYellow.texture);
+        glBindTexture(GL_TEXTURE_2D, fontTextureYellow->texture);
 	glBegin(GL_QUADS);
 	for(int i = 0; i < buffer; i++)
 	{

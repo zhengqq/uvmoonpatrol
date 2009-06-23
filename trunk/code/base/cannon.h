@@ -3,12 +3,13 @@
 
 #include "base.h"
 #include "gfx.h"
+#include "spriteManager.h"
 
 class Cannon
 {
 public:
     Cannon();
-    Cannon(int,int);
+    Cannon(int,int, SpriteManager *);
     ~Cannon();
     void update(int);
     void draw();
@@ -18,8 +19,9 @@ public:
     int width();
     int height();
 private:
-    Sprite cannonSprite;
-    Sprite explosionSprite[3];
+    SpriteManager * sManager;
+    Sprite * cannonSprite;
+    Sprite * explosionSprite[3];
     int canX,canY,startCanX;
     int levelX;
     int life;

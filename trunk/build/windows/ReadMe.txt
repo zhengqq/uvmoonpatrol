@@ -22,6 +22,9 @@ Jumping on top of moon men will help you make it over canyons & boulders.
          History
 --===---====---===---===---
 
+Version 0.3 -
+   Added a MUCH better sprite engine. Removed 95% of the memory leaks, there's still a 10kb leak somewhere, but I'll hunt it down. Also added text to the GUI, and attempted to make it look more legit.
+
 Version 0.2 -
    Added guts to the blood fountain, converted all the arrays to STL vectors, optimized all the loops to use iterators, did some other fun stuff, added missile collision support for the jet men, etc.
 

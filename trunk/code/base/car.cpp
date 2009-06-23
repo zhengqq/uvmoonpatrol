@@ -1,6 +1,6 @@
 #include "car.h"
 
-Car::Car()
+Car::Car(SpriteManager * newManager)
 {
     // Get some private variables declared
     screenX = currentFrame = 0;
@@ -9,37 +9,23 @@ Car::Car()
     airBorne = movingLeft = movingRight = crashed = FALSE;
     speed = 5;
     wheelA = TRUE;
-    if (!generateSprite("data\\car.bmp",&carSprite) ){
-        printf("Error, could not load car.bmp!\n");
-    }
-    if (!generateSprite("data\\wheel1_1.bmp",&wheelSpriteA[0]) ){
-        printf("Error, could not load wheel1_1.bmp!\n");
-    }
-    if (!generateSprite("data\\wheel2_1.bmp",&wheelSpriteA[1]) ){
-        printf("Error, could not load wheel2_1.bmp!\n");
-    }
-    if (!generateSprite("data\\wheel3_1.bmp",&wheelSpriteA[2]) ){
-        printf("Error, could not load wheel3_1.bmp!\n");
-    }
-    if (!generateSprite("data\\wheel1_2.bmp",&wheelSpriteB[0]) ){
-        printf("Error, could not load wheel1_1.bmp!\n");
-    }
-    if (!generateSprite("data\\wheel2_2.bmp",&wheelSpriteB[1]) ){
-        printf("Error, could not load wheel2_1.bmp!\n");
-    }
-    if (!generateSprite("data\\wheel3_2.bmp",&wheelSpriteB[2]) ){
-        printf("Error, could not load wheel3_1.bmp!\n");
-    }
+    sManager = newManager;
 
+    carSprite = sManager->newSprite("data\\car.bmp");
+    wheelSpriteA[0] = sManager->newSprite("data\\wheel1_1.bmp");
+    wheelSpriteA[1] = sManager->newSprite("data\\wheel2_1.bmp");
+    wheelSpriteA[2] = sManager->newSprite("data\\wheel3_1.bmp");
+    wheelSpriteB[0] = sManager->newSprite("data\\wheel1_2.bmp");
+    wheelSpriteB[1] = sManager->newSprite("data\\wheel2_2.bmp");
+    wheelSpriteB[2] = sManager->newSprite("data\\wheel3_2.bmp");
 } // Constructor
 
 Car::~Car()
 {
-    glDeleteTextures( 1, &carSprite.texture );
-    for(int i = 0; i < 3; i++)
-    {
-        glDeleteTextures( 1, &wheelSpriteA[i].texture );
-        glDeleteTextures( 1, &wheelSpriteB[i].texture );
+    sManager->removeSprite(carSprite);
+    for(int i = 0; i < 3; i++){
+        sManager->removeSprite(wheelSpriteA[i]);
+        sManager->removeSprite(wheelSpriteB[i]);
     }
 } // Deconstructor
 
@@ -143,15 +129,15 @@ void Car::update(Level * curLevel)
 }
 void Car::draw()
 {
-    DrawSprite(carSprite, int(carX), int(carY), FALSE);
+    DrawSprite(*carSprite, int(carX), int(carY), FALSE);
     if ( wheelA == TRUE ){
         for(int i = 0; i < 3; i++){
-            DrawSprite(wheelSpriteA[i], wheelX[i], wheelY[i], FALSE);
+            DrawSprite(*wheelSpriteA[i], wheelX[i], wheelY[i], FALSE);
         }
     }
     else{
         for(int i = 0; i < 3; i++){
-            DrawSprite(wheelSpriteB[i], wheelX[i], wheelY[i], FALSE);
+            DrawSprite(*wheelSpriteB[i], wheelX[i], wheelY[i], FALSE);
         }
     }
 }

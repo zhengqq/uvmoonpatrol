@@ -21,6 +21,7 @@
 #include "jetfountain.h"
 #include "jetman.h"
 #include "boulder.h"
+#include "spriteManager.h"
 
 typedef enum {
     INTRO=0,
@@ -59,7 +60,7 @@ private:
     void ShutdownGame();
     void GameRender();
     void GameLogic();
-    Sprite guiSprite;
+    Sprite * guiSprite;
     int playerScore;
     int highScore;
     int currentTime;
@@ -74,6 +75,8 @@ private:
     std::vector<Boulder*> gameBoulders;
     Level * gameLevel;
     Font * gameFont;
+
+    SpriteManager * spriteManager;
 };
 
 #endif // __GAME_H__

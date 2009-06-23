@@ -10,27 +10,22 @@ MoonMan::MoonMan(){
     printf("Default constructor does nothing for moon man!\n");
 }
 
-MoonMan::MoonMan(int startX){
+MoonMan::MoonMan(int startX, SpriteManager * newManager){
+    sManager = newManager;
     manState = RUNNING;
     currentFrame = 0;
     facingLeft = FALSE;
     spriteA = TRUE;
-    if ( !generateSprite("data\\running1_1.bmp", &manSpriteA))
-    {
-        printf("Could not load moon man running1_1.bmp\n");
-    }
-    if ( !generateSprite("data\\running1_2.bmp", &manSpriteB))
-    {
-        printf("Could not load moon man running1_1.bmp\n");
-    }
+    manSpriteA = sManager->newSprite("data\\running1_1.bmp");
+    manSpriteB = sManager->newSprite("data\\running1_2.bmp");
     manX = startX;
     manY = 100; // will snap to the level
     speed = 2;
 }
 
 MoonMan::~MoonMan(){
-    glDeleteTextures( 1, &manSpriteA.texture );
-    glDeleteTextures( 1, &manSpriteB.texture );
+    sManager->removeSprite(manSpriteA);
+    sManager->removeSprite(manSpriteB);
 }
 
 void MoonMan::update(int newScroll, Level * currentLevel){
@@ -63,10 +58,10 @@ void MoonMan::update(int newScroll, Level * currentLevel){
 
 void MoonMan::draw(){
     if ( spriteA == TRUE ){
-        DrawSprite(manSpriteA, manX-scrollX, manY, facingLeft);
+        DrawSprite(*manSpriteA, manX-scrollX, manY, facingLeft);
     }
     else{
-        DrawSprite(manSpriteB, manX-scrollX, manY, facingLeft);
+        DrawSprite(*manSpriteB, manX-scrollX, manY, facingLeft);
     }
 }
 

@@ -11,8 +11,9 @@ JetMan::JetMan(){
     printf("Default constructor does nothing!\n");
 }
 
-JetMan::JetMan(int startX){
-    generateSprite("data\\flyingman.bmp", &jetSprite);
+JetMan::JetMan(int startX, SpriteManager * newManager){
+    sManager = newManager;
+    jetSprite = sManager->newSprite("data\\flyingman.bmp");
     jetX = startX;
     jetY = 50+rand()%5; // common starting y
     state = WAITING;
@@ -22,7 +23,7 @@ JetMan::JetMan(int startX){
 }
 
 JetMan::~JetMan(){
-    glDeleteTextures( 1, &jetSprite.texture );
+    sManager->removeSprite(jetSprite);
 }
 
 void JetMan::update(int newScroll, std::vector<JetFountain*>::iterator myFountain, int carX, int carY){
@@ -63,6 +64,6 @@ void JetMan::update(int newScroll, std::vector<JetFountain*>::iterator myFountai
 
 void JetMan::draw(){
     if ( state == ACTIVATED ){
-        DrawSprite(jetSprite,int(jetX)-scrollX,int(jetY), FALSE);
+        DrawSprite(*jetSprite,int(jetX)-scrollX,int(jetY), FALSE);
     }
 }

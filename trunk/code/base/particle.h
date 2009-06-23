@@ -3,6 +3,7 @@
 
 #include "base.h"
 #include "gfx.h"
+#include "spriteManager.h"
 
 typedef enum {
     FOUNTAIN=0,
@@ -15,7 +16,7 @@ class Particle
 {
 public:
     Particle();
-    Particle(int, int, int, double, double, int, char *, unsigned int); // x,y,angle,length,gravity,life,sprite name,type
+    Particle(int, int, int, double, double, int, char *, unsigned int, SpriteManager* ); // x,y,angle,length,gravity,life,sprite name,type
     ~Particle();
     void update(int); // update our particles x & y values
     void draw(); // draw the particle
@@ -28,7 +29,8 @@ private:
     double pX,pY;   // particle's x & y
     double vX,vY;
     double gravity;
-    Sprite pSprite; // particle's sprite
+    Sprite * pSprite; // particle's sprite
+    SpriteManager * sManager;
 };
 
 #endif // __PARTICLE_H__

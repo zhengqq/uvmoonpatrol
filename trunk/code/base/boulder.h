@@ -3,6 +3,7 @@
 
 #include "base.h"
 #include "gfx.h"
+#include "spriteManager.h"
 
 typedef enum {
     SMALL_BOULDER=0,
@@ -13,7 +14,7 @@ typedef enum {
 class Boulder {
 public:
     Boulder();
-    Boulder(int,int);
+    Boulder(int,int, SpriteManager*);
     ~Boulder();
     void update(int);
     void draw();
@@ -25,8 +26,9 @@ public:
     BOOL isActive();
     BOOL isDead();
 private:
-    Sprite boulderSprite;
-    Sprite explodeSprites[3];
+    SpriteManager * sManager;
+    Sprite * boulderSprite;
+    Sprite * explodeSprites[3];
     int levelX,boulderX,boulderY;
     int life, currentState;
 };

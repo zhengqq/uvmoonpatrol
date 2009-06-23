@@ -95,11 +95,12 @@ void Game::IntroLogic()
 
 void Game::InitGame()
 {
-    generateSprite("data\\gui.bmp",&guiSprite);
+    spriteManager = new SpriteManager();
+    guiSprite = spriteManager->newSprite("data\\gui.bmp");
     // Create a new font
-    gameCar = new Car();
-    gameLevel = new Level();
-    gameFont = new Font();
+    gameCar = new Car(spriteManager);
+    gameLevel = new Level(spriteManager);
+    gameFont = new Font(spriteManager);
     carCannon = 0; // nothing for this yet!
     gameLevel->generateMoonMen(&gameMoonMen);
     gameLevel->generateBoulders(&gameBoulders);
@@ -136,7 +137,7 @@ void Game::ShutdownGame()
     while(!gameBoulders.empty()){
         delete gameBoulders.back(); gameBoulders.pop_back();
     }
-    glDeleteTextures( 1, &guiSprite.texture );
+    delete spriteManager;
 }
 
 void Game::GameRender()				// Draw Everything
@@ -173,8 +174,7 @@ void Game::GameRender()				// Draw Everything
         gameBoulders[i]->draw();
     }
 
-    DrawSprite(guiSprite, 0, 0, FALSE);
-
+    DrawSprite(*guiSprite, 0, 0, FALSE);
 
     gameFont->drawOrangeNum(16,10,highScore,6);
     gameFont->drawYellowNum(26,25,playerScore,6); // x = 0, y = 0, score = 13525, buffer = 6
@@ -205,9 +205,9 @@ void Game::GameLogic()
         gameCar->jump();
     if (gKeyCtrl){
         if ( carCannon == 0){
-            carCannon = new Cannon(gameCar->getX()+32,gameCar->getY()+16);
+            carCannon = new Cannon(gameCar->getX()+32,gameCar->getY()+16, spriteManager);
         }
-        carMissile.push_back(new Missile(gameCar->getX()-gameCar->getScreenX()+9,gameCar->getY()+5));
+        carMissile.push_back(new Missile(gameCar->getX()-gameCar->getScreenX()+9,gameCar->getY()+5, spriteManager));
         gKeyCtrl = FALSE;
     }
 
@@ -244,12 +244,12 @@ void Game::GameLogic()
         if (rectCollision(gameCar->getX(),gameCar->getY(),gameCar->width(),gameCar->height()-10, // 10 compensates for bottom of the car
                 mMan->getX(),mMan->getY(),mMan->width(),mMan->height())){
             if ( gameCar->isAirBorne() ){
-                BloodFountain * newFountain = new BloodFountain(mMan->getX()+3,mMan->getY()+15, 90, 3.0, 100, 0.05);
+                BloodFountain * newFountain = new BloodFountain(mMan->getX()+3,mMan->getY()+15, 90, 3.0, 100, 0.05, spriteManager);
                 newFountain->setSpurting();
                 mmFountain.push_back(newFountain);
             }
             else{
-                BloodFountain * newFountain = new BloodFountain(mMan->getX(),mMan->getY(), 90, 2.0, 50, 0.01);
+                BloodFountain * newFountain = new BloodFountain(mMan->getX(),mMan->getY(), 90, 2.0, 50, 0.01, spriteManager);
                 newFountain->setPop();
                 mmFountain.push_back(newFountain);
             }
@@ -264,7 +264,7 @@ void Game::GameLogic()
         }
         else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
                 mMan->getX(),mMan->getY(),mMan->width(),mMan->height()))){
-            BloodFountain * newFountain = new BloodFountain(mMan->getX(),mMan->getY(), 90, 4.0, 50, 0.25);
+            BloodFountain * newFountain = new BloodFountain(mMan->getX(),mMan->getY(), 90, 4.0, 50, 0.25, spriteManager);
             newFountain->setPop();
             mmFountain.push_back(newFountain);
             delete carCannon;
@@ -285,7 +285,7 @@ void Game::GameLogic()
         jFountain->update(scrollX);
         if (rectCollision(gameCar->getX()+5,gameCar->getY()+30,gameCar->width()-5,gameCar->height()-30, // only 6 pixels will actually collide
                 jMan->getX()+3,jMan->getY()+3,jMan->width()-3,jMan->height()-3)){
-            BloodFountain * newFountain = new BloodFountain(jMan->getX(),jMan->getY(), 270, 2.0, 50, 0.3);
+            BloodFountain * newFountain = new BloodFountain(jMan->getX(),jMan->getY(), 270, 2.0, 50, 0.3, spriteManager);
             newFountain->setPop();
             mmFountain.push_back(newFountain);
             gameCar->boostUp();
@@ -295,7 +295,7 @@ void Game::GameLogic()
         }
         else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
                 jMan->getX(),jMan->getY(),jMan->width(),jMan->height()))){
-            BloodFountain * newFountain = new BloodFountain(jMan->getX(),jMan->getY(), 0, 2.0, 40, 0.1);
+            BloodFountain * newFountain = new BloodFountain(jMan->getX(),jMan->getY(), 0, 2.0, 40, 0.1, spriteManager);
             newFountain->setPop();
             mmFountain.push_back(newFountain);
             delete carCannon;
@@ -321,7 +321,7 @@ void Game::GameLogic()
             }
 
             if (missileHit == TRUE){
-                BloodFountain * newFountain = new BloodFountain(jMan->getX(),jMan->getY(), 0, 2.0, 30, 0.15);
+                BloodFountain * newFountain = new BloodFountain(jMan->getX(),jMan->getY(), 0, 2.0, 30, 0.15, spriteManager);
                 newFountain->setPop();
                 mmFountain.push_back(newFountain);
                 jetIter = gameJetMen.erase(jetIter);

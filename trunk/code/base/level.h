@@ -13,7 +13,7 @@ class MoonMan;
 class Level
 {
 public:
-    Level();
+    Level(SpriteManager *);
     ~Level();
     void update(int);
     void draw();
@@ -23,9 +23,10 @@ public:
     void generateBoulders(std::vector<Boulder*> *boulderArray);
     void generateJetMen(std::vector<JetMan*> *, std::vector<JetFountain*> *);
 private:
-    Sprite tiles[7]; // 7 so far
-    Sprite spaceBG; // space background
-    Sprite farBG; // farthest background
-    Sprite closeBG; // closest background
+    Sprite * tiles[7]; // 7 so far
+    Sprite * spaceBG; // space background
+    Sprite * farBG; // farthest background
+    Sprite * closeBG; // closest background
+    SpriteManager * sManager;
     int levelX;
 };

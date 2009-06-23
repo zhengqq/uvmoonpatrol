@@ -547,3 +547,170 @@
 	"particle.h"
 	<math.h>
 
+1219016082 source:c:\projects\violentmoonpatrol\code\base\base.cpp
+	"base.h"
+
+1245729018 c:\projects\violentmoonpatrol\code\base\base.h
+
+1245730374 source:c:\projects\violentmoonpatrol\code\base\bloodfountain.cpp
+	"bloodfountain.h"
+
+1245730348 c:\projects\violentmoonpatrol\code\base\bloodfountain.h
+	<vector>
+	"particle.h"
+
+1245730256 c:\projects\violentmoonpatrol\code\base\particle.h
+	"base.h"
+	"gfx.h"
+	"spriteManager.h"
+
+1245733589 c:\projects\violentmoonpatrol\code\base\gfx.h
+	<SDL/SDL.h>
+	<GL/gl.h>
+	<GL/glu.h>
+
+1245731160 source:c:\projects\violentmoonpatrol\code\base\boulder.cpp
+	"boulder.h"
+
+1245729998 c:\projects\violentmoonpatrol\code\base\boulder.h
+	"base.h"
+	"gfx.h"
+	"spriteManager.h"
+
+1245731220 source:c:\projects\violentmoonpatrol\code\base\cannon.cpp
+	"cannon.h"
+
+1245730569 c:\projects\violentmoonpatrol\code\base\cannon.h
+	"base.h"
+	"gfx.h"
+	"spriteManager.h"
+
+1245732827 source:c:\projects\violentmoonpatrol\code\base\car.cpp
+	"car.h"
+
+1245729710 c:\projects\violentmoonpatrol\code\base\car.h
+	"base.h"
+	"gfx.h"
+	"level.h"
+	"spriteManager.h"
+
+1245730138 c:\projects\violentmoonpatrol\code\base\level.h
+	<vector>
+	"base.h"
+	"gfx.h"
+	"moonman.h"
+	"jetman.h"
+	"jetfountain.h"
+	"boulder.h"
+
+1245730603 c:\projects\violentmoonpatrol\code\base\moonman.h
+	"base.h"
+	"gfx.h"
+	"level.h"
+	"spriteManager.h"
+
+1245730611 c:\projects\violentmoonpatrol\code\base\jetman.h
+	<vector>
+	"base.h"
+	"gfx.h"
+	"jetfountain.h"
+	"spriteManager.h"
+
+1245730776 c:\projects\violentmoonpatrol\code\base\jetfountain.h
+	<vector>
+	"particle.h"
+
+1236156493 c:\projects\violentmoonpatrol\code\base\spritemanager.h
+	"gfx.h"
+	<vector>
+
+1245731257 source:c:\projects\violentmoonpatrol\code\base\font.cpp
+	"font.h"
+	"gfx.h"
+	<SDL/SDL.h>
+
+1245730085 c:\projects\violentmoonpatrol\code\base\font.h
+	<GL/gl.h>
+	<GL/glu.h>
+	"gfx.h"
+	"spriteManager.h"
+
+1245730722 source:c:\projects\violentmoonpatrol\code\base\game.cpp
+	"game.h"
+
+1245729892 c:\projects\violentmoonpatrol\code\base\game.h
+	<math.h>
+	<stdio.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<SDL/SDL.h>
+	<cstdlib>
+	<ctime>
+	<vector>
+	"base.h"
+	"font.h"
+	"gfx.h"
+	"car.h"
+	"level.h"
+	"moonman.h"
+	"cannon.h"
+	"missile.h"
+	"bloodfountain.h"
+	"jetfountain.h"
+	"jetman.h"
+	"boulder.h"
+	"spriteManager.h"
+
+1245730158 c:\projects\violentmoonpatrol\code\base\missile.h
+	"base.h"
+	"gfx.h"
+	"spriteManager.h"
+
+1245730746 source:c:\projects\violentmoonpatrol\code\base\jetfountain.cpp
+	"jetfountain.h"
+
+1245732743 source:c:\projects\violentmoonpatrol\code\base\jetman.cpp
+	"jetman.h"
+	<math.h>
+
+1245731346 source:c:\projects\violentmoonpatrol\code\base\level.cpp
+	"level.h"
+	"tile1.h"
+	"tile2.h"
+	"tile3.h"
+	"tile4.h"
+
+1219016082 c:\projects\violentmoonpatrol\code\base\tile1.h
+	"base.h"
+
+1219016082 c:\projects\violentmoonpatrol\code\base\tile2.h
+	"base.h"
+
+1219016082 c:\projects\violentmoonpatrol\code\base\tile3.h
+	"base.h"
+
+1219016082 c:\projects\violentmoonpatrol\code\base\tile4.h
+	"base.h"
+
+1219016082 source:c:\projects\violentmoonpatrol\code\base\main.cpp
+	<stdio.h>
+	"game.h"
+
+1245731327 source:c:\projects\violentmoonpatrol\code\base\missile.cpp
+	"missile.h"
+
+1245731093 source:c:\projects\violentmoonpatrol\code\base\moonman.cpp
+	"moonman.h"
+
+1245731132 source:c:\projects\violentmoonpatrol\code\base\particle.cpp
+	"particle.h"
+	<math.h>
+
+1245728999 source:c:\projects\violentmoonpatrol\code\base\gfx.cpp
+	"gfx.h"
+
+1245734367 source:c:\projects\violentmoonpatrol\code\base\spritemanager.cpp
+	"spriteManager.h"
+
+1245733507 source:c:\projects\violentmoonpatrol\code\windows\uvmoonpatrol.rc
+

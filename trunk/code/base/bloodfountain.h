@@ -8,7 +8,7 @@ class BloodFountain
 {
 public:
     BloodFountain();
-    BloodFountain(int,int,double,double,int,double);
+    BloodFountain(int,int,double,double,int,double, SpriteManager* );
     ~BloodFountain();
     void update(int);
     void draw();
@@ -27,6 +27,7 @@ private:
     double length;      // initial length of our blood fountain vector
     double gravity;     // gravity applying to our blood fountain
     unsigned int type;
+    SpriteManager * sManager;
 };
 
 #endif // __BLOODFOUNTAIN_H__

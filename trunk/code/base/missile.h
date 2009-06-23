@@ -3,12 +3,13 @@
 
 #include "base.h"
 #include "gfx.h"
+#include "spriteManager.h"
 
 class Missile
 {
 public:
     Missile();
-    Missile(int,int);
+    Missile(int,int, SpriteManager*);
     ~Missile();
     void update();
     void draw();
@@ -18,7 +19,8 @@ public:
     int height(){ return 4; }
 private:
     int misX,misY;
-    Sprite missileSprite;
+    Sprite * missileSprite;
+    SpriteManager * sManager;
 };
 
 #endif // __MISSILE_H__

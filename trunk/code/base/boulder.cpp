@@ -9,31 +9,32 @@ Boulder::Boulder(){
     printf("Nothing to be done for default constructor of boulder.cpp\n");
 }
 
-Boulder::Boulder(int newX, int type){
+Boulder::Boulder(int newX, int type, SpriteManager * newManager){
+    sManager = newManager;
     boulderX = newX;
     if ( type == SMALL_BOULDER ) boulderY = 188;
     else if ( type == LARGE_BOULDER ) boulderY = 172;
     levelX = 0;
     if ( type == LARGE_BOULDER ){
-        if(!generateSprite("data\\boulder1.bmp",&boulderSprite)) printf("Could not load boulder1.bmp\n");
-        generateSprite("data\\explosion2_1.bmp",&explodeSprites[0]);
-        generateSprite("data\\explosion2_2.bmp",&explodeSprites[1]);
-        generateSprite("data\\explosion2_3.bmp",&explodeSprites[2]);
+        boulderSprite = sManager->newSprite("data\\boulder1.bmp");
+        explodeSprites[0] = sManager->newSprite("data\\explosion2_1.bmp");
+        explodeSprites[1] = sManager->newSprite("data\\explosion2_2.bmp");
+        explodeSprites[2] = sManager->newSprite("data\\explosion2_3.bmp");
     }
     else if ( type == SMALL_BOULDER ){
-        if(!generateSprite("data\\boulder2.bmp",&boulderSprite)) printf("Could not load boulder2.bmp\n");
-        generateSprite("data\\explosion3_1.bmp",&explodeSprites[0]);
-        generateSprite("data\\explosion3_2.bmp",&explodeSprites[1]);
-        generateSprite("data\\explosion3_3.bmp",&explodeSprites[2]);
+        boulderSprite = sManager->newSprite("data\\boulder2.bmp");
+        explodeSprites[0] = sManager->newSprite("data\\explosion3_1.bmp");
+        explodeSprites[1] = sManager->newSprite("data\\explosion3_2.bmp");
+        explodeSprites[2] = sManager->newSprite("data\\explosion3_3.bmp");
     }
     life = 14; // how long the explosion will last!
     currentState = ACTIVE;
 }
 
 Boulder::~Boulder(){
-    glDeleteTextures( 1, &boulderSprite.texture );
-    for ( int i = 0; i < 3; i++)
-        glDeleteTextures( 1, &explodeSprites[i].texture );
+    sManager->removeSprite(boulderSprite);
+    for(int i = 0; i < 3; i++)
+        sManager->removeSprite(explodeSprites[i]);
 }
 
 void Boulder::update(int scrollX){
@@ -45,10 +46,10 @@ void Boulder::update(int scrollX){
 
 void Boulder::draw(){
     if ( currentState == ACTIVE ){
-        DrawSprite(boulderSprite, boulderX-levelX, boulderY, FALSE);
+        DrawSprite(*boulderSprite, boulderX-levelX, boulderY, FALSE);
     }
     else {
-        DrawSprite(explodeSprites[2-(life/5)], boulderX-levelX, boulderY, FALSE);
+        DrawSprite(*explodeSprites[2-(life/5)], boulderX-levelX, boulderY, FALSE);
     }
 }
 
@@ -67,10 +68,10 @@ void Boulder::setExplode(){
 }
 
 int Boulder::width(){
-    return boulderSprite.width;
+    return boulderSprite->width;
 }
 
 int Boulder::height(){
     // Do something fancy for our smaller boulders?
-    return boulderSprite.height;
+    return boulderSprite->height;
 }

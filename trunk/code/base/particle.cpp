@@ -14,8 +14,9 @@ Particle::Particle()
     pState = GROUND;
 }
 
-Particle::Particle(int x, int y, int angle, double length, double g, int l, char * filename, unsigned int type)
+Particle::Particle(int x, int y, int angle, double length, double g, int l, char * filename, unsigned int type, SpriteManager * newManager)
 {
+    sManager = newManager;
     pState = MOVING;
     pType = type;
     pX = double(x);
@@ -24,12 +25,12 @@ Particle::Particle(int x, int y, int angle, double length, double g, int l, char
     vY = length * sin(angle*PI/180);
     gravity = g;
     life = maxLife = l;
-    generateSprite(filename, &pSprite);
+    pSprite = sManager->newSprite(filename);
 }
 
 Particle::~Particle()
 {
-    glDeleteTextures( 1, &pSprite.texture );
+    sManager->removeSprite(pSprite);
 }
 
 void Particle::update(int newScroll)
@@ -95,6 +96,6 @@ void Particle::draw()
 {
     if ( ((int)pX-scrollX) > 0)
     {
-        DrawSprite(pSprite, ((int)pX-scrollX), int(pY), FALSE);
+        DrawSprite(*pSprite, ((int)pX-scrollX), int(pY), FALSE);
     }
 }

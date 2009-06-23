@@ -10,8 +10,6 @@
 #define KEY_B 0
 // Physics iterations per second
 #define PHYSICSFPS 30
-#define SCREEN_WIDTH 240
-#define SCREEN_HEIGHT 248
 
 BOOL rectCollision(int,int,int,int,int,int,int,int);
 

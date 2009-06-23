@@ -1,10 +1,8 @@
 #include "bloodfountain.h"
 
-// These defines tell the blood particle explosion how many max
-//  blood droplets for each we can have before it starts slowing down.
-#define MAX_FOUNTAIN 32
-#define MAX_CLOUD 32
-#define MAX_POP 64
+#define MAX_FOUNTAIN 256
+#define MAX_CLOUD 256
+#define MAX_POP 256
 
 #define LIFE_FOUNTAIN 90
 #define LIFE_CLOUD 15

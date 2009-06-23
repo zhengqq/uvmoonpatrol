@@ -20,45 +20,35 @@ BOOL debugJetMen[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
                     0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,
                     1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
-Level::Level()
+Level::Level(SpriteManager * newManager)
 {
-
-    if(!generateSprite("data\\tile1.bmp",&tiles[0])){
-        printf("Could not load tile1.bmp\n");
-    }
-    if(!generateSprite("data\\tile2.bmp",&tiles[1])){
-        printf("Could not load tile2.bmp\n");
-    }
-    if(!generateSprite("data\\tile3.bmp",&tiles[2])){
-        printf("Could not load tile3.bmp\n");
-    }
-    if(!generateSprite("data\\tile4.bmp",&tiles[3])){
-        printf("Could not load tile4.bmp\n");
-    }
-    if(!generateSprite("data\\pitfall1.bmp",&tiles[4])) printf("Could not load pitfall1.bmp\n");
-    if(!generateSprite("data\\pitfall2.bmp",&tiles[5])) printf("Could not load pitfall2.bmp\n");
-    if(!generateSprite("data\\pitfall3.bmp",&tiles[6])) printf("Could not load pitfall3.bmp\n");
-    if(!generateSprite("data\\spacebg1.bmp",&spaceBG)) printf("Could not load spacebg1.bmp\n");
-    if(!generateSprite("data\\farbg1.bmp",&farBG)) printf("Could not load farbg1.bmp\n");
-    if(!generateSprite("data\\closebg1.bmp",&closeBG)) printf("Could not load closebg1.bmp\n");
+    sManager = newManager;
+    tiles[0] = sManager->newSprite("data\\tile1.bmp");
+    tiles[1] = sManager->newSprite("data\\tile2.bmp");
+    tiles[2] = sManager->newSprite("data\\tile3.bmp");
+    tiles[3] = sManager->newSprite("data\\tile4.bmp");
+    tiles[4] = sManager->newSprite("data\\pitfall1.bmp");
+    tiles[5] = sManager->newSprite("data\\pitfall2.bmp");
+    tiles[6] = sManager->newSprite("data\\pitfall3.bmp");
+    spaceBG = sManager->newSprite("data\\spacebg1.bmp");
+    farBG = sManager->newSprite("data\\farbg1.bmp");
+    closeBG = sManager->newSprite("data\\closebg1.bmp");
     levelX=0;
 }
 
 Level::~Level()
 {
     for(int i = 0; i < 7; i++)
-    {
-        glDeleteTextures(1, &tiles[i].texture);
-    }
-    glDeleteTextures(1, &spaceBG.texture);
-    glDeleteTextures(1, &farBG.texture);
-    glDeleteTextures(1, &closeBG.texture);
+        sManager->removeSprite(tiles[i]);
+    sManager->removeSprite(spaceBG);
+    sManager->removeSprite(farBG);
+    sManager->removeSprite(closeBG);
 }
 
 void Level::generateMoonMen(std::vector<MoonMan*> * manArray){
     for ( int i = 0; i < 164; i++){
         if (debugMoonMen[i] == TRUE){
-            manArray->push_back(new MoonMan(i*32));
+            manArray->push_back(new MoonMan(i*32, sManager));
         }
     }
 }
@@ -66,7 +56,7 @@ void Level::generateMoonMen(std::vector<MoonMan*> * manArray){
 void Level::generateBoulders(std::vector<Boulder*> * boulderArray){
     for ( int i = 0; i < 164; i++){
         if (debugBoulders[i] > 0){
-            boulderArray->push_back(new Boulder(i*32,debugBoulders[i]-1));
+            boulderArray->push_back(new Boulder(i*32,debugBoulders[i]-1, sManager));
         }
     }
 }
@@ -74,8 +64,8 @@ void Level::generateBoulders(std::vector<Boulder*> * boulderArray){
 void Level::generateJetMen(std::vector<JetMan*> * jetArray, std::vector<JetFountain*> *ftnArray){
     for ( int i = 0; i < 164; i++){
         if (debugJetMen[i] == TRUE){
-            jetArray->push_back(new JetMan(i*32));
-            ftnArray->push_back(new JetFountain(i*32,jetArray->back()->getY(),270,1,0));
+            jetArray->push_back(new JetMan(i*32, sManager));
+            ftnArray->push_back(new JetFountain(i*32,jetArray->back()->getY(),270,1,0, sManager));
         }
     }
 }
@@ -91,24 +81,24 @@ void Level::draw()
     int farX=levelX%3840;
     int closeX=levelX%1920;
     // DRAW PARALLAX
-    DrawSprite(spaceBG,-int(spaceX/32), 0, FALSE);
+    DrawSprite(*spaceBG,-int(spaceX/32), 0, FALSE);
     if ( spaceX > 7680) //15360 - (240*32) )
     {
-        DrawSprite(spaceBG,(15360 - spaceX)/32, 0, FALSE);
+        DrawSprite(*spaceBG,(15360 - spaceX)/32, 0, FALSE);
     }
-    DrawSprite(farBG,-int(farX/8), 0, FALSE);
+    DrawSprite(*farBG,-int(farX/8), 0, FALSE);
     if ( farX > 1920) //3840 - (240*8) )
     {
-        DrawSprite(farBG,(3840 - farX)/8, 0, FALSE);
+        DrawSprite(*farBG,(3840 - farX)/8, 0, FALSE);
     }
-    DrawSprite(closeBG,-int(closeX/2), 0, FALSE);
+    DrawSprite(*closeBG,-int(closeX/2), 0, FALSE);
     if ( closeX > 960) //1920 - (240*2) )
     {
-        DrawSprite(closeBG,(1920 - closeX)/2, 0, FALSE);
+        DrawSprite(*closeBG,(1920 - closeX)/2, 0, FALSE);
     }
     // FINISH PARALLAX
     for(int i = 0; i < 164; i++){
-        DrawSprite(tiles[debugLevel[i]], i*32 - levelX, 190, FALSE);
+        DrawSprite(*tiles[debugLevel[i]], i*32 - levelX, 190, FALSE);
     }
 }
 

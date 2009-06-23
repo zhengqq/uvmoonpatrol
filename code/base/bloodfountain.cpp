@@ -18,8 +18,9 @@ BloodFountain::BloodFountain()
     angle = length = gravity = 0.0;
 }
 
-BloodFountain::BloodFountain(int x, int y, double a, double l, int life, double g)
+BloodFountain::BloodFountain(int x, int y, double a, double l, int life, double g, SpriteManager * newManager)
 {
+    sManager = newManager;
     bloodX = x;
     bloodY = y;
     lifeSpan = life;
@@ -110,14 +111,14 @@ void BloodFountain::addDroplet()
 {
     if ( type == FOUNTAIN )
     {
-        pList.push_back(new Particle(bloodX, bloodY, int(angle+rand()%20), length+rand()%5, gravity, LIFE_FOUNTAIN, bloodList[rand()%4],FOUNTAIN));
+        pList.push_back(new Particle(bloodX, bloodY, int(angle+rand()%20), length+rand()%5, gravity, LIFE_FOUNTAIN, bloodList[rand()%4],FOUNTAIN, sManager));
     }
     else if ( type == CLOUD )
     {
-        pList.push_back(new Particle(bloodX+(rand()%20-10), bloodY+(rand()%20-10), int(angle-rand()%10), length, gravity, LIFE_CLOUD, bloodList[rand()%4],CLOUD));
+        pList.push_back(new Particle(bloodX+(rand()%20-10), bloodY+(rand()%20-10), int(angle-rand()%10), length, gravity, LIFE_CLOUD, bloodList[rand()%4],CLOUD, sManager));
     }
     else if ( type == POP )
     {
-        pList.push_back(new Particle(bloodX, bloodY, rand()%360, length+(rand()%10/10), gravity, LIFE_POP, bloodList[rand()%6],POP));
+        pList.push_back(new Particle(bloodX, bloodY, rand()%360, length+(rand()%10/10), gravity, LIFE_POP, bloodList[rand()%6],POP, sManager));
     }
 }

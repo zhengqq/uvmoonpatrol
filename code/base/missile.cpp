@@ -4,15 +4,16 @@ Missile::Missile(){
     printf("Default constructor for missile does nothing!\n");
 }
 
-Missile::Missile(int startX, int startY){
+Missile::Missile(int startX, int startY, SpriteManager * newManager){
+    sManager = newManager;
     misX = startX;
     misY = startY;
-    generateSprite("data\\missile.bmp",&missileSprite);
+    missileSprite = sManager->newSprite("data\\missile.bmp");
 }
 
 Missile::~Missile()
 {
-    glDeleteTextures( 1, &missileSprite.texture );
+    sManager->removeSprite(missileSprite);
 }
 
 void Missile::update(){
@@ -22,5 +23,5 @@ void Missile::update(){
 }
 
 void Missile::draw(){
-    DrawSprite(missileSprite, misX,misY,FALSE);
+    DrawSprite(*missileSprite, misX,misY,FALSE);
 }

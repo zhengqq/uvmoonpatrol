@@ -4,19 +4,22 @@ Cannon::Cannon(){
     printf("Default constructor for cannon does nothing!\n");
 }
 
-Cannon::Cannon(int startX, int startY){
+Cannon::Cannon(int startX, int startY, SpriteManager * newManager){
     canX = startCanX = startX;
     canY = startY;
     levelX = 0;
     life = 18;
-    generateSprite("data\\cannon.bmp", &cannonSprite);
-    generateSprite("data\\explosion1_1.bmp", &explosionSprite[0]);
-    generateSprite("data\\explosion1_2.bmp", &explosionSprite[1]);
-    generateSprite("data\\explosion1_3.bmp", &explosionSprite[2]);
+    sManager = newManager;
+    cannonSprite = sManager->newSprite("data\\cannon.bmp");
+    explosionSprite[0] = sManager->newSprite("data\\explosion1_1.bmp");
+    explosionSprite[1] = sManager->newSprite("data\\explosion1_2.bmp");
+    explosionSprite[2] = sManager->newSprite("data\\explosion1_3.bmp");
 }
 
 Cannon::~Cannon(){
-    glDeleteTextures( 1, &cannonSprite.texture );
+    sManager->removeSprite(cannonSprite);
+    for(int i = 0; i < 3; i++)
+        sManager->removeSprite(explosionSprite[i]);
 }
 
 void Cannon::update(int scrollX){
@@ -31,16 +34,16 @@ void Cannon::update(int scrollX){
 
 void Cannon::draw(){
     if ( life == 18 ){
-        DrawSprite(cannonSprite, canX-levelX,canY,FALSE);
+        DrawSprite(*cannonSprite, canX-levelX,canY,FALSE);
     }
     else if ( life > 12 ){
-        DrawSprite(explosionSprite[0], canX-levelX,canY-4,FALSE);
+        DrawSprite(*explosionSprite[0], canX-levelX,canY-4,FALSE);
     }
     else if ( life > 6 ){
-        DrawSprite(explosionSprite[1], canX-levelX,canY-4,FALSE);
+        DrawSprite(*explosionSprite[1], canX-levelX,canY-4,FALSE);
     }
     else{
-        DrawSprite(explosionSprite[2], canX-levelX,canY-4,FALSE);
+        DrawSprite(*explosionSprite[2], canX-levelX,canY-4,FALSE);
     }
 }
 

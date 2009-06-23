@@ -8,7 +8,7 @@ class JetFountain
 {
 public:
     JetFountain();
-    JetFountain(int,int,double,double,double);
+    JetFountain(int,int,double,double,double,SpriteManager *);
     ~JetFountain();
     void update(int);
     void draw();
@@ -24,6 +24,7 @@ private:
     double angle;       // angle of our blood fountain
     double length;      // initial length of our blood fountain vector
     double gravity;     // gravity applying to our blood fountain
+    SpriteManager * sManager;
 };
 
 #endif // __JETFOUNTAIN_H__

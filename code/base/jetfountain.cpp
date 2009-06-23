@@ -6,8 +6,9 @@ JetFountain::JetFountain()
     angle = length = gravity = 0.0;
 }
 
-JetFountain::JetFountain(int x, int y, double a, double l, double g)
+JetFountain::JetFountain(int x, int y, double a, double l, double g, SpriteManager * newManager)
 {
+    sManager = newManager;
     JetX = x;
     JetY = y;
     decay = 1;
@@ -59,5 +60,5 @@ void JetFountain::setActive(BOOL newActiveState){
 
 void JetFountain::addJetlet()
 {
-    pList.push_back(new Particle(JetX, JetY, int(angle+rand()%15), length+rand()%30/10, gravity, 6, "data\\Jetparticle.bmp",JET));
+    pList.push_back(new Particle(JetX, JetY, int(angle+rand()%15), length+rand()%30/10, gravity, 6, "data\\Jetparticle.bmp",JET, sManager));
 }

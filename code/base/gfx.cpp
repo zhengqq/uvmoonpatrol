@@ -1,15 +1,14 @@
 #include "gfx.h"
-#include "base.h"
 
 int InitGL(void)			// All Setup For OpenGL Goes Here
 {
-	glViewport(0, 0,240, 248);
+	glViewport(0, 0,SCREEN_WIDTH, SCREEN_HEIGHT);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glDisable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0,SCREEN_WIDTH, SCREEN_HEIGHT, 0, 0.0f, 1.0f); // 0,w,h,0 makes it top left,  0,w,0,h makes it bottom left
+	glOrtho(0,GAME_WIDTH, GAME_HEIGHT, 0, 0.0f, 1.0f); // 0,w,h,0 makes it top left,  0,w,0,h makes it bottom left
 	//gluOrtho2D(0,240,0,248);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -17,23 +16,77 @@ int InitGL(void)			// All Setup For OpenGL Goes Here
 	glColor4f(1.0f, 1.0f, 1.0, 1.0f);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	return TRUE;						// Initialization Went OK
+	return true;						// Initialization Went OK
 }
 
-SDL_Surface *LoadBMP2RGBA(char *filename)
+SDL_Surface *LoadBMP2RGBA(char *filename, bool texSizeCheck)
 {
-  Uint8 *rowhi, *rowlo;
-  Uint8 *tmpbuf, tmpch;
-  SDL_Surface *image;
-  int i, j;
-  image = SDL_LoadBMP(filename);
-  if ( image == NULL ) {
-    fprintf(stderr, "Unable to load %s: %s\n", filename, SDL_GetError());
-    return(NULL);
-  }
-  /* Copy our RGB into an ABGR buffer - C32 */
-  // Allocated all 4 pixels for our ABGR
-    unsigned char * newPixels = (unsigned char *)malloc((image->w*image->h*4));
+    Uint8 *rowhi, *rowlo;
+    Uint8 *tmpbuf;
+    SDL_Surface *image;
+    int i;
+    image = SDL_LoadBMP(filename);
+    if ( image == NULL ) {
+        fprintf(stderr, "Unable to load %s: %s\n", filename, SDL_GetError());
+        return(NULL);
+    }
+
+    // Checking based on actual texture/image size is not the right way to
+    // set a sprite size, we will eventually want a sprite format?
+    if ( texSizeCheck ){
+        // Resize the image and fill in with our key color if it is not a power of 2
+        // Neat Power^2 trick, if x > 0 and x & x-1 == 0, its power of 2
+        if((image->w & (image->w-1)) !=0 ){
+            int newWidth = image->w + (8-image->w%8);
+            unsigned char * newPixels = (unsigned char*)calloc(newWidth*image->h*3,sizeof(unsigned char));
+            unsigned char * newPixelsPtr = newPixels;
+            unsigned char * pixelPtr = (unsigned char *)image->pixels;
+            for(int i = 0; i < (newWidth*image->h); i++){
+                if((i%newWidth) < image->w){
+                    *(newPixelsPtr++) = *(pixelPtr++);
+                    *(newPixelsPtr++) = *(pixelPtr++);
+                    *(newPixelsPtr++) = *(pixelPtr++);
+                }
+                else{
+                    *(newPixelsPtr++) = KEY_B;
+                    *(newPixelsPtr++) = KEY_G;
+                    *(newPixelsPtr++) = KEY_R;
+                }
+            }
+            free(image->pixels);
+            image->pixels = (void*)newPixels;
+            image->pitch += ((newWidth-image->w)*3); // create our new pitch
+            image->w = newWidth;
+        }
+
+        if((image->h & (image->h-1)) !=0 ){
+            // Add in the extra spaces at the bottom, and fill with colorkey
+            int newHeight = image->h + (8-image->h%8);
+            unsigned char * newPixels = (unsigned char*)calloc(newHeight*image->w*3,sizeof(unsigned char));
+            unsigned char * newPixelsPtr = newPixels;
+            unsigned char * pixelPtr = (unsigned char*)image->pixels;
+            for(int i = 0; i < image->w*newHeight; i++){
+                if ( i < image->w*image->h){
+                    *newPixelsPtr = *pixelPtr;
+                    *(newPixelsPtr+1) = *(pixelPtr+1);
+                    *(newPixelsPtr+2) = *(pixelPtr+2);
+                    pixelPtr+=sizeof(unsigned char)*3;
+                }
+                else{
+                    *newPixelsPtr = KEY_B;
+                    *(newPixelsPtr+1) = KEY_G;
+                    *(newPixelsPtr+2) = KEY_R;
+                }
+                newPixelsPtr += sizeof(char)*3;
+            }
+            free(image->pixels);
+            image->h = newHeight; // resize according to our new height
+            image->pixels = (void*)newPixels;
+        }
+    }
+    /* Copy our RGB into an ABGR buffer - C32 */
+    // Allocated all 4 pixels for our ABGR, assign to 0 with calloc
+    unsigned char * newPixels = (unsigned char *)calloc(image->w*image->h,sizeof(unsigned char)*4);
     unsigned char * newPixelPtr = newPixels;
     unsigned char * pixelPtr = (unsigned char *)image->pixels;
     for(int i = 0; i < (image->w*image->h);i++) // Also flips RGB to ABGR
@@ -48,7 +101,7 @@ SDL_Surface *LoadBMP2RGBA(char *filename)
         newPixelPtr += sizeof(unsigned char)*4;
     }
     free(image->pixels);        // free the pixels used in the original LoadBMP
-    image->pixels = newPixels;  // set our current image pixels to our new pixels
+    image->pixels = (void*)newPixels;  // set our current image pixels to our new pixels
     image->pitch = (image->pitch/3)*4; // adjust our pitch for 4 pixels instead of 3
     // Now flip our surface for OpenGL specifics!
     tmpbuf = (Uint8 *)malloc(image->pitch);
@@ -65,14 +118,18 @@ SDL_Surface *LoadBMP2RGBA(char *filename)
         rowhi += image->pitch;
         rowlo -= image->pitch;
     }
-  return(image);
+    free(tmpbuf);
+    return(image);
 }
 
-BOOL generateSprite(char * filename, Sprite * sprite)
+// Automatically detect non-power of 2 (instead of 8x8, 16x16, 32x32, 64x64, 128x128, etc.)
+// and fill in buffer will be the next step for this function.
+bool generateSprite(char * filename, Sprite * sprite)
 {
     SDL_Surface * tmpImage = LoadBMP2RGBA(filename);
+    // note: width & height change if 16x16 correction is on
     if ( tmpImage == NULL ){
-        return FALSE;
+        return false;
     }
     glGenTextures(1, &sprite->texture);		// Create The Texture
     glBindTexture(GL_TEXTURE_2D, sprite->texture);
@@ -85,7 +142,7 @@ BOOL generateSprite(char * filename, Sprite * sprite)
     if (tmpImage) {		// If Texture Exists
         SDL_FreeSurface(tmpImage);
     }
-    return TRUE;
+    return true;
 }
 
 void DrawSprite(Sprite & sprite, int x, int y, bool flip)

@@ -6,17 +6,39 @@
 		<Option pch_mode="0" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="default">
+			<Target title="Release">
 				<Option output="..\..\build\windows\UVmpatrol.exe" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="..\..\build\windows" />
 				<Option object_output="..\..\build\windows\.objs" />
 				<Option type="0" />
 				<Option compiler="gcc" />
 				<Option projectResourceIncludeDirsRelation="1" />
+				<Compiler>
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Debug">
+				<Option output="..\..\build\windowsdebug\uvmoonpatrol.exe" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="..\..\build\windowsdebug\" />
+				<Option object_output="..\..\build\windowsdebug\.objs" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-W" />
+					<Add option="-Wall" />
+					<Add option="-pg" />
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add option="-pg -lgmon" />
+				</Linker>
 			</Target>
 		</Build>
 		<VirtualTargets>
-			<Add alias="All" targets="default;" />
+			<Add alias="All" targets="Release;" />
 		</VirtualTargets>
 		<Linker>
 			<Add library="mingw32" />
@@ -53,6 +75,8 @@
 		<Unit filename="..\base\moonman.h" />
 		<Unit filename="..\base\particle.cpp" />
 		<Unit filename="..\base\particle.h" />
+		<Unit filename="..\base\spriteManager.cpp" />
+		<Unit filename="..\base\spriteManager.h" />
 		<Unit filename="..\base\tile1.h" />
 		<Unit filename="..\base\tile2.h" />
 		<Unit filename="..\base\tile3.h" />

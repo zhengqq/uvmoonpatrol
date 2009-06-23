@@ -5,22 +5,24 @@
 #include "base.h"
 #include "gfx.h"
 #include "jetfountain.h"
+#include "spriteManager.h"
 
 class JetMan{
 public:
     JetMan();
-    JetMan(int);
+    JetMan(int, SpriteManager* );
     ~JetMan();
     void update(int,std::vector<JetFountain*>::iterator,int,int);
     void draw();
     int getX(){return int(jetX);}
     int getY(){return int(jetY);}
-    int width(){return jetSprite.width;}
-    int height(){return jetSprite.height;}
+    int width(){return jetSprite->width;}
+    int height(){return jetSprite->height;}
 private:
     int state;
     int swoopCount;
-    Sprite jetSprite;
+    Sprite * jetSprite;
+    SpriteManager * sManager;
     int scrollX;
     double velX,velY,gravity,jetX,jetY;
 };

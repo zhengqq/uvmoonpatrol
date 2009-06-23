@@ -6,6 +6,7 @@ Car::Car(SpriteManager * newManager)
     screenX = currentFrame = 0;
     carX = 45;
     carY = 100;
+    velX = velY = 0;
     airBorne = movingLeft = movingRight = crashed = FALSE;
     speed = 5;
     wheelA = TRUE;

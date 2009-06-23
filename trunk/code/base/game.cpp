@@ -105,7 +105,6 @@ void Game::InitGame()
     gameLevel->generateMoonMen(&gameMoonMen);
     gameLevel->generateBoulders(&gameBoulders);
     gameLevel->generateJetMen(&gameJetMen,&jmFountain);
-
     playerScore = 0;
     highScore = 15000; // will be filled in later
     currentTime = currentTimeBuffer = 0;
@@ -276,6 +275,7 @@ void Game::GameLogic()
             ++moonIter;
         }
     }
+
     std::vector<JetMan*>::iterator jetIter = gameJetMen.begin();
     std::vector<JetFountain*>::iterator jfIter = jmFountain.begin();
     while ( jetIter != gameJetMen.end() ){

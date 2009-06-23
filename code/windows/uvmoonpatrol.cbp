@@ -81,6 +81,9 @@
 		<Unit filename="..\base\tile2.h" />
 		<Unit filename="..\base\tile3.h" />
 		<Unit filename="..\base\tile4.h" />
+		<Unit filename="uvmoonpatrol.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />

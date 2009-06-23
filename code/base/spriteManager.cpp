@@ -22,7 +22,7 @@ SpriteManager::~SpriteManager(){
 Sprite * SpriteManager::newSprite(char* newSpriteName){
     unsigned int i;
     for(i=0; i < spriteVector.size(); ++i){
-        if ((spriteVector[i].name != NULL) && (!strcmp(spriteVector[i].name, newSpriteName))){
+        if ((spriteVector[i].name != NULL) && (!strncmp(spriteVector[i].name, newSpriteName, strlen(newSpriteName)))){
             spriteVector[i].cnt++; // we have another count on this sprite
             return spriteVector[i].sprite;
         }
@@ -34,8 +34,8 @@ Sprite * SpriteManager::newSprite(char* newSpriteName){
             if(spriteVector[i].sprite == NULL){
                 needResize=false;
                 spriteVector[i].sprite = newSprite;
-                char * newName = new char[sizeof(char)*strlen(newSpriteName)];
-                strcpy(newName, newSpriteName);
+                char * newName = new char[strlen(newSpriteName)];
+                strncpy(newName, newSpriteName, strlen(newSpriteName));
                 spriteVector[i].name = newName;
                 spriteVector[i].cnt = 1;
                 break;
@@ -53,8 +53,8 @@ Sprite * SpriteManager::newSprite(char* newSpriteName){
                 spriteVector[i].cnt = 0;
             }
             spriteVector[oldSize].sprite = newSprite;
-            char * newName = new char[sizeof(char)*strlen(newSpriteName)];
-            strcpy(newName, newSpriteName);
+            char * newName = new char[strlen(newSpriteName)];
+            strncpy(newName, newSpriteName, strlen(newSpriteName));
             spriteVector[oldSize].name = newName;
             spriteVector[oldSize].cnt = 1;
         }

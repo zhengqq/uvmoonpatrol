@@ -21,6 +21,7 @@
 #include "jetfountain.h"
 #include "jetman.h"
 #include "boulder.h"
+#include "bus.h"
 #include "spriteManager.h"
 
 typedef enum {
@@ -73,6 +74,8 @@ private:
     std::vector<JetMan*> gameJetMen;
     std::vector<JetFountain*> jmFountain;
     std::vector<Boulder*> gameBoulders;
+    std::vector<Bus*> gameBuses;
+    std::vector<DamagedMan*> gameDamagedMen;
     Level * gameLevel;
     Font * gameFont;
 

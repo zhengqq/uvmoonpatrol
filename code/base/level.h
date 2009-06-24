@@ -7,8 +7,12 @@
 #include "jetman.h"
 #include "jetfountain.h"
 #include "boulder.h"
+#include "bus.h"
+#include "damagedman.h"
 
 class MoonMan;
+class DamagedMan;
+class Bus;
 
 class Level
 {
@@ -22,6 +26,7 @@ public:
     void generateMoonMen(std::vector<MoonMan*> * manArray);
     void generateBoulders(std::vector<Boulder*> *boulderArray);
     void generateJetMen(std::vector<JetMan*> *, std::vector<JetFountain*> *);
+    void generateBuses(std::vector<Bus*> *);
 private:
     Sprite * tiles[7]; // 7 so far
     Sprite * spaceBG; // space background

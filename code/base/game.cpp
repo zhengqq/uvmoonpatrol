@@ -105,6 +105,7 @@ void Game::InitGame()
     gameLevel->generateMoonMen(&gameMoonMen);
     gameLevel->generateBoulders(&gameBoulders);
     gameLevel->generateJetMen(&gameJetMen,&jmFountain);
+    gameLevel->generateBuses(&gameBuses);
     playerScore = 0;
     highScore = 15000; // will be filled in later
     currentTime = currentTimeBuffer = 0;
@@ -136,6 +137,12 @@ void Game::ShutdownGame()
     while(!gameBoulders.empty()){
         delete gameBoulders.back(); gameBoulders.pop_back();
     }
+    while(!gameBuses.empty()){
+        delete gameBuses.back(); gameBuses.pop_back();
+    }
+    while(!gameDamagedMen.empty()){
+        delete gameDamagedMen.back(); gameDamagedMen.pop_back();
+    }
     delete spriteManager;
 }
 
@@ -154,6 +161,12 @@ void Game::GameRender()				// Draw Everything
     if ( carCannon != 0 ){
         carCannon->draw();
     }
+    for(int i = 0; i < mmFountain.size(); i++){
+        mmFountain[i]->draw();
+    }
+    for(int i = 0; i < gameBuses.size(); i++){
+        gameBuses[i]->draw();
+    }
     for(int i = 0; i < carMissile.size(); i++){
         carMissile[i]->draw();
     }
@@ -166,11 +179,11 @@ void Game::GameRender()				// Draw Everything
     for(int i = 0; i < gameJetMen.size(); i++){
         gameJetMen[i]->draw();
     }
-    for(int i = 0; i < mmFountain.size(); i++){
-        mmFountain[i]->draw();
-    }
     for(int i = 0; i < gameBoulders.size(); i++){
         gameBoulders[i]->draw();
+    }
+    for(int i = 0; i < gameDamagedMen.size(); i++){
+        gameDamagedMen[i]->draw();
     }
 
     DrawSprite(*guiSprite, 0, 0, FALSE);
@@ -345,6 +358,60 @@ void Game::GameLogic()
         else{
             ++bfIter;
         }
+    }
+
+    std::vector<Bus*>::iterator busIter = gameBuses.begin();
+    while ( busIter != gameBuses.end() ){
+        Bus * bus = *(busIter);
+        bus->update(scrollX, gameCar->getX(), gameDamagedMen);
+        if ( bus->isActive()){
+            if ( rectCollision(gameCar->getX()+5,gameCar->getY(),gameCar->width()-5,gameCar->height()-10, // 10 compensates for bottom of the car
+                        bus->getX(),bus->getY()+2,bus->width(),bus->height())){
+                gameCar->causeCrash();
+            }
+            else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
+                        bus->getX(),bus->getY(),bus->width(),bus->height()))){
+                bus->setExplode(); // sets our boulder to explode!
+                fprintf(stdout, "EXPLODING THE BUS!");
+                delete carCannon;
+                carCannon = 0;
+            }
+            ++busIter;
+        }
+        else if ( bus->isDead() ){
+            busIter = gameBuses.erase(busIter);
+        }
+        else{
+            ++busIter;
+        }
+    }
+
+    std::vector<DamagedMan*>::iterator manIter = gameDamagedMen.begin();
+    while ( manIter != gameDamagedMen.end() ){
+        DamagedMan * man = *(manIter);
+        man->update(scrollX, gameLevel);
+        /*
+        if ( bus->isActive()){
+            if ( rectCollision(gameCar->getX()+5,gameCar->getY(),gameCar->width()-5,gameCar->height()-10, // 10 compensates for bottom of the car
+                        bus->getX(),bus->getY()+2,bus->width(),bus->height())){
+                gameCar->causeCrash();
+            }
+            else if (carCannon != 0 && (rectCollision(carCannon->getX(),carCannon->getY()-4,carCannon->width(),carCannon->height()+8, // 10 compensates for bottom of the car
+                        bus->getX(),bus->getY(),bus->width(),bus->height()))){
+                bus->setExplode(); // sets our boulder to explode!
+                fprintf(stdout, "EXPLODING THE BUS!");
+                delete carCannon;
+                carCannon = 0;
+            }
+            ++manIter;
+        }
+
+        else if ( bus->isDead() ){
+            manIter = gameBuses.erase(manIter);
+        }
+        else{*/
+            ++manIter;
+        //}
     }
 
     std::vector<Boulder*>::iterator bldIter = gameBoulders.begin();

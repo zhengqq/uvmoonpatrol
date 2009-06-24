@@ -52,10 +52,14 @@
 		<Unit filename="..\base\bloodfountain.h" />
 		<Unit filename="..\base\boulder.cpp" />
 		<Unit filename="..\base\boulder.h" />
+		<Unit filename="..\base\bus.cpp" />
+		<Unit filename="..\base\bus.h" />
 		<Unit filename="..\base\cannon.cpp" />
 		<Unit filename="..\base\cannon.h" />
 		<Unit filename="..\base\car.cpp" />
 		<Unit filename="..\base\car.h" />
+		<Unit filename="..\base\damagedman.cpp" />
+		<Unit filename="..\base\damagedman.h" />
 		<Unit filename="..\base\font.cpp" />
 		<Unit filename="..\base\font.h" />
 		<Unit filename="..\base\game.cpp" />

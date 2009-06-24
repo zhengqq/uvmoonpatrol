@@ -34,7 +34,7 @@ void JetMan::update(int newScroll, std::vector<JetFountain*>::iterator myFountai
             curFountain->setActive(TRUE);
         }
     }
-    if ( state == ACTIVATED ){
+    else if ( state == ACTIVATED ){
         scrollX = newScroll;
         if ( swoopCount < 2 )
             velX = ((carX - jetX)/10)+5;

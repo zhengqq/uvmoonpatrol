@@ -1,0 +1,25 @@
+Here's my gameplan for the end of the week (June 26th)
+
+At least 5 playable levels [ ]
+Level Loading [ ]
+Multiple Backgrounds [ ]
+Multiple Enemy Types [ ]
+Enemy Projectiles [ ]
+Working HUD [ ]
+Death sequence for car [ ]
+Title Screen/Main Menu [ ]
+Arcade/Original Mode for Quarters/Lives [ ]
+Sound Effects [ ]
+Music [ ]
+High Score [ ]
+Fix Memory Leaks [ ] (about 10k right now)
+
+Wish List beyond the week of June
+
+Bosses [ ]
+Car Upgrades [ ]
+Multiple Car Types [ ]
+More Dramatic Blood Effects [ ]
+Intro/Cinemas [ ]
+Multiple modes including combo mode and imitate that flash game? [ ]
+

@@ -20,6 +20,11 @@ BOOL debugJetMen[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,
                     0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,
                     1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
+BOOL debugBuses[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,
+                    0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,
+                    1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
+
 Level::Level(SpriteManager * newManager)
 {
     sManager = newManager;
@@ -66,6 +71,14 @@ void Level::generateJetMen(std::vector<JetMan*> * jetArray, std::vector<JetFount
         if (debugJetMen[i] == TRUE){
             jetArray->push_back(new JetMan(i*32, sManager));
             ftnArray->push_back(new JetFountain(i*32,jetArray->back()->getY(),270,1,0, sManager));
+        }
+    }
+}
+
+void Level::generateBuses(std::vector<Bus*> * busArray){
+    for ( int i = 0; i < 164; i++){
+        if (debugBuses[i] == TRUE){
+            busArray->push_back(new Bus(i*32, sManager));
         }
     }
 }

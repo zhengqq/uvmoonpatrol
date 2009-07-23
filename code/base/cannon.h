@@ -1,9 +1,7 @@
-#ifndef __CANNON_H__
-#define __CANNON_H__
+#pragma once
 
 #include "base.h"
 #include "gfx.h"
-#include "spriteManager.h"
 
 class Cannon
 {
@@ -26,5 +24,3 @@ private:
     int levelX;
     int life;
 };
-
-#endif // __CANNON_H__

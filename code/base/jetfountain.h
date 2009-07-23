@@ -4,6 +4,8 @@
 #include <vector>
 #include "particle.h"
 
+class Particle;
+
 class JetFountain
 {
 public:

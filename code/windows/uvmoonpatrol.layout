@@ -1,92 +1,119 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
-	<File name="..\base\base.h" open="0" top="0" tabpos="0">
-		<Cursor position="266" topLine="0" />
+	<File name="..\base\actor.cpp" open="1" top="0" tabpos="2">
+		<Cursor position="20" topLine="0" />
 	</File>
-	<File name="..\base\bloodfountain.cpp" open="1" top="1" tabpos="10">
-		<Cursor position="1416" topLine="50" />
+	<File name="..\base\actor.h" open="1" top="0" tabpos="3">
+		<Cursor position="637" topLine="11" />
+	</File>
+	<File name="..\base\actorpool.cpp" open="1" top="0" tabpos="4">
+		<Cursor position="2264" topLine="67" />
+	</File>
+	<File name="..\base\actorpool.h" open="0" top="0" tabpos="3">
+		<Cursor position="323" topLine="0" />
+	</File>
+	<File name="..\base\base.h" open="1" top="0" tabpos="6">
+		<Cursor position="262" topLine="0" />
+	</File>
+	<File name="..\base\bloodfountain.cpp" open="0" top="0" tabpos="10">
+		<Cursor position="2518" topLine="90" />
 	</File>
 	<File name="..\base\bloodfountain.h" open="0" top="0" tabpos="9">
-		<Cursor position="1010" topLine="0" />
+		<Cursor position="970" topLine="0" />
 	</File>
-	<File name="..\base\boulder.cpp" open="0" top="0" tabpos="11">
-		<Cursor position="1332" topLine="9" />
+	<File name="..\base\boulder.cpp" open="0" top="0" tabpos="20">
+		<Cursor position="630" topLine="2" />
 	</File>
-	<File name="..\base\boulder.h" open="0" top="0" tabpos="8">
-		<Cursor position="85" topLine="0" />
+	<File name="..\base\boulder.h" open="0" top="0" tabpos="4">
+		<Cursor position="286" topLine="0" />
+	</File>
+	<File name="..\base\bus.cpp" open="0" top="0" tabpos="18">
+		<Cursor position="311" topLine="0" />
+	</File>
+	<File name="..\base\bus.h" open="0" top="0" tabpos="6">
+		<Cursor position="51" topLine="0" />
 	</File>
 	<File name="..\base\cannon.cpp" open="0" top="0" tabpos="5">
 		<Cursor position="636" topLine="1" />
 	</File>
-	<File name="..\base\cannon.h" open="0" top="0" tabpos="3">
-		<Cursor position="189" topLine="0" />
+	<File name="..\base\cannon.h" open="0" top="0" tabpos="7">
+		<Cursor position="53" topLine="0" />
 	</File>
-	<File name="..\base\car.cpp" open="1" top="0" tabpos="6">
-		<Cursor position="789" topLine="3" />
+	<File name="..\base\car.cpp" open="1" top="0" tabpos="12">
+		<Cursor position="4231" topLine="127" />
 	</File>
-	<File name="..\base\car.h" open="0" top="0" tabpos="0">
-		<Cursor position="97" topLine="1" />
+	<File name="..\base\car.h" open="1" top="0" tabpos="7">
+		<Cursor position="288" topLine="0" />
 	</File>
-	<File name="..\base\font.cpp" open="0" top="0" tabpos="0">
-		<Cursor position="366" topLine="0" />
+	<File name="..\base\damagedman.cpp" open="1" top="0" tabpos="10">
+		<Cursor position="560" topLine="13" />
 	</File>
-	<File name="..\base\font.h" open="0" top="0" tabpos="0">
-		<Cursor position="251" topLine="0" />
+	<File name="..\base\damagedman.h" open="0" top="0" tabpos="9">
+		<Cursor position="151" topLine="0" />
 	</File>
-	<File name="..\base\game.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="3595" topLine="112" />
+	<File name="..\base\font.cpp" open="0" top="0" tabpos="16">
+		<Cursor position="366" topLine="15" />
 	</File>
-	<File name="..\base\game.h" open="0" top="0" tabpos="6">
-		<Cursor position="1491" topLine="35" />
+	<File name="..\base\font.h" open="0" top="0" tabpos="10">
+		<Cursor position="204" topLine="0" />
 	</File>
-	<File name="..\base\gfx.cpp" open="1" top="0" tabpos="5">
-		<Cursor position="491" topLine="0" />
+	<File name="..\base\game.cpp" open="1" top="0" tabpos="5">
+		<Cursor position="7172" topLine="106" />
 	</File>
-	<File name="..\base\gfx.h" open="1" top="0" tabpos="7">
-		<Cursor position="144" topLine="0" />
+	<File name="..\base\game.h" open="0" top="0" tabpos="11">
+		<Cursor position="2077" topLine="59" />
+	</File>
+	<File name="..\base\gfx.cpp" open="0" top="0" tabpos="5">
+		<Cursor position="20" topLine="0" />
+	</File>
+	<File name="..\base\gfx.h" open="0" top="0" tabpos="3">
+		<Cursor position="5" topLine="0" />
 	</File>
 	<File name="..\base\jetfountain.cpp" open="0" top="0" tabpos="17">
 		<Cursor position="515" topLine="0" />
 	</File>
-	<File name="..\base\jetfountain.h" open="0" top="0" tabpos="16">
-		<Cursor position="855" topLine="0" />
+	<File name="..\base\jetfountain.h" open="0" top="0" tabpos="12">
+		<Cursor position="115" topLine="0" />
 	</File>
-	<File name="..\base\jetman.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="267" topLine="6" />
+	<File name="..\base\jetman.cpp" open="0" top="0" tabpos="4">
+		<Cursor position="585" topLine="12" />
 	</File>
-	<File name="..\base\jetman.h" open="1" top="0" tabpos="3">
-		<Cursor position="446" topLine="0" />
+	<File name="..\base\jetman.h" open="0" top="0" tabpos="13">
+		<Cursor position="148" topLine="0" />
 	</File>
-	<File name="..\base\level.cpp" open="1" top="0" tabpos="9">
-		<Cursor position="4112" topLine="76" />
+	<File name="..\base\level.cpp" open="1" top="0" tabpos="14">
+		<Cursor position="5964" topLine="140" />
 	</File>
-	<File name="..\base\level.h" open="0" top="0" tabpos="12">
-		<Cursor position="756" topLine="0" />
+	<File name="..\base\level.h" open="1" top="0" tabpos="13">
+		<Cursor position="322" topLine="15" />
+	</File>
+	<File name="..\base\main.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="75" topLine="0" />
 	</File>
 	<File name="..\base\missile.cpp" open="0" top="0" tabpos="4">
-		<Cursor position="387" topLine="0" />
+		<Cursor position="397" topLine="0" />
 	</File>
-	<File name="..\base\missile.h" open="0" top="0" tabpos="2">
-		<Cursor position="498" topLine="0" />
+	<File name="..\base\missile.h" open="1" top="0" tabpos="11">
+		<Cursor position="100" topLine="0" />
 	</File>
-	<File name="..\base\moonman.cpp" open="0" top="0" tabpos="10">
-		<Cursor position="1491" topLine="0" />
+	<File name="..\base\moonman.cpp" open="1" top="0" tabpos="1">
+		<Cursor position="698" topLine="26" />
 	</File>
-	<File name="..\base\moonman.h" open="0" top="0" tabpos="0">
-		<Cursor position="445" topLine="0" />
+	<File name="..\base\moonman.h" open="1" top="1" tabpos="9">
+		<Cursor position="298" topLine="0" />
 	</File>
-	<File name="..\base\particle.cpp" open="0" top="0" tabpos="11">
+	<File name="..\base\particle.cpp" open="1" top="0" tabpos="8">
 		<Cursor position="1846" topLine="6" />
 	</File>
-	<File name="..\base\particle.h" open="0" top="0" tabpos="15">
-		<Cursor position="833" topLine="0" />
+	<File name="..\base\particle.h" open="0" top="0" tabpos="2">
+		<Cursor position="98" topLine="1" />
 	</File>
-	<File name="..\base\spriteManager.cpp" open="1" top="0" tabpos="8">
+	<File name="..\base\spriteManager.cpp" open="0" top="0" tabpos="8">
 		<Cursor position="2413" topLine="62" />
 	</File>
-	<File name="..\base\spriteManager.h" open="0" top="0" tabpos="0">
-		<Cursor position="212" topLine="0" />
+	<File name="..\base\spriteManager.h" open="0" top="0" tabpos="5">
+		<Cursor position="32" topLine="0" />
 	</File>
 	<File name="..\base\tile1.h" open="0" top="0" tabpos="0">
 		<Cursor position="1378" topLine="26" />

@@ -23,6 +23,7 @@
 #include "boulder.h"
 #include "bus.h"
 #include "spriteManager.h"
+#include "actorpool.h"
 
 typedef enum {
     INTRO=0,
@@ -66,6 +67,11 @@ private:
     int highScore;
     int currentTime;
     int currentTimeBuffer;
+    ActorPool * actorPool;
+    int playerGroup;
+    int enemyGroup;
+    int extraGroup;
+
     Car * gameCar;
     Cannon * carCannon; // one cannon!
     std::vector<Missile*> carMissile;
@@ -75,7 +81,7 @@ private:
     std::vector<JetFountain*> jmFountain;
     std::vector<Boulder*> gameBoulders;
     std::vector<Bus*> gameBuses;
-    std::vector<DamagedMan*> gameDamagedMen;
+    //std::vector<DamagedMan*> gameDamagedMen;
     Level * gameLevel;
     Font * gameFont;
 

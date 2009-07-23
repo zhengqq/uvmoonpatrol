@@ -1,5 +1,4 @@
-#ifndef __BLOODFOUNTAIN_H__
-#define __BLOODFOUNTAIN_H__
+#pragma once
 
 #include <vector>
 #include "particle.h"
@@ -29,5 +28,3 @@ private:
     unsigned int type;
     SpriteManager * sManager;
 };
-
-#endif // __BLOODFOUNTAIN_H__

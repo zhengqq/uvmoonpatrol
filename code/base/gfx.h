@@ -1,5 +1,4 @@
-#ifndef __GFX_H__
-#define __GFX_H__
+#pragma once
 
 #include <SDL/SDL.h>
 #include <GL/gl.h>	// Header File For The OpenGL32 Library
@@ -22,9 +21,9 @@ struct Sprite
 	int height;
 };
 
+#include "actor.h" // Actor Base Class
+
 int InitGL();
 SDL_Surface *LoadBMP2RGBA(char *filename, bool texSizeCheck=true);
 void DrawSprite(Sprite & sprite, int x, int y, bool flip);
 bool generateSprite(char * filename, Sprite * sprite);
-
-#endif // __GFX_H__

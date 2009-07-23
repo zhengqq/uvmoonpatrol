@@ -3,11 +3,10 @@
 #include "base.h"
 #include "gfx.h"
 #include "level.h"
-#include "spriteManager.h"
 
 class Level; // both level & moonman include each other.
 
-class DamagedMan {
+class DamagedMan{
 public:
     DamagedMan();
     DamagedMan(int, SpriteManager*,int);

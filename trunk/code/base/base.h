@@ -1,5 +1,4 @@
-#ifndef __BASE_H__
-#define __BASE_H__
+#pragma once
 
 #define BOOL    unsigned char
 #define FALSE   0
@@ -12,5 +11,3 @@
 #define PHYSICSFPS 30
 
 BOOL rectCollision(int,int,int,int,int,int,int,int);
-
-#endif // __BASE_H__

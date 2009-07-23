@@ -6,10 +6,6 @@ typedef enum {
     DEAD
 };
 
-MoonMan::MoonMan(){
-    printf("Default constructor does nothing for moon man!\n");
-}
-
 MoonMan::MoonMan(int startX, SpriteManager * newManager){
     sManager = newManager;
     manState = RUNNING;
@@ -19,8 +15,9 @@ MoonMan::MoonMan(int startX, SpriteManager * newManager){
     manSpriteA = sManager->newSprite("data\\running1_1.bmp");
     manSpriteB = sManager->newSprite("data\\running1_2.bmp");
     manX = startX;
-    manY = 100; // will snap to the level
+    manY = 175; // will snap to the level
     speed = 2;
+    collideType = SlowDown;
 }
 
 MoonMan::~MoonMan(){
@@ -28,7 +25,15 @@ MoonMan::~MoonMan(){
     sManager->removeSprite(manSpriteB);
 }
 
-void MoonMan::update(int newScroll, Level * currentLevel){
+int MoonMan::collision()
+{
+    // Do different effects for each type of impact?
+    if ( collideWith == Player ){
+        manState = DEAD;
+    }
+}
+
+int MoonMan::update(Level * currentLevel, int newScroll){
     scrollX = newScroll;
     if ( manState == RUNNING )
     {
@@ -37,22 +42,23 @@ void MoonMan::update(int newScroll, Level * currentLevel){
             spriteA = !spriteA;
             currentFrame = 0;
         }
-        // DEBUG!!
-        if ( manX - scrollX < 300 ){
-            if ( !currentLevel->isPit(manX+8+speed) ){
-                if ( manX < 164 * 32 ){
-                    manX += speed;
-                }
-                manY = 175; // some number that is always above ground // 196 is the min
-                while( !currentLevel->isGround(manX+8,manY+19)){
-                        manY++;
-                }
+        if ( !currentLevel->isPit(manX+8+speed) ){
+            if ( manX < 164 * 32 ){
+                manX += speed;
             }
+            manY = 176; // some number that is always above ground // 196 is the min
+            while( !currentLevel->isGround(manX+8,manY+19)){
+                    manY++;
+            }
+        }
+        if ( scrollX - manX > 32 ){ // off the screen
+            manState = DEAD;
         }
     }
     else if ( manState == DEAD)
     {
         // We're dead, change sprite to dead sprite
+        return ACTOR_REMOVE;
     }
 }
 

@@ -1,8 +1,10 @@
 #pragma once
 
-#include <vector>
+//#include <vector>
 #include "base.h"
-#include "gfx.h"
+#include "actorpool.h"
+
+/*
 #include "moonman.h"
 #include "jetman.h"
 #include "jetfountain.h"
@@ -12,21 +14,29 @@
 
 class MoonMan;
 class DamagedMan;
+class JetMan;
 class Bus;
+class Boulder;
+*/
+
+class ActorPool;
+class SpriteManager;
 
 class Level
 {
 public:
     Level(SpriteManager *);
     ~Level();
-    void update(int);
+    void update(int, ActorPool*, int);
     void draw();
     BOOL isGround(int,int);
     BOOL isPit(int);
+    /*
     void generateMoonMen(std::vector<MoonMan*> * manArray);
     void generateBoulders(std::vector<Boulder*> *boulderArray);
     void generateJetMen(std::vector<JetMan*> *, std::vector<JetFountain*> *);
     void generateBuses(std::vector<Bus*> *);
+    */
 private:
     Sprite * tiles[7]; // 7 so far
     Sprite * spaceBG; // space background

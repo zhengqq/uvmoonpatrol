@@ -96,16 +96,31 @@ void Game::IntroLogic()
 void Game::InitGame()
 {
     spriteManager = new SpriteManager();
+    actorPool = new ActorPool();
+
+    // First Actor Pool for player objects
+    playerGroup = actorPool->createGroup();
+
+    // Second Actor Pool for enemy/level objects
+    enemyGroup = actorPool->createGroup();
+
+    // Third Actor Pool for particle engines (non-collidables)
+    extraGroup = actorPool->createGroup();
+
     guiSprite = spriteManager->newSprite("data\\gui.bmp");
     // Create a new font
     gameCar = new Car(spriteManager);
+    actorPool->addActor(gameCar, playerGroup);
+
     gameLevel = new Level(spriteManager);
     gameFont = new Font(spriteManager);
     carCannon = 0; // nothing for this yet!
+    /*
     gameLevel->generateMoonMen(&gameMoonMen);
     gameLevel->generateBoulders(&gameBoulders);
     gameLevel->generateJetMen(&gameJetMen,&jmFountain);
     gameLevel->generateBuses(&gameBuses);
+    */
     playerScore = 0;
     highScore = 15000; // will be filled in later
     currentTime = currentTimeBuffer = 0;
@@ -114,7 +129,7 @@ void Game::InitGame()
 void Game::ShutdownGame()
 {
     delete gameFont;
-    delete gameCar;
+    //delete gameCar;
     delete gameLevel;
     if ( carCannon != 0 ){
         delete carCannon;
@@ -140,9 +155,10 @@ void Game::ShutdownGame()
     while(!gameBuses.empty()){
         delete gameBuses.back(); gameBuses.pop_back();
     }
-    while(!gameDamagedMen.empty()){
-        delete gameDamagedMen.back(); gameDamagedMen.pop_back();
-    }
+//    while(!gameDamagedMen.empty()){
+//        delete gameDamagedMen.back(); gameDamagedMen.pop_back();
+//    }
+    delete actorPool;
     delete spriteManager;
 }
 
@@ -157,7 +173,9 @@ void Game::GameRender()				// Draw Everything
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
     gameLevel->draw();
-    gameCar->draw();
+
+    actorPool->drawPool();
+    //gameCar->draw();
     if ( carCannon != 0 ){
         carCannon->draw();
     }
@@ -182,9 +200,9 @@ void Game::GameRender()				// Draw Everything
     for(int i = 0; i < gameBoulders.size(); i++){
         gameBoulders[i]->draw();
     }
-    for(int i = 0; i < gameDamagedMen.size(); i++){
-        gameDamagedMen[i]->draw();
-    }
+//    for(int i = 0; i < gameDamagedMen.size(); i++){
+//        gameDamagedMen[i]->draw();
+//    }
 
     DrawSprite(*guiSprite, 0, 0, FALSE);
 
@@ -223,9 +241,12 @@ void Game::GameLogic()
         gKeyCtrl = FALSE;
     }
 
-    gameCar->update(gameLevel);
+    //gameCar->update(gameLevel, 0);
+
     int scrollX = gameCar->getScreenX();
-    gameLevel->update(scrollX);
+    actorPool->updatePhysics(gameLevel, scrollX);
+
+    gameLevel->update(scrollX, actorPool, enemyGroup);
 
     if ( carCannon!= 0){
         if ( carCannon->getLife() <= 0 ){
@@ -236,6 +257,7 @@ void Game::GameLogic()
             carCannon->update(scrollX);
         }
     }
+
     /* iterate through all the missiles on the screen */
     std::vector<Missile*>::iterator iter = carMissile.begin();
     while ( iter != carMissile.end()){
@@ -248,11 +270,12 @@ void Game::GameLogic()
             ++iter;
         }
     }
-    /* iteratore through all the moon men on the screen */
+    /*
+    /* iteratore through all the moon men on the screen *
     std::vector<MoonMan*>::iterator moonIter = gameMoonMen.begin();
     while ( moonIter != gameMoonMen.end()){
         MoonMan * mMan = *(moonIter);
-        mMan->update(scrollX,gameLevel);
+        mMan->update(gameLevel, scrollX);
         if (rectCollision(gameCar->getX(),gameCar->getY(),gameCar->width(),gameCar->height()-10, // 10 compensates for bottom of the car
                 mMan->getX(),mMan->getY(),mMan->width(),mMan->height())){
             if ( gameCar->isAirBorne() ){
@@ -363,7 +386,7 @@ void Game::GameLogic()
     std::vector<Bus*>::iterator busIter = gameBuses.begin();
     while ( busIter != gameBuses.end() ){
         Bus * bus = *(busIter);
-        bus->update(scrollX, gameCar->getX(), gameDamagedMen);
+        bus->update(scrollX, gameCar->getX());
         if ( bus->isActive()){
             if ( rectCollision(gameCar->getX()+5,gameCar->getY(),gameCar->width()-5,gameCar->height()-10, // 10 compensates for bottom of the car
                         bus->getX(),bus->getY()+2,bus->width(),bus->height())){
@@ -386,7 +409,7 @@ void Game::GameLogic()
         }
     }
 
-    std::vector<DamagedMan*>::iterator manIter = gameDamagedMen.begin();
+/*    std::vector<DamagedMan*>::iterator manIter = gameDamagedMen.begin();
     while ( manIter != gameDamagedMen.end() ){
         DamagedMan * man = *(manIter);
         man->update(scrollX, gameLevel);
@@ -409,15 +432,15 @@ void Game::GameLogic()
         else if ( bus->isDead() ){
             manIter = gameBuses.erase(manIter);
         }
-        else{*/
+        else{
             ++manIter;
         //}
     }
-
+*
     std::vector<Boulder*>::iterator bldIter = gameBoulders.begin();
     while ( bldIter != gameBoulders.end() ){
         Boulder * bld = *(bldIter);
-        bld->update(scrollX);
+        bld->update(gameLevel, scrollX);
         if ( bld->isActive()){
             if ( rectCollision(gameCar->getX()+5,gameCar->getY(),gameCar->width()-5,gameCar->height()-10, // 10 compensates for bottom of the car
                         bld->getX(),bld->getY()+2,bld->width(),bld->height())){
@@ -438,6 +461,11 @@ void Game::GameLogic()
             ++bldIter;
         }
     }
+*/
+
+    actorPool->checkCollision(playerGroup, enemyGroup);
+
+    actorPool->updateCollisions();
 
     // Timer
     currentTimeBuffer++;
@@ -538,7 +566,7 @@ void Game::KillGLWindow(void)			// Properly Kill The Window
 BOOL Game::CreateGLWindow(char* title, int width, int height, int bits, BOOL fullscreenflag)
 {
   Uint32 flags;
-  int size;
+  //int size;
 
   fullscreen=fullscreenflag;	// Set The Global Fullscreen Flag
   flags = SDL_OPENGL;

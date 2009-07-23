@@ -3,21 +3,19 @@
 #include "base.h"
 #include "gfx.h"
 #include "level.h"
-#include "spriteManager.h"
 
-class Level; // both level & moonman include each other.
-
-class MoonMan {
+class MoonMan : public Actor
+{
 public:
-    MoonMan();
     MoonMan(int, SpriteManager*);
     ~MoonMan();
-    void update(int,Level*);
-    void draw();
-    int getX(){return manX;}
-    int getY(){return manY;}
-    int width(){return manSpriteA->width;}
-    int height(){return manSpriteA->height;}
+    virtual int update(Level*,int);
+    virtual int collision();
+    virtual void draw();
+    virtual int getX(){return manX;}
+    virtual int getY(){return manY;}
+    virtual int width(){return manSpriteA->width;}
+    virtual int height(){return manSpriteA->height;}
 private:
     unsigned int manState;
     unsigned int currentFrame;

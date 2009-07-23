@@ -19,6 +19,8 @@ Car::Car(SpriteManager * newManager)
     wheelSpriteB[0] = sManager->newSprite("data\\wheel1_2.bmp");
     wheelSpriteB[1] = sManager->newSprite("data\\wheel2_2.bmp");
     wheelSpriteB[2] = sManager->newSprite("data\\wheel3_2.bmp");
+
+    collideType = Player;
 } // Constructor
 
 Car::~Car()
@@ -30,7 +32,7 @@ Car::~Car()
     }
 } // Deconstructor
 
-void Car::update(Level * curLevel)
+int Car::update(Level * curLevel, int offset)
 {
     if ( crashed == FALSE ){
         currentFrame ++;
@@ -51,7 +53,7 @@ void Car::update(Level * curLevel)
             {
                 if ( curLevel->isPit(wheelX[i]+screenX+3) ){
                         crashed = TRUE;
-                        return; // no more!
+                        return ACTOR_IDLE; // no more!
                 }
                 wheelY[i]=int(carY);
                 BOOL hitFloor=FALSE;
@@ -140,6 +142,17 @@ void Car::draw()
         for(int i = 0; i < 3; i++){
             DrawSprite(*wheelSpriteB[i], wheelX[i], wheelY[i], FALSE);
         }
+    }
+}
+
+int Car::collision()
+{
+    if ( collideWith == SlowDown )
+    {
+        slowDown();
+    }
+    else{
+        crashed = TRUE;
     }
 }
 

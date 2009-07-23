@@ -2,17 +2,13 @@
 
 #include "base.h"
 #include "gfx.h"
-#include "damagedman.h"
-#include "spriteManager.h"
-
-class DamagedMan;
 
 class Bus{
 public:
     Bus();
     Bus(int, SpriteManager*);
     ~Bus();
-    void update(int,int,std::vector<DamagedMan*>);
+    void update(int,int);
     void draw();
     int width(){return busSprite[0]->width;}
     int height(){return busSprite[0]->height;}
@@ -25,7 +21,7 @@ private:
     Sprite * busSprite[2];
     SpriteManager * sManager;
     int scrollX, busY, state;
-    double velX, busX;
+    int velX, busX;
     bool crashed;
     unsigned int currentFrame;
 };

@@ -14,7 +14,7 @@
 				<Option compiler="gcc" />
 				<Option projectResourceIncludeDirsRelation="1" />
 				<Compiler>
-					<Add option="-O3" />
+					<Add option="-O2" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -46,6 +46,10 @@
 			<Add library="SDL" />
 			<Add library="opengl32" />
 		</Linker>
+		<Unit filename="..\base\actor.cpp" />
+		<Unit filename="..\base\actor.h" />
+		<Unit filename="..\base\actorpool.cpp" />
+		<Unit filename="..\base\actorpool.h" />
 		<Unit filename="..\base\base.cpp" />
 		<Unit filename="..\base\base.h" />
 		<Unit filename="..\base\bloodfountain.cpp" />

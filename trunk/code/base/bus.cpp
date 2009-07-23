@@ -16,7 +16,7 @@ Bus::Bus(int newX, SpriteManager * newManager)
     busY = 185;
     sManager = newManager;
     crashed = FALSE;
-    velX = 1.5;
+    velX = 2;
     state = WAITING;
 
     busSprite[0] = sManager->newSprite("data\\bus1_1.bmp");
@@ -29,7 +29,7 @@ Bus::~Bus(){
         sManager->removeSprite(busSprite[i]);
 }
 
-void Bus::update(int inScroll, int carX, std::vector<DamagedMan*> damageVector)
+void Bus::update(int inScroll, int carX)
 {
     if ( state == WAITING ){
         if ( int(busX) - carX < 300 ){

@@ -16,7 +16,7 @@ Missile::~Missile()
     sManager->removeSprite(missileSprite);
 }
 
-void Missile::update(){
+int Missile::update(){
     if ( misY > 0 ){
         misY -= 6; // fly upward!
     }

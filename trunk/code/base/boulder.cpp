@@ -37,7 +37,7 @@ Boulder::~Boulder(){
         sManager->removeSprite(explodeSprites[i]);
 }
 
-void Boulder::update(int scrollX){
+int Boulder::update(Level* lvl, int scrollX){
     levelX = scrollX;
     if ( currentState == EXPLODING ){
         life--;

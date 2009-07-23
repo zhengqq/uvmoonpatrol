@@ -3,7 +3,6 @@
 
 #include "base.h"
 #include "gfx.h"
-#include "spriteManager.h"
 
 typedef enum {
     SMALL_BOULDER=0,
@@ -11,13 +10,15 @@ typedef enum {
     RIGHT_BOULDER   // right boulder, used for doulbing up
 };
 
-class Boulder {
+class Boulder
+{
 public:
     Boulder();
     Boulder(int,int, SpriteManager*);
-    ~Boulder();
-    void update(int);
-    void draw();
+    virtual ~Boulder();
+    virtual int update(Level*,int);
+    virtual int collision(){ return 0; }
+    virtual void draw();
     int getX(){return boulderX;}
     int getY(){return boulderY;}
     int width();

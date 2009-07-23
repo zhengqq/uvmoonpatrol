@@ -4,6 +4,8 @@
 #include "tile3.h"
 #include "tile4.h"
 
+#include "moonman.h"
+
 int debugLevel[] = {0,1,2,3,3,2,1,1,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,1,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,
                     0,1,2,3,3,2,1,0,0,0,4,5,2,3,1,2,2,2,3,3,3,2,2,2,3,3,3,4,6,5,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,
                     0,1,4,5,3,3,2,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,4,6,6,6,6,6,6,6,5};
@@ -49,7 +51,7 @@ Level::~Level()
     sManager->removeSprite(farBG);
     sManager->removeSprite(closeBG);
 }
-
+/*
 void Level::generateMoonMen(std::vector<MoonMan*> * manArray){
     for ( int i = 0; i < 164; i++){
         if (debugMoonMen[i] == TRUE){
@@ -83,9 +85,18 @@ void Level::generateBuses(std::vector<Bus*> * busArray){
     }
 }
 
-void Level::update(int scrollX)
+*/
+
+void Level::update(int scrollX, ActorPool * actorPool, int enemyGroup)
 {
     levelX = scrollX;
+
+    if ( debugMoonMen[int(levelX/32)+9] )
+    {
+        debugMoonMen[int(levelX/32)+9] = 0;
+        MoonMan * mMan = new MoonMan(levelX + 288, sManager);
+        actorPool->addActor(mMan, enemyGroup);
+    }
 }
 
 void Level::draw()
@@ -109,8 +120,8 @@ void Level::draw()
     {
         DrawSprite(*closeBG,(1920 - closeX)/2, 0, FALSE);
     }
-    // FINISH PARALLAX
-    for(int i = 0; i < 164; i++){
+    for(int i = int(levelX/32); i < int(levelX/32)+9; i++)
+    {
         DrawSprite(*tiles[debugLevel[i]], i*32 - levelX, 190, FALSE);
     }
 }

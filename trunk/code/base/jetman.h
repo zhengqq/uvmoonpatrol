@@ -5,9 +5,11 @@
 #include "base.h"
 #include "gfx.h"
 #include "jetfountain.h"
-#include "spriteManager.h"
 
-class JetMan{
+class JetFountain;
+
+class JetMan
+{
 public:
     JetMan();
     JetMan(int, SpriteManager* );

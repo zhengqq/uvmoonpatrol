@@ -3,7 +3,6 @@
 
 #include "base.h"
 #include "gfx.h"
-#include "spriteManager.h"
 
 class Missile
 {
@@ -11,7 +10,7 @@ public:
     Missile();
     Missile(int,int, SpriteManager*);
     ~Missile();
-    void update();
+    virtual int update();
     void draw();
     int getX(){ return misX; }
     int getY(){ return misY; }

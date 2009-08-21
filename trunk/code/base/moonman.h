@@ -8,7 +8,7 @@ class MoonMan : public Actor
 {
 public:
     MoonMan(int, SpriteManager*);
-    ~MoonMan();
+    virtual ~MoonMan();
     virtual int update(Level*,int);
     virtual int collision();
     virtual void draw();

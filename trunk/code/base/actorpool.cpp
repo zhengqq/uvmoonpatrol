@@ -31,9 +31,9 @@ std::vector<Actor*> * ActorPool::getPool(int i)
 void ActorPool::cleanPool()
 {
     // Clear all the actors inside each pool
-    for(int i = 0; i < pool.size(); i++)
+    for(unsigned int i = 0; i < pool.size(); i++)
     {
-        for(int j = 0; j < pool[i].size(); j++)
+        for(unsigned int j = 0; j < pool[i].size(); j++)
         {
             Actor* actor = pool[i][j];
             delete actor;
@@ -48,9 +48,9 @@ void ActorPool::updatePhysics(Level * level, int worldOffset)
     // Clear our collision list
     collisionPool.clear();
     unsigned int ret = 0;
-    for(int i = 0; i < pool.size(); i++)
+    for(unsigned int i = 0; i < pool.size(); i++)
     {
-        for(int j = 0; j < pool[i].size(); j++)
+        for(unsigned int j = 0; j < pool[i].size(); j++)
         {
             Actor* actor = pool[i][j];
             ret = actor->update(level, worldOffset);
@@ -66,10 +66,10 @@ void ActorPool::checkCollision(int A, int B)
 {
     std::vector<Actor*> poolA = pool[A];
     std::vector<Actor*> poolB = pool[B];
-    for(int i = 0; i < poolA.size(); i++)
+    for(unsigned int i = 0; i < poolA.size(); i++)
     {
         // check collision against everything in poolB
-        for(int j = 0; j < poolB.size(); j++)
+        for(unsigned int j = 0; j < poolB.size(); j++)
         {
             if ( rectCollision(poolA[i]->getX(), poolA[i]->getY(), poolA[i]->width(), poolA[i]->height(),
                         poolB[j]->getX(), poolB[j]->getY(), poolB[j]->width(), poolB[j]->height()) ){ // this WILL push two collisions into the collision pool, no smart checks yet
@@ -84,7 +84,7 @@ void ActorPool::checkCollision(int A, int B)
 
 void ActorPool::updateCollisions()
 {
-    for(int i = 0; i < collisionPool.size(); i++)
+    for(unsigned int i = 0; i < collisionPool.size(); i++)
     {
         collisionPool[i]->collision(); // do a collision!
     }
@@ -92,9 +92,9 @@ void ActorPool::updateCollisions()
 
 void ActorPool::drawPool()
 {
-    for(int i = 0; i < pool.size(); i++)
+    for(unsigned int i = 0; i < pool.size(); i++)
     {
-        for(int j = 0; j < pool[i].size(); j++)
+        for(unsigned int j = 0; j < pool[i].size(); j++)
         {
             pool[i][j]->draw();
         }

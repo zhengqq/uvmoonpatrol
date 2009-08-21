@@ -16,16 +16,16 @@ Boulder::Boulder(int newX, int type, SpriteManager * newManager){
     else if ( type == LARGE_BOULDER ) boulderY = 172;
     levelX = 0;
     if ( type == LARGE_BOULDER ){
-        boulderSprite = sManager->newSprite("data\\boulder1.bmp");
-        explodeSprites[0] = sManager->newSprite("data\\explosion2_1.bmp");
-        explodeSprites[1] = sManager->newSprite("data\\explosion2_2.bmp");
-        explodeSprites[2] = sManager->newSprite("data\\explosion2_3.bmp");
+        boulderSprite = sManager->newSprite("data\\boulder1.png");
+        explodeSprites[0] = sManager->newSprite("data\\explosion2_1.png");
+        explodeSprites[1] = sManager->newSprite("data\\explosion2_2.png");
+        explodeSprites[2] = sManager->newSprite("data\\explosion2_3.png");
     }
     else if ( type == SMALL_BOULDER ){
-        boulderSprite = sManager->newSprite("data\\boulder2.bmp");
-        explodeSprites[0] = sManager->newSprite("data\\explosion3_1.bmp");
-        explodeSprites[1] = sManager->newSprite("data\\explosion3_2.bmp");
-        explodeSprites[2] = sManager->newSprite("data\\explosion3_3.bmp");
+        boulderSprite = sManager->newSprite("data\\boulder2.png");
+        explodeSprites[0] = sManager->newSprite("data\\explosion3_1.png");
+        explodeSprites[1] = sManager->newSprite("data\\explosion3_2.png");
+        explodeSprites[2] = sManager->newSprite("data\\explosion3_3.png");
     }
     life = 14; // how long the explosion will last!
     currentState = ACTIVE;
@@ -42,6 +42,7 @@ int Boulder::update(Level* lvl, int scrollX){
     if ( currentState == EXPLODING ){
         life--;
     }
+    return ACTOR_IDLE;
 }
 
 void Boulder::draw(){

@@ -5,8 +5,8 @@
 Font::Font(SpriteManager * newManager)
 {
     sManager = newManager;
-    fontTexture = sManager->newSprite("data\\font.bmp");
-    fontTextureYellow = sManager->newSprite("data\\fonty.bmp");
+    fontTexture = sManager->newSprite("data\\font.png");
+    fontTextureYellow = sManager->newSprite("data\\fonty.png");
 }
 
 Font::~Font()
@@ -38,16 +38,16 @@ void Font::drawNum(int x, int y, int score, int buffer, bool isOrange)
 	    for(int j = 0; j < (buffer-i-1);j++)
             powerOfTen *= 10;
 		int curNum = (score/powerOfTen);
-		glTexCoord2f(0.0625f*curNum,1.0f);
+		glTexCoord2f(0.0625f*curNum,0.0f);
 		glVertex3i(x+i*8,y,0);
 
-		glTexCoord2f(0.0625f*curNum,0.0f);
+		glTexCoord2f(0.0625f*curNum,1.0f);
 		glVertex3i(x+i*8,y+7,0);
 
-		glTexCoord2f(0.0625f*(curNum+1),0.0f);
+		glTexCoord2f(0.0625f*(curNum+1),1.0f);
 		glVertex3i(x+i*8+7,y+7,0);
 
-		glTexCoord2f(0.0625f*(curNum+1),1.0f);
+		glTexCoord2f(0.0625f*(curNum+1),0.0f);
 		glVertex3i(x+i*8+7,y,0);
 
 		score -= (curNum*powerOfTen);

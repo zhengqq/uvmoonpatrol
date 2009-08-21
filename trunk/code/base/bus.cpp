@@ -19,8 +19,8 @@ Bus::Bus(int newX, SpriteManager * newManager)
     velX = 2;
     state = WAITING;
 
-    busSprite[0] = sManager->newSprite("data\\bus1_1.bmp");
-    busSprite[1] = sManager->newSprite("data\\bus1_2.bmp");
+    busSprite[0] = sManager->newSprite("data\\bus1_1.png");
+    busSprite[1] = sManager->newSprite("data\\bus1_2.png");
     currentFrame = 0;
 }
 

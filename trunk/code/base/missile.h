@@ -9,7 +9,7 @@ class Missile
 public:
     Missile();
     Missile(int,int, SpriteManager*);
-    ~Missile();
+    virtual ~Missile();
     virtual int update();
     void draw();
     int getX(){ return misX; }

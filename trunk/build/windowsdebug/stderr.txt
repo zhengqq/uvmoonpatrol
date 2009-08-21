@@ -1,0 +1,6 @@
+Unable to load running1_1.png: Couldn't open running1_1.png
+IMG_LOAD: Couldn't open running1_1.png
+ERROR: *** Could not generate sprite running1_1.png
+Unable to load running1_2.png: Couldn't open running1_2.png
+IMG_LOAD: Couldn't open running1_2.png
+ERROR: *** Could not generate sprite running1_2.png

@@ -7,14 +7,14 @@ class Car : public Actor
 {
 public:
     Car(SpriteManager*); // Constructor
-    ~Car(); // Deconstructor
+    virtual ~Car(); // Deconstructor
     virtual int update(Level*, int); // give this the level terrain?
     virtual void draw();
     virtual int collision(); // what happens during a collision?
 
     void fire();
-    bool moveLeft();
-    bool moveRight();
+    void moveLeft();
+    void moveRight();
     void stopMove();
     void jump();
     int getScreenX(){return screenX;}

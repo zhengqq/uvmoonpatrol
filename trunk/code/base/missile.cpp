@@ -8,7 +8,7 @@ Missile::Missile(int startX, int startY, SpriteManager * newManager){
     sManager = newManager;
     misX = startX;
     misY = startY;
-    missileSprite = sManager->newSprite("data\\missile.bmp");
+    missileSprite = sManager->newSprite("data\\missile.png");
 }
 
 Missile::~Missile()
@@ -20,6 +20,7 @@ int Missile::update(){
     if ( misY > 0 ){
         misY -= 6; // fly upward!
     }
+    return ACTOR_IDLE;
 }
 
 void Missile::draw(){

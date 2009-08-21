@@ -8,7 +8,7 @@ typedef enum {
 DamagedMan::DamagedMan(int startX, SpriteManager * newManager, int startAngle){
     sManager = newManager;
     manState = FLYING;
-    damageSprite = sManager->newSprite("data\\damagedman.bmp");
+    damageSprite = sManager->newSprite("data\\damagedman.png");
     manX = startX;
     manY = 175; // will snap to the level
     speed = rand()%20/10 + 5;

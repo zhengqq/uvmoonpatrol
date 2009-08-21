@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
 #include <GL/gl.h>	// Header File For The OpenGL32 Library
 #include <GL/glu.h>	// Header File For The GLu32 Library
 
@@ -24,6 +25,6 @@ struct Sprite
 #include "actor.h" // Actor Base Class
 
 int InitGL();
-SDL_Surface *LoadBMP2RGBA(char *filename, bool texSizeCheck=true);
+SDL_Surface *LoadIMG2RGBA(char *filename);
 void DrawSprite(Sprite & sprite, int x, int y, bool flip);
 bool generateSprite(char * filename, Sprite * sprite);

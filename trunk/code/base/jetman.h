@@ -1,5 +1,4 @@
-#ifndef __JETMAN_H__
-#define __JETMAN_H__
+#pragma once
 
 #include <vector>
 #include "base.h"
@@ -8,25 +7,23 @@
 
 class JetFountain;
 
-class JetMan
+class JetMan : public Actor
 {
 public:
-    JetMan();
     JetMan(int, SpriteManager* );
-    ~JetMan();
-    void update(int,std::vector<JetFountain*>::iterator,int,int);
-    void draw();
+    virtual ~JetMan();
+    virtual int update(Level*,int);
+    virtual int collision();
+    virtual void draw();
     int getX(){return int(jetX);}
     int getY(){return int(jetY);}
     int width(){return jetSprite->width;}
     int height(){return jetSprite->height;}
 private:
-    int state;
+    unsigned int jetState;
     int swoopCount;
     Sprite * jetSprite;
     SpriteManager * sManager;
     int scrollX;
     double velX,velY,gravity,jetX,jetY;
 };
-
-#endif // __JETMAN_H__

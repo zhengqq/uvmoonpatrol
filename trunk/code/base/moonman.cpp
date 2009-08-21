@@ -12,8 +12,8 @@ MoonMan::MoonMan(int startX, SpriteManager * newManager){
     currentFrame = 0;
     facingLeft = FALSE;
     spriteA = TRUE;
-    manSpriteA = sManager->newSprite("data\\running1_1.bmp");
-    manSpriteB = sManager->newSprite("data\\running1_2.bmp");
+    manSpriteA = sManager->newSprite("data\\running1_1.png");
+    manSpriteB = sManager->newSprite("data\\running1_2.png");
     manX = startX;
     manY = 175; // will snap to the level
     speed = 2;
@@ -31,6 +31,7 @@ int MoonMan::collision()
     if ( collideWith == Player ){
         manState = DEAD;
     }
+    return 0;
 }
 
 int MoonMan::update(Level * currentLevel, int newScroll){
@@ -60,6 +61,7 @@ int MoonMan::update(Level * currentLevel, int newScroll){
         // We're dead, change sprite to dead sprite
         return ACTOR_REMOVE;
     }
+    return ACTOR_IDLE;
 }
 
 void MoonMan::draw(){

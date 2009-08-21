@@ -5,6 +5,7 @@
 #include "tile4.h"
 
 #include "moonman.h"
+#include "jetman.h"
 
 int debugLevel[] = {0,1,2,3,3,2,1,1,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,0,1,2,3,3,2,1,1,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,
                     0,1,2,3,3,2,1,0,0,0,4,5,2,3,1,2,2,2,3,3,3,2,2,2,3,3,3,4,6,5,3,3,2,1,0,0,0,0,1,1,1,1,2,2,2,3,3,3,2,2,2,3,3,3,
@@ -30,16 +31,28 @@ BOOL debugBuses[] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
 Level::Level(SpriteManager * newManager)
 {
     sManager = newManager;
-    tiles[0] = sManager->newSprite("data\\tile1.bmp");
-    tiles[1] = sManager->newSprite("data\\tile2.bmp");
-    tiles[2] = sManager->newSprite("data\\tile3.bmp");
-    tiles[3] = sManager->newSprite("data\\tile4.bmp");
-    tiles[4] = sManager->newSprite("data\\pitfall1.bmp");
-    tiles[5] = sManager->newSprite("data\\pitfall2.bmp");
-    tiles[6] = sManager->newSprite("data\\pitfall3.bmp");
-    spaceBG = sManager->newSprite("data\\spacebg1.bmp");
-    farBG = sManager->newSprite("data\\farbg1.bmp");
-    closeBG = sManager->newSprite("data\\closebg1.bmp");
+    tiles[0] = sManager->newSprite("data\\tile1.png");
+    tiles[1] = sManager->newSprite("data\\tile2.png");
+    tiles[2] = sManager->newSprite("data\\tile3.png");
+    tiles[3] = sManager->newSprite("data\\tile4.png");
+    tiles[4] = sManager->newSprite("data\\pitfall1.png");
+    tiles[5] = sManager->newSprite("data\\pitfall2.png");
+    tiles[6] = sManager->newSprite("data\\pitfall3.png");
+    spaceBG = sManager->newSprite("data\\spacebg1.png");
+    farBG = sManager->newSprite("data\\farbg1.png");
+    closeBG = sManager->newSprite("data\\closebg1.png");
+
+    // Preload a list here from the level input maybe?
+    Sprite * prebuffer;
+    char * prebufList[] = {"data\\cannon.png","running1_1.png","running1_2.png",
+        "data\\explosion1_1.png","data\\explosion1_2.png","data\\explosion1_3.png",NULL };
+    unsigned int i = 0;
+    while ( prebufList[i] != NULL ){
+        prebuffer = sManager->newSprite(prebufList[i]);
+        sManager->removeSprite(prebuffer); // load them in memory
+        i++;
+    }
+
     levelX=0;
 }
 
@@ -96,6 +109,13 @@ void Level::update(int scrollX, ActorPool * actorPool, int enemyGroup)
         debugMoonMen[int(levelX/32)+9] = 0;
         MoonMan * mMan = new MoonMan(levelX + 288, sManager);
         actorPool->addActor(mMan, enemyGroup);
+    }
+
+    if ( debugJetMen[int(levelX/32)+9] )
+    {
+        debugJetMen[int(levelX/32)+9] = 0;
+        JetMan * jMan = new JetMan(levelX + 288, sManager);
+        actorPool->addActor(jMan, enemyGroup);
     }
 }
 

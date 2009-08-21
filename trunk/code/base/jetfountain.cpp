@@ -60,5 +60,5 @@ void JetFountain::setActive(BOOL newActiveState){
 
 void JetFountain::addJetlet()
 {
-    pList.push_back(new Particle(JetX, JetY, int(angle+rand()%15), length+rand()%30/10, gravity, 6, "data\\Jetparticle.bmp",JET, sManager));
+    pList.push_back(new Particle(JetX, JetY, int(angle+rand()%15), length+rand()%30/10, gravity, 6, "data\\Jetparticle.png",JET, sManager));
 }

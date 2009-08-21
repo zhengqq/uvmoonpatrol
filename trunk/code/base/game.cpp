@@ -95,32 +95,19 @@ void Game::IntroLogic()
 
 void Game::InitGame()
 {
-    spriteManager = new SpriteManager();
-    actorPool = new ActorPool();
-
-    // First Actor Pool for player objects
-    playerGroup = actorPool->createGroup();
-
-    // Second Actor Pool for enemy/level objects
-    enemyGroup = actorPool->createGroup();
-
-    // Third Actor Pool for particle engines (non-collidables)
-    extraGroup = actorPool->createGroup();
-
-    guiSprite = spriteManager->newSprite("data\\gui.bmp");
-    // Create a new font
+    spriteManager = new SpriteManager();    // sprite manager to handle generating textures
+    actorPool = new ActorPool();            // pool to hold our groups
+    playerGroup = actorPool->createGroup(); // player objects
+    enemyGroup = actorPool->createGroup();  // enemy/level objects
+    extraGroup = actorPool->createGroup();  // non-collidables (particles, effects)
+    guiSprite = spriteManager->newSprite("data\\gui.png");
     gameCar = new Car(spriteManager);
-    actorPool->addActor(gameCar, playerGroup);
+    actorPool->addActor(gameCar, playerGroup); // add the car to the player group
 
     gameLevel = new Level(spriteManager);
     gameFont = new Font(spriteManager);
     carCannon = 0; // nothing for this yet!
-    /*
-    gameLevel->generateMoonMen(&gameMoonMen);
-    gameLevel->generateBoulders(&gameBoulders);
-    gameLevel->generateJetMen(&gameJetMen,&jmFountain);
-    gameLevel->generateBuses(&gameBuses);
-    */
+
     playerScore = 0;
     highScore = 15000; // will be filled in later
     currentTime = currentTimeBuffer = 0;
@@ -137,27 +124,6 @@ void Game::ShutdownGame()
     while(!carMissile.empty()){
         delete carMissile.back(); carMissile.pop_back();
     }
-    while(!gameMoonMen.empty()){
-        delete gameMoonMen.back(); gameMoonMen.pop_back();
-    }
-    while(!mmFountain.empty()){
-        delete mmFountain.back(); mmFountain.pop_back();
-    }
-    while(!gameJetMen.empty()){
-        delete gameJetMen.back(); gameJetMen.pop_back();
-    }
-    while(!jmFountain.empty()){
-        delete jmFountain.back(); jmFountain.pop_back();
-    }
-    while(!gameBoulders.empty()){
-        delete gameBoulders.back(); gameBoulders.pop_back();
-    }
-    while(!gameBuses.empty()){
-        delete gameBuses.back(); gameBuses.pop_back();
-    }
-//    while(!gameDamagedMen.empty()){
-//        delete gameDamagedMen.back(); gameDamagedMen.pop_back();
-//    }
     delete actorPool;
     delete spriteManager;
 }
@@ -173,46 +139,17 @@ void Game::GameRender()				// Draw Everything
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
 
     gameLevel->draw();
-
     actorPool->drawPool();
-    //gameCar->draw();
+
     if ( carCannon != 0 ){
         carCannon->draw();
     }
-    for(int i = 0; i < mmFountain.size(); i++){
-        mmFountain[i]->draw();
-    }
-    for(int i = 0; i < gameBuses.size(); i++){
-        gameBuses[i]->draw();
-    }
-    for(int i = 0; i < carMissile.size(); i++){
-        carMissile[i]->draw();
-    }
-    for(int i = 0; i < gameMoonMen.size(); i++){
-        gameMoonMen[i]->draw();
-    }
-    for(int i = 0; i < jmFountain.size(); i++){
-        jmFountain[i]->draw();
-    }
-    for(int i = 0; i < gameJetMen.size(); i++){
-        gameJetMen[i]->draw();
-    }
-    for(int i = 0; i < gameBoulders.size(); i++){
-        gameBoulders[i]->draw();
-    }
-//    for(int i = 0; i < gameDamagedMen.size(); i++){
-//        gameDamagedMen[i]->draw();
-//    }
 
     DrawSprite(*guiSprite, 0, 0, FALSE);
-
-    gameFont->drawOrangeNum(16,10,highScore,6);
-    gameFont->drawYellowNum(26,25,playerScore,6); // x = 0, y = 0, score = 13525, buffer = 6
-
+    gameFont->drawOrangeNum(16,10,highScore,6);     // draw high score
+    gameFont->drawYellowNum(26,25,playerScore,6);   // x = 0, y = 0, score = 13525, buffer = 6
     gameFont->drawOrangeNum(233,17,2,1);
-
     gameFont->drawOrangeNum(122,25,currentTime,3);
-
 
     glPopMatrix();
     glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
@@ -241,11 +178,8 @@ void Game::GameLogic()
         gKeyCtrl = FALSE;
     }
 
-    //gameCar->update(gameLevel, 0);
-
     int scrollX = gameCar->getScreenX();
     actorPool->updatePhysics(gameLevel, scrollX);
-
     gameLevel->update(scrollX, actorPool, enemyGroup);
 
     if ( carCannon!= 0){
@@ -270,7 +204,6 @@ void Game::GameLogic()
             ++iter;
         }
     }
-    /*
     /* iteratore through all the moon men on the screen *
     std::vector<MoonMan*>::iterator moonIter = gameMoonMen.begin();
     while ( moonIter != gameMoonMen.end()){
@@ -409,11 +342,11 @@ void Game::GameLogic()
         }
     }
 
-/*    std::vector<DamagedMan*>::iterator manIter = gameDamagedMen.begin();
+    std::vector<DamagedMan*>::iterator manIter = gameDamagedMen.begin();
     while ( manIter != gameDamagedMen.end() ){
         DamagedMan * man = *(manIter);
         man->update(scrollX, gameLevel);
-        /*
+        /
         if ( bus->isActive()){
             if ( rectCollision(gameCar->getX()+5,gameCar->getY(),gameCar->width()-5,gameCar->height()-10, // 10 compensates for bottom of the car
                         bus->getX(),bus->getY()+2,bus->width(),bus->height())){
@@ -436,7 +369,7 @@ void Game::GameLogic()
             ++manIter;
         //}
     }
-*
+
     std::vector<Boulder*>::iterator bldIter = gameBoulders.begin();
     while ( bldIter != gameBoulders.end() ){
         Boulder * bld = *(bldIter);
@@ -464,7 +397,6 @@ void Game::GameLogic()
 */
 
     actorPool->checkCollision(playerGroup, enemyGroup);
-
     actorPool->updateCollisions();
 
     // Timer

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Release" />
+	<ActiveTarget name="Debug" />
 	<File name="..\base\actor.cpp" open="1" top="0" tabpos="2">
 		<Cursor position="20" topLine="0" />
 	</File>
@@ -8,7 +8,7 @@
 		<Cursor position="637" topLine="11" />
 	</File>
 	<File name="..\base\actorpool.cpp" open="1" top="0" tabpos="4">
-		<Cursor position="2264" topLine="67" />
+		<Cursor position="550" topLine="41" />
 	</File>
 	<File name="..\base\actorpool.h" open="0" top="0" tabpos="3">
 		<Cursor position="323" topLine="0" />
@@ -58,7 +58,7 @@
 	<File name="..\base\font.h" open="0" top="0" tabpos="10">
 		<Cursor position="204" topLine="0" />
 	</File>
-	<File name="..\base\game.cpp" open="1" top="0" tabpos="5">
+	<File name="..\base\game.cpp" open="1" top="1" tabpos="5">
 		<Cursor position="7172" topLine="106" />
 	</File>
 	<File name="..\base\game.h" open="0" top="0" tabpos="11">
@@ -100,7 +100,7 @@
 	<File name="..\base\moonman.cpp" open="1" top="0" tabpos="1">
 		<Cursor position="698" topLine="26" />
 	</File>
-	<File name="..\base\moonman.h" open="1" top="1" tabpos="9">
+	<File name="..\base\moonman.h" open="1" top="0" tabpos="9">
 		<Cursor position="298" topLine="0" />
 	</File>
 	<File name="..\base\particle.cpp" open="1" top="0" tabpos="8">

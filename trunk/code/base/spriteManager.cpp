@@ -70,13 +70,13 @@ void SpriteManager::removeSprite(Sprite* remSprite){
     for(unsigned int i=0; i < spriteVector.size(); ++i){
         if(spriteVector[i].sprite == remSprite){
             spriteVector[i].cnt--; // just reduce the number of sprites associated to this value
-            if ( autoFlush || spriteVector[i].cnt == 0 ){
+            /*if ( autoFlush || spriteVector[i].cnt == 0 ){
                 glDeleteTextures(1, &spriteVector[i].sprite->texture);
                 delete spriteVector[i].sprite;
                 spriteVector[i].sprite = NULL;
                 delete spriteVector[i].name;
                 spriteVector[i].name = NULL;
-            }
+            }*/
         }
     }
 }

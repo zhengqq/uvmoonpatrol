@@ -719,15 +719,16 @@
 
 1248318408 c:\projects\ultraviolentmoonpatrol\code\base\base.h
 
-1248326805 source:c:\projects\ultraviolentmoonpatrol\code\base\boulder.cpp
+1250825498 source:c:\projects\ultraviolentmoonpatrol\code\base\boulder.cpp
 	"boulder.h"
 
 1248326926 c:\projects\ultraviolentmoonpatrol\code\base\boulder.h
 	"base.h"
 	"gfx.h"
 
-1248319893 c:\projects\ultraviolentmoonpatrol\code\base\gfx.h
+1250825692 c:\projects\ultraviolentmoonpatrol\code\base\gfx.h
 	<SDL/SDL.h>
+	<SDL/SDL_image.h>
 	<GL/gl.h>
 	<GL/glu.h>
 	"actor.h"
@@ -736,17 +737,17 @@
 	"gfx.h"
 	<vector>
 
-1245731220 source:c:\projects\ultraviolentmoonpatrol\code\base\cannon.cpp
+1250824132 source:c:\projects\ultraviolentmoonpatrol\code\base\cannon.cpp
 	"cannon.h"
 
 1248325742 c:\projects\ultraviolentmoonpatrol\code\base\cannon.h
 	"base.h"
 	"gfx.h"
 
-1248331212 source:c:\projects\ultraviolentmoonpatrol\code\base\car.cpp
+1250825593 source:c:\projects\ultraviolentmoonpatrol\code\base\car.cpp
 	"car.h"
 
-1248330994 c:\projects\ultraviolentmoonpatrol\code\base\car.h
+1250825587 c:\projects\ultraviolentmoonpatrol\code\base\car.h
 	"base.h"
 	"gfx.h"
 
@@ -760,12 +761,12 @@
 	"bus.h"
 	"damagedman.h"
 
-1248330820 c:\projects\ultraviolentmoonpatrol\code\base\moonman.h
+1250825612 c:\projects\ultraviolentmoonpatrol\code\base\moonman.h
 	"base.h"
 	"gfx.h"
 	"level.h"
 
-1248318971 c:\projects\ultraviolentmoonpatrol\code\base\jetman.h
+1250825624 c:\projects\ultraviolentmoonpatrol\code\base\jetman.h
 	<vector>
 	"base.h"
 	"gfx.h"
@@ -780,7 +781,7 @@
 	"gfx.h"
 	"spriteManager.h"
 
-1245731257 source:c:\projects\ultraviolentmoonpatrol\code\base\font.cpp
+1250824366 source:c:\projects\ultraviolentmoonpatrol\code\base\font.cpp
 	"font.h"
 	"gfx.h"
 	<SDL/SDL.h>
@@ -791,23 +792,24 @@
 	"gfx.h"
 	"spriteManager.h"
 
-1245728999 source:c:\projects\ultraviolentmoonpatrol\code\base\gfx.cpp
+1250825686 source:c:\projects\ultraviolentmoonpatrol\code\base\gfx.cpp
 	"gfx.h"
 
-1245730746 source:c:\projects\ultraviolentmoonpatrol\code\base\jetfountain.cpp
+1250824133 source:c:\projects\ultraviolentmoonpatrol\code\base\jetfountain.cpp
 	"jetfountain.h"
 
-1245822110 source:c:\projects\ultraviolentmoonpatrol\code\base\jetman.cpp
+1250825701 source:c:\projects\ultraviolentmoonpatrol\code\base\jetman.cpp
 	"jetman.h"
 	<math.h>
 
-1248332121 source:c:\projects\ultraviolentmoonpatrol\code\base\level.cpp
+1250826339 source:c:\projects\ultraviolentmoonpatrol\code\base\level.cpp
 	"level.h"
 	"tile1.h"
 	"tile2.h"
 	"tile3.h"
 	"tile4.h"
 	"moonman.h"
+	"jetman.h"
 
 1219016082 c:\projects\ultraviolentmoonpatrol\code\base\tile1.h
 	"base.h"
@@ -825,7 +827,7 @@
 	<stdio.h>
 	"game.h"
 
-1248321069 c:\projects\ultraviolentmoonpatrol\code\base\game.h
+1250824941 c:\projects\ultraviolentmoonpatrol\code\base\game.h
 	<math.h>
 	<stdio.h>
 	<GL/gl.h>
@@ -850,7 +852,7 @@
 	"spriteManager.h"
 	"actorpool.h"
 
-1248318946 c:\projects\ultraviolentmoonpatrol\code\base\missile.h
+1250825618 c:\projects\ultraviolentmoonpatrol\code\base\missile.h
 	"base.h"
 	"gfx.h"
 
@@ -862,25 +864,25 @@
 	"base.h"
 	"gfx.h"
 
-1248061573 source:c:\projects\ultraviolentmoonpatrol\code\base\missile.cpp
+1250825715 source:c:\projects\ultraviolentmoonpatrol\code\base\missile.cpp
 	"missile.h"
 
-1248331266 source:c:\projects\ultraviolentmoonpatrol\code\base\moonman.cpp
+1250825732 source:c:\projects\ultraviolentmoonpatrol\code\base\moonman.cpp
 	"moonman.h"
 
 1245731132 source:c:\projects\ultraviolentmoonpatrol\code\base\particle.cpp
 	"particle.h"
 	<math.h>
 
-1245822360 source:c:\projects\ultraviolentmoonpatrol\code\base\spritemanager.cpp
+1250825972 source:c:\projects\ultraviolentmoonpatrol\code\base\spritemanager.cpp
 	"spriteManager.h"
 
 1245733507 source:c:\projects\ultraviolentmoonpatrol\code\windows\uvmoonpatrol.rc
 
-1245736538 source:c:\projects\ultraviolentmoonpatrol\code\base\bloodfountain.cpp
+1250824132 source:c:\projects\ultraviolentmoonpatrol\code\base\bloodfountain.cpp
 	"bloodfountain.h"
 
-1247887661 source:c:\projects\ultraviolentmoonpatrol\code\base\bus.cpp
+1250824132 source:c:\projects\ultraviolentmoonpatrol\code\base\bus.cpp
 	"bus.h"
 
 1248318731 c:\projects\ultraviolentmoonpatrol\code\base\damagedman.h
@@ -888,10 +890,10 @@
 	"gfx.h"
 	"level.h"
 
-1245821040 source:c:\projects\ultraviolentmoonpatrol\code\base\damagedman.cpp
+1250824133 source:c:\projects\ultraviolentmoonpatrol\code\base\damagedman.cpp
 	"damagedman.h"
 
-1248331321 source:c:\projects\ultraviolentmoonpatrol\code\base\game.cpp
+1250825661 source:c:\projects\ultraviolentmoonpatrol\code\base\game.cpp
 	"game.h"
 
 1248330710 c:\projects\ultraviolentmoonpatrol\code\base\actor.h
@@ -905,6 +907,6 @@
 	<vector>
 	"actor.h"
 
-1248330726 source:c:\projects\ultraviolentmoonpatrol\code\base\actorpool.cpp
+1250825485 source:c:\projects\ultraviolentmoonpatrol\code\base\actorpool.cpp
 	"actorpool.h"
 

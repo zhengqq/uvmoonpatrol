@@ -75,13 +75,7 @@ private:
     Car * gameCar;
     Cannon * carCannon; // one cannon!
     std::vector<Missile*> carMissile;
-    std::vector<MoonMan*> gameMoonMen;
-    std::vector<BloodFountain*> mmFountain;
-    std::vector<JetMan*> gameJetMen;
-    std::vector<JetFountain*> jmFountain;
-    std::vector<Boulder*> gameBoulders;
-    std::vector<Bus*> gameBuses;
-    //std::vector<DamagedMan*> gameDamagedMen;
+
     Level * gameLevel;
     Font * gameFont;
 

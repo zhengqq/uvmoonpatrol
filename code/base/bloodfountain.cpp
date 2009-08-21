@@ -8,7 +8,7 @@
 #define LIFE_CLOUD 15
 #define LIFE_POP 20
 
-char * bloodList[6] = {"data\\blood1.bmp","data\\blood2.bmp","data\\blood3.bmp","data\\blood4.bmp","data\\guts1.bmp","data\\guts2.bmp"};
+char * bloodList[6] = {"data\\blood1.png","data\\blood2.png","data\\blood3.png","data\\blood4.png","data\\guts1.png","data\\guts2.png"};
 
 BloodFountain::BloodFountain()
 {

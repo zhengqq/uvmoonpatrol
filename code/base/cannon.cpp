@@ -10,10 +10,10 @@ Cannon::Cannon(int startX, int startY, SpriteManager * newManager){
     levelX = 0;
     life = 18;
     sManager = newManager;
-    cannonSprite = sManager->newSprite("data\\cannon.bmp");
-    explosionSprite[0] = sManager->newSprite("data\\explosion1_1.bmp");
-    explosionSprite[1] = sManager->newSprite("data\\explosion1_2.bmp");
-    explosionSprite[2] = sManager->newSprite("data\\explosion1_3.bmp");
+    cannonSprite = sManager->newSprite("data\\cannon.png");
+    explosionSprite[0] = sManager->newSprite("data\\explosion1_1.png");
+    explosionSprite[1] = sManager->newSprite("data\\explosion1_2.png");
+    explosionSprite[2] = sManager->newSprite("data\\explosion1_3.png");
 }
 
 Cannon::~Cannon(){

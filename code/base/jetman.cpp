@@ -1,22 +1,11 @@
 #include "jetman.h"
 #include <math.h>
 
-typedef enum {
-    WAITING=0,
-    ACTIVATED,
-    DONE
-};
-
-JetMan::JetMan(){
-    printf("Default constructor does nothing!\n");
-}
-
 JetMan::JetMan(int startX, SpriteManager * newManager){
     sManager = newManager;
-    jetSprite = sManager->newSprite("data\\flyingman.bmp");
+    jetSprite = sManager->newSprite("data\\flyingman.png");
     jetX = startX;
     jetY = 50+rand()%5; // common starting y
-    state = WAITING;
     gravity = 0.01; // gravity constant on the moon?
     velX = velY = 0.0;
     swoopCount = 0;
@@ -26,8 +15,8 @@ JetMan::~JetMan(){
     sManager->removeSprite(jetSprite);
 }
 
-void JetMan::update(int newScroll, std::vector<JetFountain*>::iterator myFountain, int carX, int carY){
-    JetFountain * curFountain = *(myFountain);
+int JetMan::update(Level * currentLevel, int newScroll){
+/*    JetFountain * curFountain = *(myFountain);
     if ( state == WAITING ){
         if ( int(jetX) - carX < 300 ){
             state = ACTIVATED;
@@ -60,10 +49,26 @@ void JetMan::update(int newScroll, std::vector<JetFountain*>::iterator myFountai
             state == DONE;
         }
     }
+    */
+
+    if ( scrollX - jetX > 32 )
+    {
+        // We're dead, change sprite to dead sprite
+        return ACTOR_REMOVE;
+    }
+
+    scrollX = newScroll;
+    return ACTOR_IDLE;
+}
+
+int JetMan::collision(){
+    // Do different effects for each type of impact?
+    if ( collideWith == Player ){
+        // kill?
+    }
+    return 0;
 }
 
 void JetMan::draw(){
-    if ( state == ACTIVATED ){
-        DrawSprite(*jetSprite,int(jetX)-scrollX,int(jetY), FALSE);
-    }
+    DrawSprite(*jetSprite,int(jetX)-scrollX,int(jetY), FALSE);
 }

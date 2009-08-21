@@ -12,13 +12,13 @@ Car::Car(SpriteManager * newManager)
     wheelA = TRUE;
     sManager = newManager;
 
-    carSprite = sManager->newSprite("data\\car.bmp");
-    wheelSpriteA[0] = sManager->newSprite("data\\wheel1_1.bmp");
-    wheelSpriteA[1] = sManager->newSprite("data\\wheel2_1.bmp");
-    wheelSpriteA[2] = sManager->newSprite("data\\wheel3_1.bmp");
-    wheelSpriteB[0] = sManager->newSprite("data\\wheel1_2.bmp");
-    wheelSpriteB[1] = sManager->newSprite("data\\wheel2_2.bmp");
-    wheelSpriteB[2] = sManager->newSprite("data\\wheel3_2.bmp");
+    carSprite = sManager->newSprite("data\\car.png");
+    wheelSpriteA[0] = sManager->newSprite("data\\wheel1_1.png");
+    wheelSpriteA[1] = sManager->newSprite("data\\wheel2_1.png");
+    wheelSpriteA[2] = sManager->newSprite("data\\wheel3_1.png");
+    wheelSpriteB[0] = sManager->newSprite("data\\wheel1_2.png");
+    wheelSpriteB[1] = sManager->newSprite("data\\wheel2_2.png");
+    wheelSpriteB[2] = sManager->newSprite("data\\wheel3_2.png");
 
     collideType = Player;
 } // Constructor
@@ -56,7 +56,7 @@ int Car::update(Level * curLevel, int offset)
                         return ACTOR_IDLE; // no more!
                 }
                 wheelY[i]=int(carY);
-                BOOL hitFloor=FALSE;
+                //BOOL hitFloor=FALSE;
                 while( !curLevel->isGround(wheelX[i]+screenX+3,wheelY[i]+16)){
                     wheelY[i]++;
                 }
@@ -129,7 +129,9 @@ int Car::update(Level * curLevel, int offset)
 
         screenX += int(carX/20)+2; // ?
     }
+    return ACTOR_IDLE;
 }
+
 void Car::draw()
 {
     DrawSprite(*carSprite, int(carX), int(carY), FALSE);
@@ -154,14 +156,15 @@ int Car::collision()
     else{
         crashed = TRUE;
     }
+    return 0;
 }
 
-bool Car::moveLeft()
+void Car::moveLeft()
 {
     movingLeft = TRUE;
 }
 
-bool Car::moveRight()
+void Car::moveRight()
 {
     movingRight = TRUE;
 }
